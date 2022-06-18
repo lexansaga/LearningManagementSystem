@@ -1,0 +1,149 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Grade my Student {% endblock %}
+
+{% block stylesheets %}
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico"/>
+	<!-- CUSTOM STYLESHEET -->
+	<link rel="stylesheet" href="assets/grading.css">
+	<!-- FONT AWESOME -->
+	<script src="https://kit.fontawesome.com/575abfd474.js" crossorigin="anonymous"></script>
+	<!-- BOOTSTRAP -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+
+    <style>
+        body {
+            background: #EEEEEE;
+        }
+        .search {
+            float: right;
+            width: 200px;
+            height: 40px;
+            border-radius: 2em;
+            padding: 10px;
+            border: none;
+            box-shadow: 10px 10px 15px grey;
+            font-size: 14px;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+<body>
+    <!--wrapper start-->
+    <div class="wrapper">
+        <!--header menu start-->
+        <div class="header">
+            <div class="header-menu">
+                <div class="title">Aoba Johsai Academy</div>
+            </div>
+        </div>
+        <!--header menu end-->
+        <!--sidebar start-->
+        <div class="sidebar">
+            <div class="sidebar-menu">
+                <center class="profile">
+                    <img src="assets/logo.png" alt="">
+                    <p>{{ app.user.fullname }}</p>
+                </center>
+                <hr></hr>
+                <li class="item">
+                    <a href="/dashboard" class="menu-btn">
+                        <i class="fas fa-desktop"></i>Dashboard
+                    </a>
+                </li>
+                <li class="item">
+                    <a href="/student" class="menu-btn">
+                        <i class="fas fa-graduation-cap"></i>Student
+                    </a>
+                </li>
+                <li class="item">
+                    <a href="/grading" class="menu-btn">
+                        <span><i class="fas fa-file-excel"></i>Grading</span>
+                    </a>
+                </li>
+                <li class="item">
+                    <a href="/profile" class="menu-btn">
+                        <i class="fas fa-users-cog"></i>Profile
+                    </a>
+                </li>
+                
+                <!-- Button trigger modal -->   
+                <li class="item">
+                    <div class="menu-btn">
+                        {% if app.user %}
+                        <a href="{{ path('app_logout') }}">
+                            <button>
+                                <i class="fas fa-sign-out-alt"></i>Logout
+                            </button>
+                        </a>
+                        {% endif %}
+                    </div>  
+                </li>
+            </div>
+        </div>
+        <!--sidebar end-->
+        <!--main container start-->
+        <div class="content">
+            <div class="directory">
+                <p>Grading / </p>
+            </div>
+            <hr></hr>
+
+            <h5>Student Grading</h5>
+            <button type="button" class="btn btn-success">Create Grade Component</button>
+            <input class="search" name="search" type="search" placeholder="Type search..." aria-label="Search">
+            <br><br>
+            <div class="grades">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Grade Range</th>
+                            <th>Grade Point</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>96-100</td>
+                            <td>4.0</td>
+                        </tr>
+                        <tr>
+                            <td>90-95</td>
+                            <td>3.5</td>
+                        </tr>
+                        <tr>
+                            <td>84-89</td>
+                            <td>3.0</td>
+                        </tr>
+                        <tr>
+                            <td>78-83</td>
+                            <td>2.5</td>
+                        </tr>
+                        <tr>
+                            <td>72-77</td>
+                            <td>2.0</td>
+                        </tr>
+                        <tr>
+                            <td>66-71</td>
+                            <td>1.5</td>
+                        </tr>
+                        <tr>
+                            <td>60-65</td>
+                            <td>1.0</td>
+                        </tr>
+                        <tr>
+                            <td>59 and below</td>
+                            <td>R</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+        </div>
+        <!--main container end-->
+    </div>
+    <!--wrapper end-->
+
+    </div>
+</body>
+{% endblock %}

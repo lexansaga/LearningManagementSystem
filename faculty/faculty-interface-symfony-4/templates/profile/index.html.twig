@@ -1,0 +1,103 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} My Profile {% endblock %}
+
+{% block stylesheets %}
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico"/>
+	<!-- CUSTOM STYLESHEET -->
+	<link rel="stylesheet" href="assets/profile.css">
+	<!-- FONT AWESOME -->
+	<script src="https://kit.fontawesome.com/575abfd474.js" crossorigin="anonymous"></script>
+	<!-- BOOTSTRAP -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+
+    <style>
+        body {
+            background: #EEEEEE;
+        }
+        .profiler {
+            padding: 5%;
+            background: white;
+            box-shadow: 10px 10px 15px grey;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+<body>
+    <!--wrapper start-->
+    <div class="wrapper">
+        <!--header menu start-->
+        <div class="header">
+            <div class="header-menu">
+                <div class="title">Aoba Johsai Academy</div>
+            </div>
+        </div>
+        <!--header menu end-->
+        <!--sidebar start-->
+        <div class="sidebar">
+            <div class="sidebar-menu">
+                <center class="profile">
+                    <img src="assets/logo.png" alt="">
+                    <p>{{ app.user.fullname }}</p>
+                </center>
+                <hr></hr>
+                <li class="item">
+                    <a href="/dashboard" class="menu-btn">
+                        <i class="fas fa-desktop"></i>Dashboard
+                    </a>
+                </li>
+                <li class="item">
+                    <a href="/student" class="menu-btn">
+                        <i class="fas fa-graduation-cap"></i>Student
+                    </a>
+                </li>
+                <li class="item">
+                    <a href="/grading" class="menu-btn">
+                        <i class="fas fa-file-excel"></i>Grading
+                    </a>
+                </li>
+                <li class="item">
+                    <a href="/profile" class="menu-btn">
+                        <span><i class="fas fa-users-cog"></i>Profile</span>
+                    </a>
+                </li>
+                
+                <!-- Button trigger modal -->   
+                <li class="item">
+                    <div class="menu-btn">
+                        {% if app.user %}
+                        <a href="{{ path('app_logout') }}">
+                            <button>
+                                <i class="fas fa-sign-out-alt"></i>Logout
+                            </button>
+                        </a>
+                        {% endif %}
+                    </div>  
+                </li>
+            </div>
+        </div>
+        <!--sidebar end-->
+        <!--main container start-->
+        <div class="content">
+            <div class="directory">
+                <p>Profile / </p>
+            </div>
+            <hr></hr>
+            <div class="profiler">
+                <label style="font-size: 20px; font-weight: bold;">{{ app.user.fullname }}</label>,
+                {{ app.user.special }} <br>
+                <label>ID : </label> {{ app.user.facultyid }}<br>
+                <label>Status : </label> {{ app.user.status }}<br>
+                <label>Personal Email : </label> {{ app.user.email }}<br>
+                <label>School Email : </label> {{ app.user.username }}<br>
+                <label>Employment Date : </label> {{ app.user.regdate }}<br>
+            </div>
+        </div>
+        <!--main container end-->
+    </div>
+    <!--wrapper end-->
+
+    </div>
+</body>
+{% endblock %}
