@@ -27,7 +27,7 @@
             <!--header menu start-->
             <div class="header">
                 <div class="header-menu">
-					<div class="title">Aoba Johsai Academy</div>
+					<div class="title">Educa Academy</div>
                 </div>
             </div>
             <!--header menu end-->

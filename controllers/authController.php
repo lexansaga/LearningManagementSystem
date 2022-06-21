@@ -567,7 +567,7 @@
 			}
 			$initials = strtolower($acronym);
 			$middle = strtolower($mname[0]);
-			$username = $lname ."". $initials ."". $middle . "@faculty-aja.edu.com";
+			$username = $lname ."". $initials ."". $middle . "@faculty-aja.educa.com";
 			$faculty_id = $dyear .'-'. $increment;
 
 			$sql = "INSERT INTO faculty (fullname, gender, special, status,
