@@ -44,7 +44,7 @@
         </div>
         <!--header menu end-->
         <!--sidebar start-->
-        <div class="sidebar">
+           <div class="sidebar">
             <div class="sidebar-menu">
                 <center class="profile">
                     <img src="assets/logo.png" alt="">
@@ -53,12 +53,12 @@
                 <hr></hr>
                 <li class="item">
                     <a href="/dashboard" class="menu-btn">
-                        <span><i class="fas fa-desktop"></i>Dashboard</span>
+                        <i class="fas fa-desktop"></i>Dashboard
                     </a>
                 </li>
                 <li class="item">
                     <a href="/student" class="menu-btn">
-                        <i class="fas fa-graduation-cap"></i>Student
+                        <span><i class="fas fa-graduation-cap"></i>Student</span>
                     </a>
                 </li>
                 <li class="item">
@@ -71,8 +71,13 @@
                         <i class="fas fa-users-cog"></i>Profile
                     </a>
                 </li>
+                <li class="item">
+                    <a href="/subjects" class="menu-btn">
+                        <i class="fas fa-users-cog"></i>Subjects
+                    </a>
+                </li>
                 
-                <!-- Button trigger modal -->	
+                <!-- Button trigger modal -->   
                 <li class="item">
                     <div class="menu-btn">
                         {% if app.user %}
@@ -82,7 +87,7 @@
                             </button>
                         </a>
                         {% endif %}
-                    </div>	
+                    </div>  
                 </li>
             </div>
         </div>

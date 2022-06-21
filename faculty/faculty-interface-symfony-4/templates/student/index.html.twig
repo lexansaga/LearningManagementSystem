@@ -64,6 +64,11 @@
                         <i class="fas fa-users-cog"></i>Profile
                     </a>
                 </li>
+                <li class="item">
+                    <a href="/subjects" class="menu-btn">
+                        <i class="fas fa-users-cog"></i>Subjects
+                    </a>
+                </li>
                 
                 <!-- Button trigger modal -->   
                 <li class="item">
@@ -103,7 +108,7 @@
                             <td>
                                 <div class="view">
                                     
-                                    <a href="{{ path('view', {'id':a.id,'course':a.coursename,'class':a.class}) }}">View Students</a>
+                                    <a href="{{ path('viewStudent', {'id':a.id,'course':a.coursename,'class':a.class}) }}">View Students</a>
                                 </div>
                             </td>
                         </tr>

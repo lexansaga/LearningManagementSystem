@@ -19,7 +19,7 @@
 			// Move to the right
 			$this->Cell(30);
 			// Title
-			$this->Cell(30,10,'Aoba Johsai Academy',0,0);
+			$this->Cell(30,10,'Educa Academy',0,0);
 			// Font
 			$this->SetFont('Arial','',10);
 			// Move to the right
