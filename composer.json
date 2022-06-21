@@ -1,6 +1,7 @@
 {
     "require": {
         "swiftmailer/swiftmailer": "^6.0",
-        "phpmailer/phpmailer": "^6.5"
+        "phpmailer/phpmailer": "^6.5",
+        "symfony/ux-turbo": "^2.2"
     }
 }
