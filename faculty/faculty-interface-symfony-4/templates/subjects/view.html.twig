@@ -4,6 +4,7 @@
     {{ course.coursename }}
  {% endblock %}
 
+
 {% block stylesheets %}
   
 
@@ -223,13 +224,20 @@
                   <input type="text" />
                   <label> Description</label>
                   <input type="text" />
+                  <label>Duration</label>
+                  <input type='datetime-local'/>
                   <label> Task type</label>
-                  <select>
+                  
+                  <select  id="selectdata">
                     <option>Essay</option>
                     <option>Quiz</option>
                     <option>Activity</option>
+                    <option>Assignment</option>
                   </select>
-                  <input type="file"/>
+                  
+                  
+                  <button id="addquestion" hidden>Add Question</button>
+                  <input type="file" id="fileinput"/>
 
 
             </div>
@@ -253,21 +261,11 @@
 
     
     </div>
-    <script>
-    document.onload = function(){
-      var myModal = document.getElementById('myModal');
-      let doc = document.getElementById("createactivity");
-      doc.addEventListener('click', function() {
-          
-          $('#myModal').modal('show');
-          console.log("getclick");
-      });
-      
-      }
-    
-    
 
     
-    </script>
+{% block javascripts %}
+    <script src={{asset('assets/activities.js')}}></script>
+{% endblock %}
+
 </body>
 {% endblock %}
