@@ -66,7 +66,7 @@ class SubjectsController extends AbstractController
         $search1 = $request->get('course');
         
         $latestActivities = $this->getDoctrine()->getRepository(Activities::class)->find($id);
-
+        
      
         
         return $this->render('subjects/view.html.twig', [

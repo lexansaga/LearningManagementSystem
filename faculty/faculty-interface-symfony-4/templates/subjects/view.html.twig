@@ -5,13 +5,7 @@
  {% endblock %}
 
 {% block stylesheets %}
-    <link rel="icon" type="image/x-icon" href="assets/favicon.ico"/>
-	<!-- CUSTOM STYLESHEET -->
-	
-	<!-- FONT AWESOME -->
-	<script src="https://kit.fontawesome.com/575abfd474.js" crossorigin="anonymous"></script>
-	<!-- BOOTSTRAP -->
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+  
 
     <style>
 
@@ -159,80 +153,121 @@
         <!--header menu start-->
         <div class="header">
             <div class="header-menu">
-                <div class="title">Aoba Johsai Academy</div>
+                <div class="title">Educa Academy</div>
             </div>
         </div>
         <!--header menu end-->
         <!--sidebar start-->
-           <div class="sidebar">
-            <div class="sidebar-menu">
-                <center class="profile">
-                    <img src="assets/logo.png" alt="">
-                    <p>{{ app.user.fullname }}</p>
-                </center>
-                <hr></hr>
-                <li class="item">
-                    <a href="/dashboard" class="menu-btn">
-                        <i class="fas fa-desktop"></i>Dashboard
-                    </a>
-                </li>
-                <li class="item">
-                    <a href="/student" class="menu-btn">
-                        <span><i class="fas fa-graduation-cap"></i>Student</span>
-                    </a>
-                </li>
-                <li class="item">
-                    <a href="/grading" class="menu-btn">
-                        <i class="fas fa-file-excel"></i>Grading
-                    </a>
-                </li>
-                <li class="item">
-                    <a href="/profile" class="menu-btn">
-                        <i class="fas fa-users-cog"></i>Profile
-                    </a>
-                </li>
-                <li class="item">
-                    <a href="/subjects" class="menu-btn">
-                        <i class="fas fa-users-cog"></i>Subjects
-                    </a>
-                </li>
-                
-                <!-- Button trigger modal -->   
-                <li class="item">
-                    <div class="menu-btn">
-                        {% if app.user %}
-                        <a href="{{ path('app_logout') }}">
-                            <button>
-                                <i class="fas fa-sign-out-alt"></i>Logout
-                            </button>
-                        </a>
-                        {% endif %}
-                    </div>  
-                </li>
-            </div>
-        </div>
+          
         <!--sidebar end-->
         <!--main container start-->
         <div class="content">
-         <button type="button" class="btn btn-success" 
-            id="createactivity"
-         >Create Activities</button>
-         <button type="button" class="btn btn-success">Create Assignment</button>
+        <h1>{{ course.coursename}}</h1>
+         
+        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          Create Task    
+        </button>
+
+         
+
+         <h5>Active Task</h5>
+             <table class="table table-bordered">
+        <tr>
+                    <th>Task Title</th>
+                    <th>Task Type</th>
+                    <th>File</th>
+                    <th>Duration:</th>
+                    
+                </tr>
+          {% for s in allActivities %}
+                <tbody>
+                    <tr>
+                       
+                    </tr>
+                </tbody>
+                {% endfor %}
+    </table>
+         <h5>Past Task</h5>
+             <table class="table table-bordered">
+        <tr>
+                    <th>Task Title</th>
+                    <th>Task Type</th>
+                    <th>File</th>
+                    <th>Duration:</th>
+                    
+                </tr>
+          {% for s in allActivities %}
+                <tbody>
+                    <tr>
+                       
+                    </tr>
+                </tbody>
+                {% endfor %}
+    </table>
+
+
+      
+
+          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Create Task</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body container">
+                
+                  <label
+                    
+                  > Task Title</label>
+                  <input type="text" />
+                  <label> Description</label>
+                  <input type="text" />
+                  <label> Task type</label>
+                  <select>
+                    <option>Essay</option>
+                    <option>Quiz</option>
+                    <option>Activity</option>
+                  </select>
+                  <input type="file"/>
+
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+          </div>
         </div>
+      </div>
+
+
+
+
+        </div>
+  
+
         <!--main container end-->
     </div>
     <!--wrapper end-->
 
+    
     </div>
     <script>
-    let doc = document.getElementById("createactivity");
-    doc.addEventListener('click', function() {
-        fetch("/subjects/api/addActivity").then((data)=>{
-            console.log(data);
-        });
-        
-        
-    });
+    document.onload = function(){
+      var myModal = document.getElementById('myModal');
+      let doc = document.getElementById("createactivity");
+      doc.addEventListener('click', function() {
+          
+          $('#myModal').modal('show');
+          console.log("getclick");
+      });
+      
+      }
+    
+    
+
+    
     </script>
 </body>
 {% endblock %}

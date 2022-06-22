@@ -29,3 +29,6 @@ viewSubjects:
 addActivity:
     path: /subjects/api/addActivity
     controller:  App\Controller\SubjectsController::addActivity
+gradeStudent:
+    path: /grading/grade/{id}?course={course}&fullname={fullname}
+    controller: App\Controller\GradingController::gradeStudent
