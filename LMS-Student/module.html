@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
 </head>
 
-<body>
+<body class="hasCalendar">
     <header>
         <div class="menu">
             <i class="bx bx-menu"></i>
@@ -36,13 +36,16 @@
                 <li>
                     <a href="index.html"><i class="bx bxs-dashboard"></i> Dashboard</a>
                 </li>
-                <li>
-                    <a href="module.html"><i class="bx bxs-dashboard"></i> Module</a>
+                <li class="active">
+                    <a href="module.html"><i class='bx bxs-copy-alt bx-tada'></i> Module</a>
                 </li>
                 <li>
-                    <a href="activity.html"><i class="bx bxs-dashboard"></i> Activity</a>
+                    <a href="activity.html"><i class='bx bx-math'></i>Activity</a>
                 </li>
-                <li class="sidebar-subholder">
+                <li>
+                    <a href="class.html"><i class='bx bxs-grid'></i>Classroom</a>
+                </li>
+                <li class="sidebar-subholder" style="display:none;">
                     <i class='bx bxs-face'></i> Classroom
                     <ul class="sidebar-submenu">
                         <li>
@@ -54,6 +57,8 @@
                     </ul>
                 </li>
                 <li><a href="grades.html"> <i class='bx bxs-book-content'></i>Grades</a></li>
+                <li><a href="confirmpayment.html"> <i class='bx bxs-credit-card-alt'></i>Confirm Payment</a>
+                </li>
 
                 <li><a href="index.html"><i class='bx bxs-door-open'></i>Logout</a></li>
             </ul>

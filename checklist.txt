@@ -1,0 +1,24 @@
+ADMIN 
+x- manage users
+x- Demographics (total number of students, teachers, stafff)
+x- manage courses
+x- assign course loads to faculty
+x- send announcement
+x- create classes
+x- collect student records
+-	Can update student statement of account
+
+TEACHER
+- manage class (dapat yung iaassign ni admin na class is mag rreflect kay Teacher/Faculty) 
+- create activities inside class (kumbaga parang nag ttakelang ng ms forms) -(Scoring)
+-assignments (section where teacher can notify students about assignments)
+
+x- grade students
+
+STUDENTS
+- join class (dapat yung iaassign ni admin na class is mag rreflect din automatically kay Student)
+- take activities 
+- submit assignments (section lang na makakapag upload ng file yung studentsdun saspecific na tab for assignments)
+- view grades
+- take mock exam (same lang nung sa activities, multiple items tapos may categories)
+-  payment confirmation (section na makakaupload yung student ng file)

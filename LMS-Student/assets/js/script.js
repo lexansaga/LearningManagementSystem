@@ -29,8 +29,16 @@ $(window).on('load', function () {
 
     // Calendar Script
     // Link : https://www.jqueryscript.net/time-clock/animated-event-calendar.html
-    $(function () {
-        $('#calendar-container').calendar();
-    });
+    if ($('body').hasClass('hasCalendar')) {
 
+        $(function () {
+            $('#calendar-container').calendar();
+        });
+
+    }
+
+    $('input[type="file"]').change(function (e) {
+        var fileName = e.target.files[0].name;
+        console.log('The file "' + fileName + '" has been selected.');
+    });
 })

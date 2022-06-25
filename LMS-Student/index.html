@@ -12,10 +12,11 @@
         integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous" />
     <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet" />
     <link href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/calendar-style.css" />
     <link rel="stylesheet" href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
 </head>
 
-<body>
+<body class="hasCalendar">
     <header>
         <div class="menu">
             <i class="bx bx-menu"></i>
@@ -32,16 +33,19 @@
             </div>
 
             <ul class="sidebar-menu">
-                <li>
-                    <a href="index.html"><i class="bx bxs-dashboard"></i> Dashboard</a>
+                <li class="active">
+                    <a href="index.html"><i class="bx bxs-dashboard bx-tada"></i> Dashboard</a>
                 </li>
                 <li>
-                    <a href="module.html"><i class="bx bxs-dashboard"></i> Module</a>
+                    <a href="module.html"><i class='bx bxs-copy-alt'></i> Module</a>
                 </li>
                 <li>
-                    <a href="activity.html"><i class="bx bxs-dashboard"></i> Activity</a>
+                    <a href="activity.html"><i class='bx bx-math'></i>Activity</a>
                 </li>
-                <li class="sidebar-subholder">
+                <li>
+                    <a href="class.html"><i class='bx bxs-grid'></i>Classroom</a>
+                </li>
+                <li class="sidebar-subholder" style="display:none;">
                     <i class='bx bxs-face'></i> Classroom
                     <ul class="sidebar-submenu">
                         <li>
@@ -53,31 +57,100 @@
                     </ul>
                 </li>
                 <li><a href="grades.html"> <i class='bx bxs-book-content'></i>Grades</a></li>
+                <li><a href="confirmpayment.html"> <i class='bx bxs-credit-card-alt'></i>Confirm Payment</a>
+                </li>
 
                 <li><a href="index.html"><i class='bx bxs-door-open'></i>Logout</a></li>
             </ul>
         </div>
         <div class="main-content">
-            <h3>Classroom</h3>
-            <div class="table-wrapper">
-                <table id="datatable" class="display">
-                    <thead>
-                        <tr>
-                            <th>Room Name</th>
-                            <th>Subject Code</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><a href="#">Room 1</a></td>
-                            <td><a href="#">SUBJ1000001</a></td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">Room 2</a></td>
-                            <td><a href="#">SUBJ1000002</a></td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="main-content-wrapper">
+                <div class="activity-container">
+
+                    <div class="activity-content">
+                        <div class="module-container">
+                            <a href="#" class="module">
+                                <img src="assets/images/module-image.jpg" alt="module-image">
+                                <div class="module-content">
+                                    <h5>Subject Name</h5>
+                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nostrum asperiores
+                                        voluptatem consectetur magnam accusamus quas nam placeat praesentium, nesciunt
+                                        qui,
+                                        ipsa sapiente dignissimos, inventore illo non modi vel perferendis sequi?</p>
+                                    <button class="btn btn-primary">Open</button>
+                                </div>
+                            </a>
+
+
+                            <a href="#" class="module">
+                                <img src="assets/images/module-image.jpg" alt="module-image">
+                                <div class="module-content">
+                                    <h5>Subject Name</h5>
+                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nostrum asperiores
+                                        voluptatem consectetur magnam accusamus quas nam placeat praesentium, nesciunt
+                                        qui,
+                                        ipsa sapiente dignissimos, inventore illo non modi vel perferendis sequi?</p>
+                                    <button class="btn btn-primary">Open</button>
+                                </div>
+                            </a>
+
+
+                            <a href="#" class="module">
+                                <img src="assets/images/module-image.jpg" alt="module-image">
+                                <div class="module-content">
+                                    <h5>Subject Name</h5>
+                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nostrum asperiores
+                                        voluptatem consectetur magnam accusamus quas nam placeat praesentium, nesciunt
+                                        qui,
+                                        ipsa sapiente dignissimos, inventore illo non modi vel perferendis sequi?</p>
+                                    <button class="btn btn-primary">Open</button>
+                                </div>
+                            </a>
+
+
+                            <a href="#" class="module">
+                                <img src="assets/images/module-image.jpg" alt="module-image">
+                                <div class="module-content">
+                                    <h5>Subject Name</h5>
+                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nostrum asperiores
+                                        voluptatem consectetur magnam accusamus quas nam placeat praesentium, nesciunt
+                                        qui,
+                                        ipsa sapiente dignissimos, inventore illo non modi vel perferendis sequi?</p>
+                                    <button class="btn btn-primary">Open</button>
+                                </div>
+                            </a>
+
+
+                            <a href="#" class="module">
+                                <img src="assets/images/module-image.jpg" alt="module-image">
+                                <div class="module-content">
+                                    <h5>Subject Name</h5>
+                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nostrum asperiores
+                                        voluptatem consectetur magnam accusamus quas nam placeat praesentium, nesciunt
+                                        qui,
+                                        ipsa sapiente dignissimos, inventore illo non modi vel perferendis sequi?</p>
+                                    <button class="btn btn-primary">Open</button>
+                                </div>
+                            </a>
+
+
+                        </div>
+                    </div>
+                    <div class="activity-info">
+                        <div id="calendar-container"></div>
+                    </div>
+                    <div class="activity-submission module-todo">
+                        <h5>TODO</h5>
+                        <ul>
+                            <li><a href="#"> <i class='bx bxs-notepad bx-tada'
+                                        style='color:#00b686'></i>&nbsp;&nbsp;&nbsp;7
+                                    Assignments</a></li>
+
+                        </ul>
+                    </div>
+
+
+                </div>
             </div>
         </div>
     </main>
@@ -94,6 +167,7 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
+    <script src="assets/js/calendar.js"></script>
     <script src="assets/js/script.js"></script>
 </body>
 

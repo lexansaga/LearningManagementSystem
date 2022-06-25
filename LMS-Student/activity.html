@@ -36,12 +36,15 @@
                     <a href="index.html"><i class="bx bxs-dashboard"></i> Dashboard</a>
                 </li>
                 <li>
-                    <a href="module.html"><i class="bx bxs-dashboard"></i> Module</a>
+                    <a href="module.html"><i class='bx bxs-copy-alt'></i> Module</a>
+                </li>
+                <li class="active">
+                    <a href="activity.html"><i class='bx bx-math bx-tada'></i>Activity</a>
                 </li>
                 <li>
-                    <a href="activity.html"><i class="bx bxs-dashboard"></i> Activity</a>
+                    <a href="class.html"><i class='bx bxs-grid'></i>Classroom</a>
                 </li>
-                <li class="sidebar-subholder">
+                <li class="sidebar-subholder" style="display:none;">
                     <i class='bx bxs-face'></i> Classroom
                     <ul class="sidebar-submenu">
                         <li>
@@ -53,6 +56,8 @@
                     </ul>
                 </li>
                 <li><a href="grades.html"> <i class='bx bxs-book-content'></i>Grades</a></li>
+                <li><a href="confirmpayment.html"> <i class='bx bxs-credit-card-alt'></i>Confirm Payment</a>
+                </li>
 
                 <li><a href="index.html"><i class='bx bxs-door-open'></i>Logout</a></li>
             </ul>
@@ -70,6 +75,21 @@
                             <h2 class="media-title">Image Media title</h2>
                             <img src="https://images.pexels.com/photos/733856/pexels-photo-733856.jpeg?cs=srgb&dl=pexels-tirachard-kumtanom-733856.jpg&fm=jpg"
                                 class="activity-image" />
+
+                            <div class="mb-3 form-upload">
+                                <label for="formFileMultiple" class="form-label">Multiple files input example</label>
+                                <input class="form-control" type="file" id="formFileMultiple" multiple>
+                                <ul>
+                                    <li>File 1
+                                        <div class="remove-file"><i class='bx bx-x'></i></div>
+                                    </li>
+                                    <li>File 2
+                                        <div class="remove-file"><i class='bx bx-x'></i></div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <button class="btn btn-primary btn-submit-comment">Submit</button>
+
                         </div>
 
 
@@ -78,13 +98,31 @@
                             <video controls>
                                 <source src="assets/images/video.mp4">
                             </video>
+
+                            <div class="mb-3 form-upload">
+                                <label for="formFileMultiple" class="form-label">Multiple files input example</label>
+                                <input class="form-control" type="file" id="formFileMultiple" multiple>
+                            </div>
+                            <button class="btn btn-primary btn-submit-comment">Submit</button>
+
                         </div>
-                        <p class="activity-description">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit qui accusamus necessitatibus ab
-                            tempora. Cupiditate ducimus sunt, maiores corporis obcaecati excepturi soluta aspernatur,
-                            ullam molestiae id ea beatae magnam facere!
-                        </p>
-                        <a href="#" class="activity-link">Sample Activity.pdf</a>
+
+                        <div class="activity-upload">
+                            <p class="activity-description">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit qui accusamus
+                                necessitatibus ab
+                                tempora. Cupiditate ducimus sunt, maiores corporis obcaecati excepturi soluta
+                                aspernatur,
+                                ullam molestiae id ea beatae magnam facere!
+                            </p>
+                            <a href="#" class="activity-link">Sample Activity.pdf</a>
+                            <div class="mb-3 form-upload">
+                                <label for="formFileMultiple" class="form-label">Multiple files input example</label>
+                                <input class="form-control" type="file" id="formFileMultiple" multiple>
+                            </div>
+                            <button class="btn btn-primary btn-submit-comment">Submit</button>
+
+                        </div>
 
                         <div class="quiz-wrapper">
                             <div class="quiz">
