@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EDUCA - Student</title>
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/style-media-queries.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous" />
+    <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet" />
+    <link href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/calendar-style.css" />
+    <link rel="stylesheet" href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+</head>
+
+<body>
+    <header>
+        <div class="menu">
+            <i class="bx bx-menu"></i>
+        </div>
+        <a href="index.html" class="logo"> EDUCA </a>
+    </header>
+    <main>
+        <div class="sidebar">
+            <div class="profile">
+                <img src="assets/images/logo.png" alt="logo" />
+
+                <h5 class="name">Saga Alexander</h5>
+                <h5 class="section">Section 1</h5>
+            </div>
+
+            <ul class="sidebar-menu">
+                <li>
+                    <a href="index.html"><i class="bx bxs-dashboard"></i> Dashboard</a>
+                </li>
+                <li>
+                    <a href="module.html"><i class="bx bxs-dashboard"></i> Module</a>
+                </li>
+                <li>
+                    <a href="activity.html"><i class="bx bxs-dashboard"></i> Activity</a>
+                </li>
+                <li class="sidebar-subholder">
+                    <i class='bx bxs-face'></i> Classroom
+                    <ul class="sidebar-submenu">
+                        <li>
+                            <a href="room.html"><i class='bx bxs-face'></i>Room</a>
+                        </li>
+                        <li>
+                            <a href="class.html"><i class='bx bxs-face'></i>Class</a>
+                        </li>
+                    </ul>
+                </li>
+                <li><a href="grades.html"> <i class='bx bxs-book-content'></i>Grades</a></li>
+
+                <li><a href="index.html"><i class='bx bxs-door-open'></i>Logout</a></li>
+            </ul>
+        </div>
+        <div class="main-content">
+            <h3>Modules</h3>
+            <div class="main-content-wrapper">
+                <div class="activity-container">
+
+                    <div class="activity-content">
+                        <div class="module-container">
+                            <a href="#" class="module">
+                                <img src="assets/images/module-image.jpg" alt="module-image">
+                                <div class="module-content">
+                                    <h5>Module Title</h5>
+                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nostrum asperiores
+                                        voluptatem consectetur magnam accusamus quas nam placeat praesentium, nesciunt
+                                        qui,
+                                        ipsa sapiente dignissimos, inventore illo non modi vel perferendis sequi?</p>
+                                    <button class="btn btn-primary">Open</button>
+                                </div>
+                            </a>
+
+
+                            <a href="#" class="module">
+                                <img src="assets/images/module-image.jpg" alt="module-image">
+                                <div class="module-content">
+                                    <h5>Module Title</h5>
+                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nostrum asperiores
+                                        voluptatem consectetur magnam accusamus quas nam placeat praesentium, nesciunt
+                                        qui,
+                                        ipsa sapiente dignissimos, inventore illo non modi vel perferendis sequi?</p>
+                                    <button class="btn btn-primary">Open</button>
+                                </div>
+                            </a>
+
+
+                            <a href="#" class="module">
+                                <img src="assets/images/module-image.jpg" alt="module-image">
+                                <div class="module-content">
+                                    <h5>Module Title</h5>
+                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nostrum asperiores
+                                        voluptatem consectetur magnam accusamus quas nam placeat praesentium, nesciunt
+                                        qui,
+                                        ipsa sapiente dignissimos, inventore illo non modi vel perferendis sequi?</p>
+                                    <button class="btn btn-primary">Open</button>
+                                </div>
+                            </a>
+
+
+                            <a href="#" class="module">
+                                <img src="assets/images/module-image.jpg" alt="module-image">
+                                <div class="module-content">
+                                    <h5>Module Title</h5>
+                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nostrum asperiores
+                                        voluptatem consectetur magnam accusamus quas nam placeat praesentium, nesciunt
+                                        qui,
+                                        ipsa sapiente dignissimos, inventore illo non modi vel perferendis sequi?</p>
+                                    <button class="btn btn-primary">Open</button>
+                                </div>
+                            </a>
+
+
+                            <a href="#" class="module">
+                                <img src="assets/images/module-image.jpg" alt="module-image">
+                                <div class="module-content">
+                                    <h5>Module Title</h5>
+                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nostrum asperiores
+                                        voluptatem consectetur magnam accusamus quas nam placeat praesentium, nesciunt
+                                        qui,
+                                        ipsa sapiente dignissimos, inventore illo non modi vel perferendis sequi?</p>
+                                    <button class="btn btn-primary">Open</button>
+                                </div>
+                            </a>
+
+
+                        </div>
+                    </div>
+                    <div class="activity-info">
+                        <div id="calendar-container"></div>
+                    </div>
+                    <div class="activity-submission module-todo">
+                        <h5>TODO</h5>
+                        <ul>
+                            <li><a href="#"> <i class='bx bxs-notepad bx-tada'
+                                        style='color:#00b686'></i>&nbsp;&nbsp;&nbsp;7
+                                    Assignments</a></li>
+
+                        </ul>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous">
+    </script>
+
+
+    <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
+    <script src="assets/js/calendar.js"></script>
+    <script src="assets/js/script.js"></script>
+</body>
+
+</html>

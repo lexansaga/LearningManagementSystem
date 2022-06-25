@@ -3,7 +3,11 @@
   --primary-color: #000080;
   --secondary-color: #c70041;
   --font-color: #000;
+  --font-color-dark: #1a1a1a;
   --font-family-default: "Roboto", sans-serif;
+
+  --navbar-height: 94px;
+  --sidebar-width: clamp(180px, 14.141vw, 280px);
 }
 
 * {
@@ -13,18 +17,20 @@
   transition: 0.2s ease-in-out all;
 }
 body {
-  overflow: hidden;
 }
-header {
+
+body > header {
   padding: 26px 48px;
   background-color: var(--primary-color);
   display: flex;
   flex-direction: row;
-  position: relative;
+  position: fixed;
   align-items: center;
+  width: 100vw;
+  z-index: 1;
 }
 
-header .menu {
+body > header .menu {
   color: white;
   font-size: 32px;
   margin: 0 28px 0 0;
@@ -48,15 +54,16 @@ main {
 }
 
 .sidebar {
-  width: 250px;
-  height: calc(100vh - 94px);
+  width: var(--sidebar-width);
+  margin: var(--navbar-height) 0 0 0;
+  height: calc(100vh - var(--navbar-height));
   box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%);
   padding: 28px 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   background-color: white;
-  /* position: fixed; */
+  position: fixed;
 }
 
 .sidebar .profile {
@@ -129,12 +136,11 @@ main {
   width: 100%;
   height: 100%;
   padding: 2.424vw 3.636vw;
-  overflow: scroll;
-  /* margin: 0 0 0 250px; */
+  margin: var(--navbar-height) 0 0 var(--sidebar-width);
 }
 
 .main-content-wrapper {
-  margin: 48px 0 0 0;
+  margin: clamp(28px, 2.424vw, 48px) 0 0 0;
 }
 
 table.dataTable {
@@ -186,7 +192,7 @@ span .paginate_button {
 }
 .activity-content {
   box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%);
-  padding: 28px 48px;
+  padding: 1.414vw 2.424vw;
   background-color: white;
   grid-area: activity-content;
   display: flex;
@@ -284,6 +290,7 @@ span .paginate_button {
   border-bottom: 1px solid black;
   display: flex;
   align-items: center;
+  line-height: 1;
 }
 .activity-info li i,
 .activity-submission li i,
@@ -312,4 +319,72 @@ span .paginate_button {
 .btn-submit-comment {
   margin: 12px 0 0 0;
   padding: 12px 16px;
+}
+
+.module-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px 8px;
+  width: 100%;
+  height: 100%;
+}
+
+.module {
+  border: 1px solid #cecece;
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+  padding: 0 0 8px 0;
+  text-decoration: none;
+
+  color: var(--font-color-dark);
+}
+.module-content {
+  padding: 0 0 26px 0;
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+.module:hover img {
+  transform: scale(1.1);
+}
+.module img {
+  width: 100%;
+  /* height: 50%; */
+  max-height: 50%;
+  object-fit: cover;
+  object-position: top;
+  margin: 0 0 18px 0;
+}
+
+.module button {
+  padding: 8px 18px;
+}
+.module h5 {
+  padding: 0 26px;
+  text-align: center;
+}
+.module p {
+  width: 100%;
+  line-height: 1.2em;
+  height: 3.6em;
+  padding: 0 26px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  text-align: justify;
+}
+.module-todo {
+  height: fit-content;
+}
+.module-todo i {
+  font-size: 22px !important;
+}
+.module-todo a {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
 }
