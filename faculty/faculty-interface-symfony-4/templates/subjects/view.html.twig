@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title %} 
-    {{ course.coursename }}
+    {{ coursename }}
  {% endblock %}
 
 
@@ -163,7 +163,7 @@
         <!--sidebar end-->
         <!--main container start-->
         <div class="content">
-        <h1>{{ course.coursename}}</h1>
+        <h1>{{ coursename }}</h1>
          
         <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
           Create Task    
@@ -177,32 +177,78 @@
                     <th>Task Title</th>
                     <th>Task Type</th>
                     <th>File</th>
+                    <th>Score</th>
                     <th>Duration:</th>
+                    <th>Action</th>
                     
                 </tr>
           {% for s in allActivities %}
+              
+
+                {%  if date(s.activitydeadline) > date() %}
+
                 <tbody>
                     <tr>
-                       
+                       <td>{{s.activityname}}</td>
+                       <td>{{s.activitytype}}</td>
+                       {% if s.file is not empty %}
+                       <td><button
+
+                       value="{{s.file}}"
+                        onclick="clickFile(this)"
+                       >FILE</button></td>
+                       {% else %}
+                       <td></td>
+                       {% endif %}
+                       <td>{{s.maxscore}}</td>
+                       <td >{{s.activitydeadline|date('d-m-Y h:m:s')}}</td>
+                        <td><button
+                        onclick="clickRemove({{s.id}})"
+                       >REMOVE</button></td>
                     </tr>
                 </tbody>
+                {%  endif %}
+                
                 {% endfor %}
+
+
     </table>
          <h5>Past Task</h5>
              <table class="table table-bordered">
-        <tr>
+           <tr>
                     <th>Task Title</th>
                     <th>Task Type</th>
                     <th>File</th>
+                    <th>Score</th>
                     <th>Duration:</th>
+                    <th>Action</th>
                     
                 </tr>
           {% for s in allActivities %}
+                {%  if date(s.activitydeadline) < date() %}
+
                 <tbody>
                     <tr>
+                       <td>{{s.activityname}}</td>
+                       <td>{{s.activitytype}}</td>
+                       {% if s.file is not empty %}
+                       <td><button
+
+                       value="{{s.file}}"
+                        onclick="clickFile(this)"
+                       >FILE</button></td>
+                       {% else %}
+                       <td></td>
+                       {% endif %}
                        
+                       <td>{{s.maxscore}}</td>
+                       <td >{{s.activitydeadline|date('d-m-Y h:m:s')}}</td>
+                       <td><button
+                        onclick="clickRemove({{s.id}})"
+                       >REMOVE</button></td>
                     </tr>
                 </tbody>
+                {%  endif %}
                 {% endfor %}
     </table>
 
@@ -216,35 +262,49 @@
               <h5 class="modal-title" id="exampleModalLabel">Create Task</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body container">
-                
-                  <label
-                    
-                  > Task Title</label>
-                  <input type="text" />
-                  <label> Description</label>
-                  <input type="text" />
-                  <label>Duration</label>
-                  <input type='datetime-local'/>
-                  <label> Task type</label>
+            <div class="modal-body container" id="mymodal">
+                <div class="row">
+                  <label class="col"> Task Title</label>
+                  <input class="col" type="text" id="activityname"/>
+                </div>
+                <div class="row">
+                  <label class="col"> Description</label>
+                  <input class="col" type="text" />
+                </div>
+
+                <div class="row">
+                  <label class="col">Duration</label>
+                  <input id="deadline" class="col" type='datetime-local' name="activity_deadline"/>
+                </div>
+
+                <div class="row">
+                <label class="col"> Task type</label>
                   
-                  <select  id="selectdata">
+                  <select  class=" col"id="selectdata">
                     <option>Essay</option>
                     <option>Quiz</option>
                     <option>Activity</option>
                     <option>Assignment</option>
                   </select>
+                </div>
+                <div  class="row">
+                <input class="col" type="file" id="fileinput"/>
+                  <button class="col" id="addquestion" hidden>Add Question</button>
+                  <label class="col" id="maxScore" hidden>Score:</label>
+                  <input class="col" id="scoreInput" placeholder="Enter Score"/>
+                </div>
+
+                
                   
-                  
-                  <button id="addquestion" hidden>Add Question</button>
-                  <input type="file" id="fileinput"/>
 
 
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
+              <button type="button" class="btn btn-primary" id="actbutton" onclick="addActivity({{myid}})">Add Activity</button>
             </div>
+               
+                
           </div>
         </div>
       </div>

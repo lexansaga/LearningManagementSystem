@@ -9,7 +9,11 @@ security:
                 algorithm: sha256
                 encode_as_base64: false
                 iterations: 1
-
+            App\Entity\Students:
+                algorithm: auto
+                migrate_from:
+                    - bcrypt # uses the "bcrypt" hasher with the default options
+                    - legacy # uses the "legacy" hasher configured above
             App\Entity\Faculty:
                 # the new hasher, along with its option
                 algorithm: auto
@@ -23,13 +27,17 @@ security:
             entity:
                 class: App\Entity\Faculty
                 property: username
+        student_user_provider:
+            entity:
+                class: App\Entity\Students
+                property: email
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
             lazy: true
-            provider: app_user_provider
+            
             custom_authenticator: App\Security\AppCustomAuthenticator
             logout:
                 path: app_logout

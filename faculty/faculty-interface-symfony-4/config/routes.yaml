@@ -7,28 +7,50 @@
 dashboard:
     path: /dashboard
     controller: App\Controller\DashboardController::index
+    
 student:
-  path: /student
-  controller: App\Controller\StudentController::index
-
+    path: /student
+    controller: App\Controller\StudentController::index
+    
 grading:
     path: /grading
     controller: App\Controller\GradingController::index
+    
 profile:
     path: /profile
     controller: App\Controller\ProfileController::index
+    
 viewStudent:
     path: /student/mystudent/{id}
     controller: App\Controller\StudentController::view
+    
 subjects:
     path: /subjects
     controller: App\Controller\SubjectsController::index
+    
 viewSubjects:
     path: /subjects/{id}
     controller: App\Controller\SubjectsController::view
+    defaults: { id: 1 }
 addActivity:
     path: /subjects/api/addActivity
     controller:  App\Controller\SubjectsController::addActivity
+    options:
+        expose: true
+removeActivity:
+    path: /subjects/api/removeActivity
+    controller:  App\Controller\SubjectsController::removeActivity
+    options:
+        expose: true
+grades:
+    path: /grades
+    controller: App\Controller\GradingController::showMyGrades
+    
+classrooms:
+    path: /classrooms
+    controller: App\Controller\SubjectsController::showClassrooms
+    
 gradeStudent:
-    path: /grading/grade/{id}?course={course}&fullname={fullname}
+    path: /grading/grade/{id}
     controller: App\Controller\GradingController::gradeStudent
+    

@@ -135,6 +135,110 @@
     </style>
 {% endblock %}
 {% block body %}
-    <label>{{id}}</label>
+<div
+class="wrapper"
+>
+ <div class="header">
+            <div class="header-menu">
+                <div class="title">Educa Academy</div>
+            </div>
+        </div>
+        <div class="content">
+         
+            <div class="directory">
+                <p>Grading / Grade my Student</p>
+            </div>
+            <hr></hr>
+
+            <h5>Student Grading</h5>
+                <button type="button" class="btn btn-danger" style="width: 100px;">
+                Back</button>
+            <input class="search" name="search" type="search" placeholder="Type search..." aria-label="Search">
+            <br><br>
+            <div class="flex">
+                <div class="grades">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Grade Range</th>
+                                <th>Grade Point</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>96-100</td>
+                                <td>4.0</td>
+                            </tr>
+                            <tr>
+                                <td>90-95</td>
+                                <td>3.5</td>
+                            </tr>
+                            <tr>
+                                <td>84-89</td>
+                                <td>3.0</td>
+                            </tr>
+                            <tr>
+                                <td>78-83</td>
+                                <td>2.5</td>
+                            </tr>
+                            <tr>
+                                <td>72-77</td>
+                                <td>2.0</td>
+                            </tr>
+                            <tr>
+                                <td>66-71</td>
+                                <td>1.5</td>
+                            </tr>
+                            <tr>
+                                <td>60-65</td>
+                                <td>1.0</td>
+                            </tr>
+                            <tr>
+                                <td>59 and below</td>
+                                <td>R</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="add-grades">
+                    {{ form_start(form) }}
+                    <table class="table table-hover">
+                        <tr>
+                            <th>Course Name          </th>
+                            <th>Name    </th>
+                            <th>Interim 1</th>
+                            <th>Midterm</th>
+                            <th>Interim 2</th>
+                            <th>Final</th>
+                            <th>Grade</th>
+                            <th>Remark</th>
+                        </tr>
+                            {% for s in students %}
+                            <tbody>
+                                <tr>
+                                    <td>{{ s.course }}</td>
+                                    <td>{{ s.fullname }}</td>
+                                    
+                                    <td>{{ form_row(form.interim1) }}</td>
+                                    <td>{{ form_row(form.midterm) }}</td>
+                                    <td>{{ form_row(form.interim2) }}</td>
+                                    <td>{{ form_row(form.final) }}</td>
+                                    
+                                    <td>{{ s.Grade }}</td>
+                                    <td>{{ s.Remarks }}</td>
+                                </tr>
+                            </tbody>
+                            {% endfor %}
+                    </table>
+                    <div class="save">
+                        {{ form_row(form.save) }}
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+            </div> 
+        </div>
     
-{% endblock %}
+
+</div>
+         {% endblock %}

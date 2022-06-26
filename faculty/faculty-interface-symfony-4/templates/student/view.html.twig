@@ -192,7 +192,7 @@
                             <a style="text-decoration: none; color: blue;" href="{{ path('gradeStudent', {'id':s.id,'course':s.course,'fullname':s.fullname}) }}">| Edit |</a>
                             {% else %}
                             <label>{{s.id}}</label>
-                            <a style="text-decoration: none; color: red;" href="{{ path('gradeStudent', default = {'id'=s.id,'course'=s.course,'fullname'=s.fullname}) }}">Grade</a>
+                            <a style="text-decoration: none; color: red;" href="{{ path('gradeStudent', {'id':s.id,'course':s.course,'fullname':s.fullname}) }}">Grade</a>
                             {% endif %}
                         </td>
                     </tr>

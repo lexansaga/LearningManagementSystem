@@ -113,27 +113,52 @@
     <body>
     <div class="wrapper">
 
-        {% if app.session is not empty %}
+        {% if app.user is not empty %}
         <div class="sidebar">
             <div class="sidebar-menu">
-                <center class="profile">
+            <center class="profile">
                     <img src={{asset('assets/logo.png')}} alt="">
+                    
                     <p>{{ app.user.fullname }}</p>
                 </center>
                 <hr></hr>
+                
+                {% if app.user.roles[0] == "FACULTY" %}
+                
                 <li class="item">
                     <a href="/dashboard" class="menu-btn">
+                    
+                    {% if app.request.uri == "http://127.0.0.1:8000/dashboard" %}
+                        
+                        <span><i class="fas fa-desktop"></i>Dashboard</span>
+                        
+                    {% else %}
                         <i class="fas fa-desktop"></i>Dashboard
+                    {% endif %}
                     </a>
                 </li>
                 <li class="item">
                     <a href="/student" class="menu-btn">
-                        <span><i class="fas fa-graduation-cap"></i>Student</span>
+                    {% if  app.request.uri == "http://127.0.0.1:8000/student" %}
+                        
+                            <span><i class="fas fa-graduation-cap"></i>Student</span>
+                            
+                        {% else %}
+                            <i class="fas fa-graduation-cap"></i>Student
+                        {% endif %}
+                        
                     </a>
                 </li>
                 <li class="item">
                     <a href="/grading" class="menu-btn">
-                        <i class="fas fa-file-excel"></i>Grading
+                    {% if app.request.uri == "http://127.0.0.1:8000/grading" %}
+                        
+                            <span><i class="fas fa-file-excel"></i>Grading</span>
+                            
+                        {% else %}
+                            <i class="fas fa-file-excel"></i>Grading
+                        {% endif %}
+                        
                     </a>
                 </li>
                 <li class="item">
@@ -146,7 +171,19 @@
                         <i class="fas fa-users-cog"></i>Subjects
                     </a>
                 </li>
-                
+
+                {% else %}
+                <li class="item">
+                    <a href="/classrooms" class="menu-btn">
+                        <i class="fas fa-users-cog"></i>Classrooms
+                    </a>
+                </li>
+                <li class="item">
+                    <a href="/grades" class="menu-btn">
+                        <i class="fas fa-users-cog"></i>Grades
+                    </a>
+                </li>
+                {% endif %}
                 <!-- Button trigger modal -->   
                 <li class="item">
                     <div class="menu-btn">
@@ -159,6 +196,9 @@
                         {% endif %}
                     </div>  
                 </li>
+                
+                
+                
             </div>
         </div>
         

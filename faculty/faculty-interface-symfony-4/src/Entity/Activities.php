@@ -5,10 +5,11 @@ namespace App\Entity;
 use App\Repository\ActivitiesRepository;
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @ORM\Entity(repositoryClass=ActivitiesRepository::class)
  */
-class Activities
+class Activities 
 {
     /**
      * @ORM\Id
@@ -41,6 +42,26 @@ class Activities
      * @ORM\Column(type="datetime")
      */
     private $activity_deadline;
+
+    /**
+     * @ORM\Column(type="blob", nullable=true)
+     */
+    private $file;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $description;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $activitytype;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $maxscore;
 
     public function getId(): ?int
     {
@@ -106,4 +127,54 @@ class Activities
 
         return $this;
     }
+
+    public function getFile()
+    {
+        return $this->file;
+    }
+
+    public function setFile($file): self
+    {
+        $this->file = $file;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): self
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    public function getActivitytype(): ?string
+    {
+        return $this->activitytype;
+    }
+
+    public function setActivitytype(string $activitytype): self
+    {
+        $this->activitytype = $activitytype;
+
+        return $this;
+    }
+
+    public function getMaxscore(): ?int
+    {
+        return $this->maxscore;
+    }
+
+    public function setMaxscore(int $maxscore): self
+    {
+        $this->maxscore = $maxscore;
+
+        return $this;
+    }
+    
+   
 }
