@@ -17,6 +17,7 @@ class GradingController extends AbstractController
     /**
      * @Route("/grading", name="grading")
      */
+    
     public function index(): Response
     {
         return $this->render('grading/index.html.twig', [
@@ -24,11 +25,18 @@ class GradingController extends AbstractController
         ]);
     }
 
+    public function showMyGrades(){
+        return $this->render('student/show.html.twig', [
+            
+        ]);
+    }
+
     /**
      * @Route("/grading/grade/{id}", name="grade")
      */
-    public function grade(int $id, Request $request): Response
+    public function gradeStudent(Request $request): Response
     {
+        $id = $request->get('id');    
         $search1 = $request->get('course');
         $search2 = $request->get('fullname');
         
@@ -126,13 +134,17 @@ class GradingController extends AbstractController
             $entityManager->flush();
 
             //return new Response('Saved new product with id '.$product->getId());
-            return $this->redirectToRoute("grade", ['id' =>$id, 'course' =>$search1, 'fullname' =>$search2]);
+            return $this->redirectToRoute("gradeStudent", ['id' =>$id, 'course' =>$search1, 'fullname' =>$search2]);
        }
 
 
         return $this->render('grading/grade.html.twig', [
-            'form' => $form->createView(),
-            'students' => $students
+
+                'id'=>"125",
+                'course'=>$search1,
+                'course1'=>$search2,
+                'form' => $form->createView(),
+                'students' => $students        
         ]);
     }
 

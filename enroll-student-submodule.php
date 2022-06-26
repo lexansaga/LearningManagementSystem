@@ -236,7 +236,12 @@
 							<!-- ADD NSO -->
 							<input class="files" type="file" name="NSO" value="Choose File" accept="application/pdf" max-size="2000">
 							<p>
-						
+							<label>Password: </label><br>
+                            <input type="password" name="pass" placeholder="password">
+                            <br>
+                            <label>Confirm Password: </label><br>
+                            <input type="password" name="passConf" placeholder="confirm password">
+                            <br>
 							<div class="enroll-student">
 								<button type="submit" name="enroll-backbtn" class="btn btn-danger">Cancel
 									<i class="fas fa-backspace"></i>

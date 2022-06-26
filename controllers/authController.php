@@ -77,6 +77,7 @@
 		$email = htmlspecialchars($_POST['email']);
 		$prevschool = htmlspecialchars($_POST['prevschool']);
 		$hea = $_POST['hea'];
+		
 
 		// FOR UPLOADING IMAGE
 		$img = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
@@ -166,14 +167,13 @@
 		if (count($errors) == 0) {
 			date_default_timezone_set('Asia/Manila');
 			$reg_date = date("F j\, Y \| g:i A", time());
-			
+			$mypass = password_hash("hehe", PASSWORD_BCRYPT);
 			$sql = "INSERT INTO students (idnum, fname, mname, lname, entlev,
-				gender, cnum, email, prevschool, hea, img, g_moral, NSO, reg_date)
-			VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				gender, cnum, email, prevschool, hea, img, g_moral, NSO, reg_date, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
 			$stmt = $connection->prepare($sql);
-			$stmt->bind_param('ssssssssssssss', $idnum, $fname, $mname, $lname, 
+			$stmt->bind_param('sssssssssssssss', $idnum, $fname, $mname, $lname, 
 				$entlev, $gender, $cnum, $email, $prevschool, $hea, $image, 
-				$g_moral, $NSO, $reg_date);
+				$g_moral, $NSO, $reg_date, $mypass);
 			
 			move_uploaded_file($_FILES['image']['tmp_name'], $target);
 			move_uploaded_file($_FILES['g_moral']['tmp_name'], "data/files/GMORAL/".$g_moral);
@@ -194,6 +194,7 @@
 				exit();
 			}
 			else  {
+
 				$errors['db_error'] = "Database error: failed to register";
 			}
 		}
@@ -661,7 +662,7 @@
 		$fullname = $_POST['fullname'];
 		$year_term = $_POST['year_term'];
 		$program_class = $_POST['program_class'];
-
+		
 		$sql = "INSERT INTO course_enrolled (idnum, fullname, year_term, program_class, course) VALUES (?, ?, ?, ?, ?)";
 		$stmt = $connection->prepare($sql);
 

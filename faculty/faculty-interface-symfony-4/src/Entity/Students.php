@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Entity;
-
+use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="students")
  * @ORM\Entity
  */
-class Students
+class Students implements UserInterface
 {
     /**
      * @var int
@@ -146,6 +146,11 @@ class Students
      * @ORM\Column(name="reg_date", type="string", length=30, nullable=false)
      */
     private $regDate;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $password;
 
     public function getId(): ?int
     {
@@ -331,6 +336,10 @@ class Students
 
         return $this;
     }
+    public function getFullname(): ?string
+    {
+        return $this->fname ." ". $this->mname ." ". $this->lname;
+    }
 
     public function getGMoral(): ?string
     {
@@ -368,5 +377,32 @@ class Students
         return $this;
     }
 
+    public function getRoles(){
+        
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'STUDENT';
 
+        return array_unique($roles);
+    }
+    public function getPassword(){
+         
+
+        return $this->password;
+    }
+    public function getSalt(){
+
+    }
+    public function eraseCredentials(){
+
+    }
+    public function getUsername(){
+        return $this->email;   
+    }
+
+    public function setPassword(?string $password): self
+    {
+        $this->password = $password;
+
+        return $this;
+    }
 }

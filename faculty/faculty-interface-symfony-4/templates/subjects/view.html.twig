@@ -1,17 +1,12 @@
 {% extends 'base.html.twig' %}
 
 {% block title %} 
-    {{ course.coursename }}
+    {{ coursename }}
  {% endblock %}
 
+
 {% block stylesheets %}
-    <link rel="icon" type="image/x-icon" href="assets/favicon.ico"/>
-	<!-- CUSTOM STYLESHEET -->
-	
-	<!-- FONT AWESOME -->
-	<script src="https://kit.fontawesome.com/575abfd474.js" crossorigin="anonymous"></script>
-	<!-- BOOTSTRAP -->
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+  
 
     <style>
 
@@ -159,80 +154,178 @@
         <!--header menu start-->
         <div class="header">
             <div class="header-menu">
-                <div class="title">Aoba Johsai Academy</div>
+                <div class="title">Educa Academy</div>
             </div>
         </div>
         <!--header menu end-->
         <!--sidebar start-->
-           <div class="sidebar">
-            <div class="sidebar-menu">
-                <center class="profile">
-                    <img src="assets/logo.png" alt="">
-                    <p>{{ app.user.fullname }}</p>
-                </center>
-                <hr></hr>
-                <li class="item">
-                    <a href="/dashboard" class="menu-btn">
-                        <i class="fas fa-desktop"></i>Dashboard
-                    </a>
-                </li>
-                <li class="item">
-                    <a href="/student" class="menu-btn">
-                        <span><i class="fas fa-graduation-cap"></i>Student</span>
-                    </a>
-                </li>
-                <li class="item">
-                    <a href="/grading" class="menu-btn">
-                        <i class="fas fa-file-excel"></i>Grading
-                    </a>
-                </li>
-                <li class="item">
-                    <a href="/profile" class="menu-btn">
-                        <i class="fas fa-users-cog"></i>Profile
-                    </a>
-                </li>
-                <li class="item">
-                    <a href="/subjects" class="menu-btn">
-                        <i class="fas fa-users-cog"></i>Subjects
-                    </a>
-                </li>
-                
-                <!-- Button trigger modal -->   
-                <li class="item">
-                    <div class="menu-btn">
-                        {% if app.user %}
-                        <a href="{{ path('app_logout') }}">
-                            <button>
-                                <i class="fas fa-sign-out-alt"></i>Logout
-                            </button>
-                        </a>
-                        {% endif %}
-                    </div>  
-                </li>
-            </div>
-        </div>
+          
         <!--sidebar end-->
         <!--main container start-->
         <div class="content">
-         <button type="button" class="btn btn-success" 
-            id="createactivity"
-         >Create Activities</button>
-         <button type="button" class="btn btn-success">Create Assignment</button>
+        <h1>{{ coursename }}</h1>
+         
+        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          Create Task    
+        </button>
+
+         
+
+         <h5>Active Task</h5>
+             <table class="table table-bordered">
+        <tr>
+                    <th>Task Title</th>
+                    <th>Task Type</th>
+                    <th>File</th>
+                    <th>Score</th>
+                    <th>Duration:</th>
+                    <th>Action</th>
+                    
+                </tr>
+          {% for s in allActivities %}
+              
+
+                {%  if date(s.activitydeadline) > date() %}
+
+                <tbody>
+                    <tr>
+                       <td>{{s.activityname}}</td>
+                       <td>{{s.activitytype}}</td>
+                       {% if s.file is not empty %}
+                       <td><button
+
+                       value="{{s.file}}"
+                        onclick="clickFile(this)"
+                       >FILE</button></td>
+                       {% else %}
+                       <td></td>
+                       {% endif %}
+                       <td>{{s.maxscore}}</td>
+                       <td >{{s.activitydeadline|date('d-m-Y h:m:s')}}</td>
+                        <td><button
+                        onclick="clickRemove({{s.id}})"
+                       >REMOVE</button></td>
+                    </tr>
+                </tbody>
+                {%  endif %}
+                
+                {% endfor %}
+
+
+    </table>
+         <h5>Past Task</h5>
+             <table class="table table-bordered">
+           <tr>
+                    <th>Task Title</th>
+                    <th>Task Type</th>
+                    <th>File</th>
+                    <th>Score</th>
+                    <th>Duration:</th>
+                    <th>Action</th>
+                    
+                </tr>
+          {% for s in allActivities %}
+                {%  if date(s.activitydeadline) < date() %}
+
+                <tbody>
+                    <tr>
+                       <td>{{s.activityname}}</td>
+                       <td>{{s.activitytype}}</td>
+                       {% if s.file is not empty %}
+                       <td><button
+
+                       value="{{s.file}}"
+                        onclick="clickFile(this)"
+                       >FILE</button></td>
+                       {% else %}
+                       <td></td>
+                       {% endif %}
+                       
+                       <td>{{s.maxscore}}</td>
+                       <td >{{s.activitydeadline|date('d-m-Y h:m:s')}}</td>
+                       <td><button
+                        onclick="clickRemove({{s.id}})"
+                       >REMOVE</button></td>
+                    </tr>
+                </tbody>
+                {%  endif %}
+                {% endfor %}
+    </table>
+
+
+      
+
+          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Create Task</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body container" id="mymodal">
+                <div class="row">
+                  <label class="col"> Task Title</label>
+                  <input class="col" type="text" id="activityname"/>
+                </div>
+                <div class="row">
+                  <label class="col"> Description</label>
+                  <input class="col" type="text" />
+                </div>
+
+                <div class="row">
+                  <label class="col">Duration</label>
+                  <input id="deadline" class="col" type='datetime-local' name="activity_deadline"/>
+                </div>
+
+                <div class="row">
+                <label class="col"> Task type</label>
+                  
+                  <select  class=" col"id="selectdata">
+                    <option>Essay</option>
+                    <option>Quiz</option>
+                    <option>Activity</option>
+                    <option>Assignment</option>
+                  </select>
+                </div>
+                <div  class="row">
+                <input class="col" type="file" id="fileinput"/>
+                  <button class="col" id="addquestion" hidden>Add Question</button>
+                  <label class="col" id="maxScore" hidden>Score:</label>
+                  <input class="col" id="scoreInput" placeholder="Enter Score"/>
+                </div>
+
+                
+                  
+
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" id="actbutton" onclick="addActivity({{myid}})">Add Activity</button>
+            </div>
+               
+                
+          </div>
         </div>
+      </div>
+
+
+
+
+        </div>
+  
+
         <!--main container end-->
     </div>
     <!--wrapper end-->
 
+    
     </div>
-    <script>
-    let doc = document.getElementById("createactivity");
-    doc.addEventListener('click', function() {
-        fetch("/subjects/api/addActivity").then((data)=>{
-            console.log(data);
-        });
-        
-        
-    });
-    </script>
+
+    
+{% block javascripts %}
+    <script src={{asset('assets/activities.js')}}></script>
+{% endblock %}
+
 </body>
 {% endblock %}

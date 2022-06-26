@@ -8,12 +8,206 @@
         {% block stylesheets %}
             
         {% endblock %}
-
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico"/>
+	<!-- CUSTOM STYLESHEET -->
+	<link rel="stylesheet" href="assets/student.css">
+	<!-- FONT AWESOME -->
+	<script src="https://kit.fontawesome.com/575abfd474.js" crossorigin="anonymous"></script>
+	<!-- BOOTSTRAP -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         {% block javascripts %}
             {#{{ encore_entry_script_tags('app') }}#}
         {% endblock %}
+        <style>
+          .wrapper .sidebar{
+    z-index: 1;
+    background: #FFF;
+    box-shadow: 10px 10px 15px grey;
+    position: fixed;
+    top: 70px;
+    width: 180px;
+    height: calc(100% - 9%);
+    transition: 0.3s;
+    transition-property: width;
+    overflow-y: auto;
+  }
+  .wrapper .sidebar .sidebar-menu{
+    overflow: hidden;
+  }
+  .wrapper .sidebar .sidebar-menu .profile img{
+    margin: 20px 0;
+    width: 90px;
+    height: 90px;
+  }
+  .wrapper .sidebar .sidebar-menu .profile p{
+    color: grey;
+    font-weight: 650;
+  }
+  .wrapper .sidebar .sidebar-menu .item{
+    width: 250px;
+    overflow: hidden;
+    font-size: 14px;
+  }
+  .wrapper .sidebar .sidebar-menu .item a{
+    text-decoration: none;
+  }
+  .wrapper .sidebar .sidebar-menu .item .menu-btn{
+    display: block;
+    color: #000;
+    position: relative;
+    padding: 10px 20px;
+    transition: 0.3s;
+    transition-property: color;
+  }
+  .wrapper .sidebar .sidebar-menu .item button {
+      border: none;
+      background: none;
+  }
+  .wrapper .sidebar .sidebar-menu .item button:hover {
+      color: #FFF;
+  }
+  /********** SIDEBAR BUTTONS **********/
+  .wrapper .sidebar .sidebar-menu .item .menu-btn span{
+      padding: 20px;
+      background: #A41034;
+      border-radius: 2em;
+      color: #fff;
+  }
+  .wrapper .sidebar .sidebar-menu .item .menu-btn span:hover{
+      background: #C2133D;
+  }
+  .wrapper .sidebar .sidebar-menu .item .menu-btn:hover{
+      background: #C2133D;
+      color: #FFF;
+      text-decoration: none;
+  }
+  .wrapper .sidebar .sidebar-menu .item .menu-btn i{
+      margin-right: 20px;
+  }
+  /********** LOGOUT MODAL **********/
+  .modal .modal-dialog .modal-content .modal-footer button {
+      font-size: 14px;
+  }
+  .modal .modal-dialog .modal-content .modal-footer button a {
+      text-decoration: none;
+      color: #FFF;
+  }
+  
+  
+  
+  /********** MAIN CONTAINER **********/
+  .wrapper .content{
+    width: (100% - 250px);
+    margin-top: 70px;
+    margin-left: 220px;
+    padding: 15px;
+    background-size: cover;
+    height: 100vh;
+    transition: 0.3s;
+  }
+        </style>
+
     </head>
     <body>
-        {% block body %}{% endblock %}
+    <div class="wrapper">
+
+        {% if app.user is not empty %}
+        <div class="sidebar">
+            <div class="sidebar-menu">
+            <center class="profile">
+                    <img src={{asset('assets/logo.png')}} alt="">
+                    
+                    <p>{{ app.user.fullname }}</p>
+                </center>
+                <hr></hr>
+                
+                {% if app.user.roles[0] == "FACULTY" %}
+                
+                <li class="item">
+                    <a href="/dashboard" class="menu-btn">
+                    
+                    {% if app.request.uri == "http://127.0.0.1:8000/dashboard" %}
+                        
+                        <span><i class="fas fa-desktop"></i>Dashboard</span>
+                        
+                    {% else %}
+                        <i class="fas fa-desktop"></i>Dashboard
+                    {% endif %}
+                    </a>
+                </li>
+                <li class="item">
+                    <a href="/student" class="menu-btn">
+                    {% if  app.request.uri == "http://127.0.0.1:8000/student" %}
+                        
+                            <span><i class="fas fa-graduation-cap"></i>Student</span>
+                            
+                        {% else %}
+                            <i class="fas fa-graduation-cap"></i>Student
+                        {% endif %}
+                        
+                    </a>
+                </li>
+                <li class="item">
+                    <a href="/grading" class="menu-btn">
+                    {% if app.request.uri == "http://127.0.0.1:8000/grading" %}
+                        
+                            <span><i class="fas fa-file-excel"></i>Grading</span>
+                            
+                        {% else %}
+                            <i class="fas fa-file-excel"></i>Grading
+                        {% endif %}
+                        
+                    </a>
+                </li>
+                <li class="item">
+                    <a href="/profile" class="menu-btn">
+                        <i class="fas fa-users-cog"></i>Profile
+                    </a>
+                </li>
+                <li class="item">
+                    <a href="/subjects" class="menu-btn">
+                        <i class="fas fa-users-cog"></i>Subjects
+                    </a>
+                </li>
+
+                {% else %}
+                <li class="item">
+                    <a href="/classrooms" class="menu-btn">
+                        <i class="fas fa-users-cog"></i>Classrooms
+                    </a>
+                </li>
+                <li class="item">
+                    <a href="/grades" class="menu-btn">
+                        <i class="fas fa-users-cog"></i>Grades
+                    </a>
+                </li>
+                {% endif %}
+                <!-- Button trigger modal -->   
+                <li class="item">
+                    <div class="menu-btn">
+                        {% if app.user %}
+                        <a href="{{ path('app_logout') }}">
+                            <button>
+                                <i class="fas fa-sign-out-alt"></i>Logout
+                            </button>
+                        </a>
+                        {% endif %}
+                    </div>  
+                </li>
+                
+                
+                
+            </div>
+        </div>
+        
+
+        {% endif %}
+                {% block body %}{% endblock %}
+        </div>
+
+
+        
     </body>
 </html>
