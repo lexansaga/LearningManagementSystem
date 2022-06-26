@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EDUCA - Student</title>
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/style-media-queries.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous" />
+    <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet" />
+    <link href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+</head>
+
+<body>
+    <header>
+        <div class="menu">
+            <i class="bx bx-menu"></i>
+        </div>
+        <a href="index.html" class="logo"> EDUCA </a>
+    </header>
+    <main>
+        <div class="sidebar">
+            <div class="profile">
+                <img src="assets/images/logo.png" alt="logo" />
+
+                <h5 class="name">Saga Alexander</h5>
+                <h5 class="section">Section 1</h5>
+            </div>
+
+            <ul class="sidebar-menu">
+                <li>
+                    <a href="index.html"><i class="bx bxs-dashboard"></i> Dashboard</a>
+                </li>
+                <li>
+                    <a href="module.html"><i class='bx bxs-copy-alt'></i> Module</a>
+                </li>
+                <li>
+                    <a href="activity.html"><i class='bx bx-math'></i>Activity</a>
+                </li>
+                <li>
+                    <a href="class.html"><i class='bx bxs-grid'></i>Classroom</a>
+                </li>
+                <li class="sidebar-subholder" style="display:none;">
+                    <i class='bx bxs-face'></i> Classroom
+                    <ul class="sidebar-submenu">
+                        <li>
+                            <a href="room.html"><i class='bx bxs-face'></i>Room</a>
+                        </li>
+                        <li>
+                            <a href="class.html"><i class='bx bxs-face'></i>Class</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="active"><a href="grades.html"> <i class='bx bxs-book-content bx-tada'></i>Grades</a></li>
+                <li><a href="confirmpayment.html"> <i class='bx bxs-credit-card-alt'></i>Confirm Payment</a>
+                </li>
+
+                <li><a href="index.html"><i class='bx bxs-door-open'></i>Logout</a></li>
+            </ul>
+        </div>
+        <div class="main-content">
+            <h3>Classroom</h3>
+            <div class="main-content-wrapper">
+                <table id="datatable" class="display">
+                    <thead>
+                        <tr>
+                            <th>Subject</th>
+                            <th>Prelim</th>
+                            <th>Midterm</th>
+                            <th>Prefinal</th>
+                            <th>Final</th>
+                            <th>Remarks</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><a href="#">Subject 1</a></td>
+                            <td>94.0</td>
+                            <td>92.0</td>
+                            <td>97.8</td>
+                            <td>86.1</td>
+                            <td>2.25</td>
+                        </tr>
+                        <tr>
+                            <td><a href="#">Subject 2</a></td>
+                            <td>95.0</td>
+                            <td>96.0</td>
+                            <td>91.8</td>
+                            <td>81.1</td>
+                            <td>2.75</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous">
+    </script>
+
+
+    <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
+    <script src="assets/js/script.js"></script>
+</body>
+
+</html>

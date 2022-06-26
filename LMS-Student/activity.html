@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EDUCA - Student</title>
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/style-media-queries.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous" />
+    <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet" />
+    <link href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+</head>
+
+<body>
+    <header>
+        <div class="menu">
+            <i class="bx bx-menu"></i>
+        </div>
+        <a href="index.html" class="logo"> EDUCA </a>
+    </header>
+    <main>
+        <div class="sidebar">
+            <div class="profile">
+                <img src="assets/images/logo.png" alt="logo" />
+
+                <h5 class="name">Saga Alexander</h5>
+                <h5 class="section">Section 1</h5>
+            </div>
+
+            <ul class="sidebar-menu">
+                <li>
+                    <a href="index.html"><i class="bx bxs-dashboard"></i> Dashboard</a>
+                </li>
+                <li>
+                    <a href="module.html"><i class='bx bxs-copy-alt'></i> Module</a>
+                </li>
+                <li class="active">
+                    <a href="activity.html"><i class='bx bx-math bx-tada'></i>Activity</a>
+                </li>
+                <li>
+                    <a href="class.html"><i class='bx bxs-grid'></i>Classroom</a>
+                </li>
+                <li class="sidebar-subholder" style="display:none;">
+                    <i class='bx bxs-face'></i> Classroom
+                    <ul class="sidebar-submenu">
+                        <li>
+                            <a href="room.html"><i class='bx bxs-face'></i>Room</a>
+                        </li>
+                        <li>
+                            <a href="class.html"><i class='bx bxs-face'></i>Class</a>
+                        </li>
+                    </ul>
+                </li>
+                <li><a href="grades.html"> <i class='bx bxs-book-content'></i>Grades</a></li>
+                <li><a href="confirmpayment.html"> <i class='bx bxs-credit-card-alt'></i>Confirm Payment</a>
+                </li>
+
+                <li><a href="index.html"><i class='bx bxs-door-open'></i>Logout</a></li>
+            </ul>
+        </div>
+        <div class="main-content">
+            <h3>Activity</h3>
+            <div class="main-content-wrapper">
+                <div class="activity-container">
+
+                    <div class="activity-content">
+
+                        <h2 class="activity-title">Sample Activity Title</h2>
+
+                        <div class="activity-media">
+                            <h2 class="media-title">Image Media title</h2>
+                            <img src="https://images.pexels.com/photos/733856/pexels-photo-733856.jpeg?cs=srgb&dl=pexels-tirachard-kumtanom-733856.jpg&fm=jpg"
+                                class="activity-image" />
+
+                            <div class="mb-3 form-upload">
+                                <label for="formFileMultiple" class="form-label">Multiple files input example</label>
+                                <input class="form-control" type="file" id="formFileMultiple" multiple>
+                                <ul>
+                                    <li>File 1
+                                        <div class="remove-file"><i class='bx bx-x'></i></div>
+                                    </li>
+                                    <li>File 2
+                                        <div class="remove-file"><i class='bx bx-x'></i></div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <button class="btn btn-primary btn-submit-comment">Submit</button>
+
+                        </div>
+
+
+                        <div class="activity-media">
+                            <h2 class="media-title">Video Media title</h2>
+                            <video controls>
+                                <source src="assets/images/video.mp4">
+                            </video>
+
+                            <div class="mb-3 form-upload">
+                                <label for="formFileMultiple" class="form-label">Multiple files input example</label>
+                                <input class="form-control" type="file" id="formFileMultiple" multiple>
+                            </div>
+                            <button class="btn btn-primary btn-submit-comment">Submit</button>
+
+                        </div>
+
+                        <div class="activity-upload">
+                            <p class="activity-description">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit qui accusamus
+                                necessitatibus ab
+                                tempora. Cupiditate ducimus sunt, maiores corporis obcaecati excepturi soluta
+                                aspernatur,
+                                ullam molestiae id ea beatae magnam facere!
+                            </p>
+                            <a href="#" class="activity-link">Sample Activity.pdf</a>
+                            <div class="mb-3 form-upload">
+                                <label for="formFileMultiple" class="form-label">Multiple files input example</label>
+                                <input class="form-control" type="file" id="formFileMultiple" multiple>
+                            </div>
+                            <button class="btn btn-primary btn-submit-comment">Submit</button>
+
+                        </div>
+
+                        <div class="quiz-wrapper">
+                            <div class="quiz">
+                                <h6 class="quiz-title">Quiz Radio</h6>
+                                <div class="quiz-radio-choices">
+                                    <!-- Radio Button  -->
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="choice">
+                                        <label class="form-check-label" for="choice">
+                                            Choices 1
+                                        </label>
+                                    </div>
+
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="choice">
+                                        <label class="form-check-label" for="choice">
+                                            Choices 2
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="quiz">
+                                <h6 class="quiz-title">Quiz with Checkboxes</h6>
+                                <div class="quiz-checkbox-choices">
+                                    <!-- Checkboxes Button  -->
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" name="chkbox">
+                                        <label class="form-check-label" for="chkbox">
+                                            Choices 1
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" name="chkbox">
+                                        <label class="form-check-label" for="chkbox">
+                                            Choices 2
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="quiz">
+                                <h6 class="quiz-title">Quiz with TextArea</h6>
+                                <div class="quiz-textbox-choices">
+                                    <!-- Textboxes -->
+
+                                    <textarea class="form-control" aria-label="With textarea"></textarea>
+                                </div>
+                            </div>
+
+
+                            <button class="btn btn-primary btn-submit-quiz">Submit</button>
+                        </div>
+                    </div>
+                    <div class="activity-info">
+                        <h5>Assignment</h5>
+                        <ul>
+                            <li><i class='bx bx-paperclip'></i>Type: <span>Quiz</span></li>
+                            <li><i class='bx bxs-note'></i>Max Score: <span>10</span></li>
+                            <li><i class='bx bxs-time'></i>Due: <span>June 11,2023</span></li>
+                            <li><i class='bx bxs-time'></i>Status: <span>Active</span></li>
+                        </ul>
+                    </div>
+                    <div class="activity-submission">
+                        <h5>Submission</h5>
+                        <ul>
+                            <li>Submitted: <span>June 21, 2022, 2:00 pm</span></li>
+                            <li>Submission: <span>On Time</span></li>
+                            <li>Max attemps: <span>2</span></li>
+                            <li>Allow Late Submission <span><i class='bx bx-check' style='color:#1bdc6f'></i></span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="activity-comment">
+                        <h5>Comment</h5>
+                        <ul>
+                            <li><a href="#" class="prof-name">Prof Name : </a><span class="comment">Lorem ipsum, dolor
+                                    sit
+                                    amet consectetur
+                                    adipisicing elit.</span></li>
+                        </ul>
+
+                        <textarea class="form-control" aria-label="With textarea"></textarea>
+
+                        <button class="btn btn-primary btn-submit-comment">Submit</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous">
+    </script>
+
+
+    <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
+    <script src="assets/js/script.js"></script>
+</body>
+
+</html>
