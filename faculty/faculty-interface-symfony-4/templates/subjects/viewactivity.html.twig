@@ -1,0 +1,116 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<main>
+<div class="header">
+            <div class="header-menu">
+                <div class="title">Educa Academy</div>
+            </div>
+        </div>
+<div class="main-content">
+<h3>{{activity.tasktype}}</h3>
+            
+            <div class="main-content-wrapper content">
+                <div class="activity-container">
+
+                    <div class="activity-content">
+
+                        <h2 class="activity-title">{{activity.activityname}}</h2>
+                        <h2>SCORE: {{activity.score}}</h2>
+                       {% if activity.activitytype == "Essay" %}
+                            <div class="activity-upload">
+                                    {% if subfiles is not empty %}
+    <ul>
+    
+    
+                                    {% for a in subfiles %}
+
+
+                                     <li>File <label
+                                     
+                                     onclick="getFile('{{a}}','submittedactivities','{{userid}}')"
+                                     >{{a}}</label>
+                                        <div class="remove-file" >
+                                        
+                                        <i class='bx bx-x'></i></div>
+                                    </li>
+                                        
+                                    {% endfor %}
+    </ul>
+                                    {% endif %}
+
+                            </div>
+                            <input
+                                placeholder="add score"
+                            />
+                        {% elseif activity.activitytype == "Quiz" %}
+
+                        
+                        <div class="quiz-wrapper">
+                            <div id="timer"></div>
+                            <div class="quiz">
+                                
+                                {% for a in activity.quizquestions %}
+                                    {% if a.activitytype == "Identification" %}
+                                    <br/>
+                                       <label>QUESTION: {{a.question}}</label>
+                                        <br/>
+                                        <label> ANSWER: {{a.answer}}</label>
+                                    {% elseif a.activitytype == "Multiple" %}
+                                        <br/>
+                                        <label>MULTIPLE CHOICE QUESTION: {{a.question}}</label>
+                                        <br/>
+                                        <label>ANSWER:{{a.answer}}</label>
+                                        <br/>
+                                    {% else %}
+                                        <br/>
+                                        <label>ESSAY QUESTION: {{a.question}}</label>
+                                        <br/>
+                                        <label
+                                        
+                                        >ANSWER: {{a.answer}}</label>
+                                        <br/>
+                                        <input 
+                                            placeholder="addpoints"
+                                        />
+                                        
+                                    {% endif %}
+                                    
+                                {% endfor %}
+                               
+                    
+                            </div>
+
+
+                            
+
+
+
+                            
+
+
+                            
+                        </div>
+                       {% endif %}
+
+
+                        
+                    </div>
+                  
+                    
+
+                </div>
+            </div>
+        </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
+    <script src="{{ app.request.schemeAndHttpHost }}/assets/js/script.js"></script>
+    <script src="{{ app.request.schemeAndHttpHost }}/assets/js/submitactivities.js"></script>
+    <script src="{{ app.request.schemeAndHttpHost }}/assets/js/getFile.js"></script>
+</main>
+     
+{% endblock %}

@@ -1,0 +1,118 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<link rel="stylesheet" href="{{ app.request.schemeAndHttpHost }}/assets/css/style.css"/>
+    <link rel="stylesheet" href="{{ app.request.schemeAndHttpHost }}assets/css/style-media-queries.css"/>
+    <link rel="stylesheet" href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+    <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet" />
+    <main>
+         <div class=" header">
+            <div class="header-menu">
+                <div class="title">Educa Academy</div>
+            </div>
+        </div>
+        <div
+            class="main-content"
+        >
+            <h3>{{classroom.course}}</h3>
+            <div
+                class="main-content-wrapper"
+            >
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="{{"activities" in app.request.uri ? "nav-link active" : "nav-link" }}" href="{{path('showClassroom',{'id':id})}}">Activity</a>
+                    </li>
+                    <li class="nav-item">
+                       <a class="{{"module" in app.request.uri ? "nav-link active" : "nav-link" }}" href="{{path('showClassroomModule',{'id':id})}}">Module</a>
+                    </li>
+                   
+  
+                </ul>
+
+
+                {% if "activities" in app.request.uri %}
+                 <table id="datatable" class="display">
+                    <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Activity Name</th>
+                            <th>Description</th>
+                            <th>Score</th>
+                            <th>Activity Deadline</th>
+                            <th>File</th>
+                            <th>Attempts</th>
+                        </tr>
+                    </thead>
+                </table>
+                {% else %}
+                    <ul>
+                        <li>File 
+                            <div class="remove-file"><i class='bx bx-x'></i></div>
+                        </li>
+                    </ul>
+                {% endif %}
+                
+            </div>
+        </div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+
+    
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
+      <script>
+        
+        {% if all is not empty and "activities" in app.request.uri  %}
+        let c = []
+       {% for b in all %}
+            
+            c.push({
+                id:"{{b.id}}",
+                activitytype:"{{b.activitytype}}",
+                activityname:"{{b.activityname}}",
+                description:"{{b.description}}",
+                score:0,
+                activitydeadline:"{{b.activitydeadline|date('d-m-Y h:m:s')}}",
+                file:"{{b.file}}",
+                attempts:{{b.maxattempt}},
+            });   
+        {% endfor %}
+        
+        $('#datatable').DataTable({
+            ordering: true,
+            pageLength: 20,
+            data:c,
+            columns : [
+                { data: 'activitytype' },
+                       { title: "Activity Name", class: "center",data: "activityname", render: function(data, type, full, meta) {
+                        if(full.attempts==0){
+                            return '<label>'+data+'</label>'
+                        }else{
+                            return '<a href=activityID/'+full.id+'>'+data+'</a>'
+                        }
+     
+  }
+  },
+                { data: 'description' },
+                { data: 'score' },
+                { data: 'activitydeadline' },
+                { data: 'file' },
+                { data: 'attempts' },
+                
+            ],
+            dom: 'B<"clear">lfrtip',
+            buttons: [
+                'copy', 'excel', 'pdf', 'csv', 'print'
+            ]
+        });
+        {% endif %}
+        
+    </script>
+    <script src="assets/js/script.js"></script>
+    </main>
+
+{% endblock %}

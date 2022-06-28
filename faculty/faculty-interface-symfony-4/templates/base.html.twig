@@ -10,17 +10,20 @@
         {% endblock %}
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico"/>
 	<!-- CUSTOM STYLESHEET -->
-	<link rel="stylesheet" href="assets/student.css">
+	<link rel="stylesheet" href="{{ app.request.schemeAndHttpHost}}/assets/student.css">
 	<!-- FONT AWESOME -->
 	<script src="https://kit.fontawesome.com/575abfd474.js" crossorigin="anonymous"></script>
 	<!-- BOOTSTRAP -->
+    
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         {% block javascripts %}
             {#{{ encore_entry_script_tags('app') }}#}
         {% endblock %}
-        <style>
+    {% if app.user is not empty and app.user.roles[0] == "FACULTY"%}
+          <style>
           .wrapper .sidebar{
     z-index: 1;
     background: #FFF;
@@ -108,7 +111,17 @@
     transition: 0.3s;
   }
         </style>
+    {% else %}
+    <link rel="stylesheet" href="{{ app.request.schemeAndHttpHost }}/assets/css/style.css"/>
+    <link rel="stylesheet" href="{{ app.request.schemeAndHttpHost }}assets/css/style-media-queries.css"/>
+    
 
+  
+    {% endif %}
+
+    <link rel="stylesheet" href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+    <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet" />
     </head>
     <body>
     <div class="wrapper">
@@ -171,31 +184,49 @@
                         <i class="fas fa-users-cog"></i>Subjects
                     </a>
                 </li>
-
+                <li class="item">
+                    <a  href="{{ path('app_logout') }}" class="menu-btn">
+                        <i class="fas fa-users-cog"></i>Logout
+                    </a>
+                </li>
                 {% else %}
-                <li class="item">
-                    <a href="/classrooms" class="menu-btn">
-                        <i class="fas fa-users-cog"></i>Classrooms
-                    </a>
+                
+            <ul class="sidebar-menu">
+                <li class={{app.request.uri == "http://127.0.0.1:8000/dashboard"?"active":""}}>
+                    <a href="/dashboard"><i class="bx bxs-dashboard"></i> Dashboard</a>
                 </li>
-                <li class="item">
-                    <a href="/grades" class="menu-btn">
-                        <i class="fas fa-users-cog"></i>Grades
-                    </a>
+                
+                <li class={{app.request.uri == "http://127.0.0.1:8000/classrooms"?"active":""}}>
+                    <a href="/classrooms"><i class='bx bxs-grid'></i>Classroom</a>
                 </li>
+                <li class="sidebar-subholder" style="display:none;" >
+                    <i class='bx bxs-face'></i> Classroom
+                    <ul class="sidebar-submenu">
+                        <li>
+                            <a href="room.html"><i class='bx bxs-face'></i>Room</a>
+                        </li>
+                        <li>
+                            <a href="class.html"><i class='bx bxs-face'></i>Class</a>
+                        </li>
+                    </ul>
+                </li>
+                <li
+                class={{app.request.uri == "http://127.0.0.1:8000/grades"?"active":""}}
+                ><a href="/grades"> <i class='bx bxs-book-content'></i>Grades</a></li>
+                <li
+                class={{app.request.uri == "http://127.0.0.1:8000/profile/uploadpayment"?"active":""}}
+                ><a href="{{path("showUploadPayment")}}"> <i class='bx bxs-credit-card-alt'></i>Confirm Payment</a>
+                </li>
+
+                <li><a href="{{ path('app_logout') }}">
+                            
+                                <i class='bx bxs-door-open'></i>Logout
+                            
+                        </a></li>
+            </ul>
                 {% endif %}
                 <!-- Button trigger modal -->   
-                <li class="item">
-                    <div class="menu-btn">
-                        {% if app.user %}
-                        <a href="{{ path('app_logout') }}">
-                            <button>
-                                <i class="fas fa-sign-out-alt"></i>Logout
-                            </button>
-                        </a>
-                        {% endif %}
-                    </div>  
-                </li>
+                
                 
                 
                 

@@ -44,7 +44,7 @@ class Activities
     private $activity_deadline;
 
     /**
-     * @ORM\Column(type="blob", nullable=true)
+     * @ORM\Column(type="string", nullable=true)
      */
     private $file;
 
@@ -62,6 +62,42 @@ class Activities
      * @ORM\Column(type="integer")
      */
     private $maxscore;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $Course;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $ProgramClass;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $tasktype;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isallowlatesubmission;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $allowfileupload;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $maxattempt;
+
+    
+
+    
+
+    
 
     public function getId(): ?int
     {
@@ -175,6 +211,82 @@ class Activities
 
         return $this;
     }
+
+    public function getCourse(): ?string
+    {
+        return $this->Course;
+    }
+
+    public function setCourse(string $Course): self
+    {
+        $this->Course = $Course;
+
+        return $this;
+    }
+
+    public function getProgramClass(): ?string
+    {
+        return $this->ProgramClass;
+    }
+
+    public function setProgramClass(string $ProgramClass): self
+    {
+        $this->ProgramClass = $ProgramClass;
+
+        return $this;
+    }
+
+    public function getTasktype(): ?string
+    {
+        return $this->tasktype;
+    }
+
+    public function setTasktype(string $tasktype): self
+    {
+        $this->tasktype = $tasktype;
+
+        return $this;
+    }
+
+    public function getIsallowlatesubmission(): ?bool
+    {
+        return $this->isallowlatesubmission;
+    }
+
+    public function setIsallowlatesubmission(bool $isallowlatesubmission): self
+    {
+        $this->isallowlatesubmission = $isallowlatesubmission;
+
+        return $this;
+    }
+
+    public function getAllowfileupload(): ?bool
+    {
+        return $this->allowfileupload;
+    }
+
+    public function setAllowfileupload(bool $allowfileupload): self
+    {
+        $this->allowfileupload = $allowfileupload;
+
+        return $this;
+    }
+
+    public function getMaxattempt(): ?int
+    {
+        return $this->maxattempt;
+    }
+
+    public function setMaxattempt(int $maxattempt): self
+    {
+        $this->maxattempt = $maxattempt;
+
+        return $this;
+    }
+
+  
+
+   
     
    
 }

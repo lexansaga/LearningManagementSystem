@@ -86,19 +86,18 @@ if(addquestion!=null){
         let optionTemp2 = document.createElement("option");
         let optionTemp3 = document.createElement("option");
 
-        optionTempdef.text = "Default";
-        optionTempdef.value = "Default";
+        optionTemp3.text = "Identification";
+        optionTemp3.value = "Identification";
         optionTemp1.text = "Multiple";
         optionTemp1.value = "Multiple";
         optionTemp2.text = "Essay";
         optionTemp2.value = "Essay";
-        optionTemp3.text = "Identication";
-        optionTemp3.value = "Identication";
+        
         selectTemp.add(optionTempdef);
         selectTemp.add(optionTemp1);
         selectTemp.add(optionTemp2);
         selectTemp.add(optionTemp3);
-        selectTemp.value ="Default"
+        selectTemp.value ="Identification"
         
         row5.appendChild(selectTemp);
         row5.appendChild(score);
@@ -198,14 +197,17 @@ if(temp!=null){
 
 
     fileinput.addEventListener('change',(data)=>{
-        console.log(data.target.files)
-        objTemp.append('filename',data.target.files[0].name);
-        objTemp.append('file',data.target.files[0]);
+        for (let index = 0; index <  data.target.files.length; index++) {
+            const element =  data.target.files[index];
+            objTemp.append(`file${index}`,element);
+            objTemp.append(`filename${index}`,element.name);
+        }
+        
     })
     
 }
-async function addActivity(data){
-    console.log(tempQ);
+async function addActivity(data,coursename,programclass){
+    
     
     objTemp.append('activityname',document.getElementById("activityname").value);
     objTemp.append('activitytype',select.value);
@@ -217,10 +219,16 @@ async function addActivity(data){
 
         objTemp.append('maxscore',parseInt(scoreInput.value))
     }
-    objTemp.append('description',"sadasdasdasd");
+
+    objTemp.append('description',document.getElementById("description").value);
+    objTemp.append('allowfile',document.getElementById("allowfile").value);
+    objTemp.append('tasktype',document.getElementById("tasktype").value);
+    objTemp.append('maxattempt',document.getElementById("maxattempt").value);
+    objTemp.append('allowlate',document.getElementById("allowlate").value);
     objTemp.append('facultyloadid',data);
     objTemp.append('deadline',document.getElementById("deadline").value);
-    
+    objTemp.append('course',coursename);
+    objTemp.append('programclass',programclass);
     console.log(objTemp);
     var res = await fetch('/subjects/api/addActivity',{
         credentials: 'same-origin',

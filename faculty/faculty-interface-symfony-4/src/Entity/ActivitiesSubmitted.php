@@ -23,7 +23,7 @@ class ActivitiesSubmitted
     private $activityid;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string",length=255)
      */
     private $studentid;
 
@@ -36,6 +36,31 @@ class ActivitiesSubmitted
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $file;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $ProgramClass;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $Course;
+
+    /**
+     * @ORM\Column(type="json")
+     */
+    private $correctanswers = [];
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $timestamp;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $elapsedtime;
 
     public function getId(): ?int
     {
@@ -54,12 +79,12 @@ class ActivitiesSubmitted
         return $this;
     }
 
-    public function getStudentid(): ?int
+    public function getStudentid(): ?string
     {
         return $this->studentid;
     }
 
-    public function setStudentid(int $studentid): self
+    public function setStudentid(string $studentid): self
     {
         $this->studentid = $studentid;
 
@@ -86,6 +111,66 @@ class ActivitiesSubmitted
     public function setFile(?string $file): self
     {
         $this->file = $file;
+
+        return $this;
+    }
+
+    public function getProgramClass(): ?string
+    {
+        return $this->ProgramClass;
+    }
+
+    public function setProgramClass(string $ProgramClass): self
+    {
+        $this->ProgramClass = $ProgramClass;
+
+        return $this;
+    }
+
+    public function getCourse(): ?string
+    {
+        return $this->Course;
+    }
+
+    public function setCourse(string $Course): self
+    {
+        $this->Course = $Course;
+
+        return $this;
+    }
+
+    public function getCorrectanswers(): ?array
+    {
+        return $this->correctanswers;
+    }
+
+    public function setCorrectanswers(array $correctanswers): self
+    {
+        $this->correctanswers = $correctanswers;
+
+        return $this;
+    }
+
+    public function getTimestamp(): ?\DateTimeInterface
+    {
+        return $this->timestamp;
+    }
+
+    public function setTimestamp(\DateTimeInterface $timestamp): self
+    {
+        $this->timestamp = $timestamp;
+
+        return $this;
+    }
+
+    public function getElapsedtime(): ?\DateTimeInterface
+    {
+        return $this->elapsedtime;
+    }
+
+    public function setElapsedtime(?\DateTimeInterface $elapsedtime): self
+    {
+        $this->elapsedtime = $elapsedtime;
 
         return $this;
     }

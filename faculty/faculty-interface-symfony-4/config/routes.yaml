@@ -7,10 +7,16 @@
 dashboard:
     path: /dashboard
     controller: App\Controller\DashboardController::index
-    
+
 student:
     path: /student
     controller: App\Controller\StudentController::index
+
+
+showallactivities:
+    path: /subject/activities/{id}
+    controller:  App\Controller\SubjectsController::showSubmission
+
     
 grading:
     path: /grading
@@ -32,11 +38,7 @@ viewSubjects:
     path: /subjects/{id}
     controller: App\Controller\SubjectsController::view
     defaults: { id: 1 }
-addActivity:
-    path: /subjects/api/addActivity
-    controller:  App\Controller\SubjectsController::addActivity
-    options:
-        expose: true
+
 removeActivity:
     path: /subjects/api/removeActivity
     controller:  App\Controller\SubjectsController::removeActivity
@@ -53,4 +55,39 @@ classrooms:
 gradeStudent:
     path: /grading/grade/{id}
     controller: App\Controller\GradingController::gradeStudent
-    
+showClassroom:
+    path: /classroom/activities/{id}
+    controller: App\Controller\SubjectsController::showClassroom
+showClassroomModule:
+    path: /classroom/module/{id}
+    controller: App\Controller\SubjectsController::showClassroomModule
+showClassroomActivities:
+    path: /classroom/activities/activityID/{id}
+    controller: App\Controller\StudentController::showClassroomActivity
+
+showUploadPayment:
+    path: /profile/uploadpayment
+    controller: App\Controller\StudentController::showUploadPayment
+
+getUploadedFile:
+    path: /student/getFile
+    controller: App\Controller\SubjectsController::retriveFile
+showstudentactivity:
+    path: /activity/view/{id}
+    controller: App\Controller\SubjectsController::showActivityView
+
+addActivity:
+    path: /subjects/api/addActivity
+    controller:  App\Controller\SubjectsController::addActivity
+    options:
+        expose: true
+submitActivity:
+    path: /student/submitActivity
+    controller: App\Controller\StudentController::submitActivity
+    options:
+        expose: true
+addReceipt:
+    path: /students/api/uploadPayment
+    controller:  App\Controller\StudentController::uploadReceipt
+    options:
+        expose: true
