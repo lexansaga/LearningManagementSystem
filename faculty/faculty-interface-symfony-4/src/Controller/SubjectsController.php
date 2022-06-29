@@ -47,7 +47,7 @@ class SubjectsController extends AbstractController
 
         $subact = $this->getDoctrine()->getRepository(ActivitiesSubmitted::class)->find($id);
         $activity = $this->getDoctrine()->getRepository(Activities::class)->findBy(array('id'=>$subact->getActivityid()));
-        $temp = array('activityname'=>$activity[0]->getActivityname(),'tasktype'=>$activity[0]->getTasktype(),'activitytype'=>$activity[0]->getActivitytype(),'quizquestions'=>$subact->getCorrectanswers(),'score'=>$subact->getScore());
+        $temp = array('id'=>$subact->getActivityid(),'activityname'=>$activity[0]->getActivityname(),'tasktype'=>$activity[0]->getTasktype(),'activitytype'=>$activity[0]->getActivitytype(),'quizquestions'=>$subact->getCorrectanswers(),'score'=>$subact->getScore());
         $allfiles = json_decode($subact->getFile());
         if($subact->getFile()!=null){
             
@@ -57,7 +57,8 @@ class SubjectsController extends AbstractController
         }
         
         return $this->render('subjects/viewactivity.html.twig', [
-            'userid'=>$studentID,
+                'userid'=>$studentID,
+                'id'=>$id,
                 'activity'=>$temp,
                 'subfiles'=>$allfiles
         ]);
@@ -121,6 +122,21 @@ class SubjectsController extends AbstractController
             'all'=>$all,
             'activity'=>$activity
         ]);
+    }
+
+    public function addPoints(ManagerRegistry $doctrine,Request $request){
+        $json = $request->getContent();
+        $entityManager = $doctrine->getManager();
+        $myJson = json_decode($json);
+        
+        $subactivity = $entityManager->getRepository(ActivitiesSubmitted::class)->find($myJson->id);
+        
+        $subactivity->setScore($myJson->score);
+        $entityManager->flush();
+        $response = new Response("Successful");
+        $response->headers->set('Content-Type', 'text/html');
+        
+        return $response;
     }
     public function showClassroom($id){
         $userID = $this->getUser()->getIdnum();

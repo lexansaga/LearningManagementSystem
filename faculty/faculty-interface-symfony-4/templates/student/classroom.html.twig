@@ -40,7 +40,7 @@
                             <th>Description</th>
                             <th>Score</th>
                             <th>Activity Deadline</th>
-                            <th>File</th>
+                            
                             <th>Attempts</th>
                         </tr>
                     </thead>
@@ -77,7 +77,7 @@
                 description:"{{b.description}}",
                 score:0,
                 activitydeadline:"{{b.activitydeadline|date('d-m-Y h:m:s')}}",
-                file:"{{b.file}}",
+                
                 attempts:{{b.maxattempt}},
             });   
         {% endfor %}
@@ -89,18 +89,16 @@
             columns : [
                 { data: 'activitytype' },
                        { title: "Activity Name", class: "center",data: "activityname", render: function(data, type, full, meta) {
-                        if(full.attempts==0){
-                            return '<label>'+data+'</label>'
-                        }else{
+                        
                             return '<a href=activityID/'+full.id+'>'+data+'</a>'
-                        }
+                        
      
   }
   },
                 { data: 'description' },
                 { data: 'score' },
                 { data: 'activitydeadline' },
-                { data: 'file' },
+                
                 { data: 'attempts' },
                 
             ],

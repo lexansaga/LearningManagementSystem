@@ -81,7 +81,7 @@ if(addquestion!=null){
         });
         let row5 = document.createElement("div");
         let selectTemp = document.createElement("select");
-        let optionTempdef = document.createElement("option");
+        
         let optionTemp1 = document.createElement("option");
         let optionTemp2 = document.createElement("option");
         let optionTemp3 = document.createElement("option");
@@ -93,7 +93,7 @@ if(addquestion!=null){
         optionTemp2.text = "Essay";
         optionTemp2.value = "Essay";
         
-        selectTemp.add(optionTempdef);
+        
         selectTemp.add(optionTemp1);
         selectTemp.add(optionTemp2);
         selectTemp.add(optionTemp3);
@@ -102,7 +102,9 @@ if(addquestion!=null){
         row5.appendChild(selectTemp);
         row5.appendChild(score);
         row5.classList.add("row");
+        obj[`activitytype`] = "Identification";
         selectTemp.addEventListener('change',(data)=>{
+            
             obj[`activitytype`] = data.target.value;
             if(data.target.value == "Multiple"){
                 answerlabel.hidden = false;

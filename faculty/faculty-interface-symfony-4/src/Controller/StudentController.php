@@ -63,6 +63,7 @@ class StudentController extends AbstractController
             
             
         }
+        
         $subactivity = new ActivitiesSubmitted();
         $subactivity->setScore($score);
         $subactivity->setActivityid($activityID);
@@ -72,9 +73,9 @@ class StudentController extends AbstractController
         $subactivity->setFile(json_encode($tempArr));
         $subactivity->setCorrectanswers(json_decode($correctAnswers));
         $subactivity->setTimestamp(new DateTime(date("Y-m-d H:i:s")));
+        $subactivity->setIsvalid(true);
         
         
-
         $entityManager->persist($subactivity);
 
         
@@ -85,20 +86,78 @@ class StudentController extends AbstractController
         
         return $response;
     }
+
+    public function retake(ManagerRegistry $doctrine,Request $request){
+
+        $userID = $this->getUser()->getIdnum();
+        $id = $request->get('id');
+        $entityManager = $doctrine->getManager();
+        
+        
+        
+       
+        $oldact = $entityManager->getRepository(ActivitiesSubmitted::class)->findBy(array('activityid'=>$id,'studentid'=>$userID,'isvalid'=>true));
+        
+        
+        if($oldact!=null){
+            $oldact[0]->setIsvalid(false);
+            $entityManager->persist($oldact[0]);
+        }
+
+        
+        $entityManager->flush();
+        
+
+        return $this->redirectToRoute("showClassroomActivities", ['id' =>$id]);
+        
+    }
+
     public function showClassroomActivity(ManagerRegistry $doctrine,Request $request){
 
         $userID = $this->getUser()->getIdnum();
         
         $id = $request->get('id');
+
+        
+
         $entityManager = $doctrine->getManager();
         $activity = $entityManager->getRepository(Activities::class)->find($id);
-
-        $subactivity = $entityManager->getRepository(ActivitiesSubmitted::class)->findBy(array('activityid'=>$activity->getId()));
+        $allact = $entityManager->getRepository(ActivitiesSubmitted::class)->findBy(array('activityid'=>$activity->getId(),'studentid'=>$userID));
+        $subactivity = $entityManager->getRepository(ActivitiesSubmitted::class)->findBy(array('activityid'=>$activity->getId(),'isvalid'=>true,'studentid'=>$userID));
         $activity->setFile(json_decode($activity->getFile()));
+        
+        
+        if($subactivity!=null){
+            
+            $count = $activity->getMaxattempt() - count($allact);
+
+            
+            return $this->render('student/success.html.twig', [
+                'activity'=>$activity,
+                'userID'=> $userID,
+                'id'=>$id,
+                'quizquestions'=>$activity->getQuestions(),
+                'allSubmission'=>$subactivity[0],
+                'submissioncount'=>$count
+            ]);    
+        }
+        if($allact!=null){
+            $count = $activity->getMaxattempt() - count($allact);
+            
+            return $this->render('student/showactivity.html.twig', [
+                'activity'=>$activity,
+                'userID'=> $userID,
+                'id'=>$id,
+                'submissioncount'=>$count,
+                'quizquestions'=>$activity->getQuestions(),
+                'allSubmission'=>$subactivity
+            ]);
+        }
         return $this->render('student/showactivity.html.twig', [
             'activity'=>$activity,
             'userID'=> $userID,
             'id'=>$id,
+            'submissioncount'=>$activity->getMaxattempt(),
             'quizquestions'=>$activity->getQuestions(),
             'allSubmission'=>$subactivity
         ]);

@@ -28,7 +28,7 @@ async function submitAnswer(data,actid,studentid,programclass,course,roomID) {
         
         for (let i = data.length-1; i >= 0; i--) {
             const element = data[i];
-            
+            console.log(element.activitytype);        
             if(element.activitytype=="Multiple" ){
                 
                 if(element['question'+(i+1)].trim()==eachelement.ariaLabel){
@@ -71,6 +71,8 @@ async function submitAnswer(data,actid,studentid,programclass,course,roomID) {
                         correctanswers = [...correctanswers,{
                             activitytype:"Essay",
                             answer:eachelement.value.trim(),
+                            graded:"notgraded",
+                            score:0,
                             type:"wrong",
                             question: eachelement.ariaLabel
                         }];
@@ -79,7 +81,7 @@ async function submitAnswer(data,actid,studentid,programclass,course,roomID) {
             }
         }
         
-        console.log(points);
+        
         
     }
 
@@ -101,7 +103,7 @@ async function submitAnswer(data,actid,studentid,programclass,course,roomID) {
     })
 
     
-    
+    window.location.reload();
     
 }
 

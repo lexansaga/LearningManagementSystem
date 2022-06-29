@@ -13,6 +13,10 @@ student:
     controller: App\Controller\StudentController::index
 
 
+retake:
+    path: /activity/retake/{id}
+    controller: App\Controller\StudentController::retake
+
 showallactivities:
     path: /subject/activities/{id}
     controller:  App\Controller\SubjectsController::showSubmission
@@ -61,6 +65,9 @@ showClassroom:
 showClassroomModule:
     path: /classroom/module/{id}
     controller: App\Controller\SubjectsController::showClassroomModule
+
+
+
 showClassroomActivities:
     path: /classroom/activities/activityID/{id}
     controller: App\Controller\StudentController::showClassroomActivity
@@ -89,5 +96,10 @@ submitActivity:
 addReceipt:
     path: /students/api/uploadPayment
     controller:  App\Controller\StudentController::uploadReceipt
+    options:
+        expose: true
+addpoints:
+    path: /students/api/addpoints
+    controller:  App\Controller\SubjectsController::addPoints
     options:
         expose: true

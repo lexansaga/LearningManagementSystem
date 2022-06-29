@@ -62,6 +62,11 @@ class ActivitiesSubmitted
      */
     private $elapsedtime;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isvalid;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -171,6 +176,18 @@ class ActivitiesSubmitted
     public function setElapsedtime(?\DateTimeInterface $elapsedtime): self
     {
         $this->elapsedtime = $elapsedtime;
+
+        return $this;
+    }
+
+    public function getIsvalid(): ?bool
+    {
+        return $this->isvalid;
+    }
+
+    public function setIsvalid(bool $isvalid): self
+    {
+        $this->isvalid = $isvalid;
 
         return $this;
     }

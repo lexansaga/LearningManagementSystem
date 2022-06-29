@@ -30,9 +30,7 @@
                                      
                                      onclick="getFile('{{a}}','submittedactivities','{{userid}}')"
                                      >{{a}}</label>
-                                        <div class="remove-file" >
                                         
-                                        <i class='bx bx-x'></i></div>
                                     </li>
                                         
                                     {% endfor %}
@@ -42,6 +40,7 @@
                             </div>
                             <input
                                 placeholder="add score"
+                                class="points"
                             />
                         {% elseif activity.activitytype == "Quiz" %}
 
@@ -70,9 +69,12 @@
                                         
                                         >ANSWER: {{a.answer}}</label>
                                         <br/>
-                                        <input 
-                                            placeholder="addpoints"
-                                        />
+                                        
+                                            <input 
+                                                placeholder="addpoints"
+                                                class="points"
+                                            />
+                                        
                                         
                                     {% endif %}
                                     
@@ -97,7 +99,7 @@
                         
                     </div>
                   
-                    
+                    <button class="btn btn-primary btn-submit-quiz" onclick="addPoints({{id}},{{activity.quizquestions|json_encode}})">DONE</button>
 
                 </div>
             </div>
@@ -110,6 +112,7 @@
     <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
     <script src="{{ app.request.schemeAndHttpHost }}/assets/js/script.js"></script>
     <script src="{{ app.request.schemeAndHttpHost }}/assets/js/submitactivities.js"></script>
+    <script src="{{ app.request.schemeAndHttpHost }}/assets/js/addPoints.js"></script>
     <script src="{{ app.request.schemeAndHttpHost }}/assets/js/getFile.js"></script>
 </main>
      
