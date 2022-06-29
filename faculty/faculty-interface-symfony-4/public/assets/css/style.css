@@ -56,7 +56,7 @@ main {
 
 .sidebar {
   width: var(--sidebar-width);
-  margin: var(--navbar-height) 0 0 0;
+  
   height: calc(100vh - var(--navbar-height));
   box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%);
   padding: 28px 0;
@@ -91,7 +91,7 @@ main {
 }
 
 .sidebar-menu {
-  margin: 28px 0 0 0;
+  
   list-style-type: none;
   width: 100%;
   padding: 0;

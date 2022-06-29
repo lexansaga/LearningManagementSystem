@@ -1,0 +1,169 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<main>
+<div class="header">
+            <div class="header-menu">
+                <div class="title">Educa Academy</div>
+            </div>
+        </div>
+<div class="main-content">
+<h3>{{activity.tasktype}}</h3>
+            
+            <div class="main-content-wrapper">
+                <div class="activity-container">
+
+                    <div class="activity-content">
+
+                        <h2 class="activity-title">{{activity.activityname}}</h2>
+                        
+                       {% if activity.activitytype == "Essay" %}
+                            <div class="activity-upload">
+                                <p class="activity-description">
+                                    {{activity.description}}
+                                </p>
+                                    <h3>Attached Files</h3>
+                                    {% for b in activity.file %}
+                                    
+
+                                     <li>File <label
+                                     
+                                     onclick="getFile('{{b}}','activities','{{activity.facultyloadid}}')"
+                                     >{{b}}</label>
+                                        
+                                    </li>
+                                        
+                                    {% endfor %}
+                                {% if activity.allowfileupload %}
+                                    <div class="mb-3 form-upload" >
+                                        <label for="formFileMultiple" class="form-label">Multiple files input example</label>
+                                        <input class="form-control" type="file" id="formFileMultiple" multiple>
+                                    </div>
+                                {% endif %}
+                               
+
+                            </div>
+
+                        {% elseif activity.activitytype == "Quiz" %}
+
+                        
+                        <div class="quiz-wrapper">
+                            <div id="timer"></div>
+                            <div class="quiz">
+                                {% set curIndex = 0 %}
+                                {% for a in quizquestions %}
+                                    {% if a.activitytype == "Identification" %}
+                                        <h6 class="quiz-title">{{a['question'~(loop.index)]}}</h6>
+                                        <textarea class="form-control answers" aria-label="{{a['question'~(loop.index)]}}"  ></textarea>
+                                    {% elseif a.activitytype == "Multiple" %}
+                                        
+                                        <h6 class="quiz-title">{{a['question'~(loop.index)]}}</h6>
+
+                                        {% set question = [a['firstchoice'~(loop.index)], a['secondchoice'~(loop.index)], a['thirdchoice'~(loop.index)], a['answer'~(loop.index)]]%}
+                                        
+                                        {% set randomChoice = [] %}
+                                        {% set curIndex = loop.index %}
+                                        {% set currentQuestion = a['question'~(loop.index)]%}
+                                        
+                                        
+                                        
+                                        {% for i in 1..question | length %}
+                                        {% set randomChoice = randomChoice | merge([random(question | filter(value => value not in randomChoice))]) %}
+                                        {% endfor %}
+
+                                         {% for c in randomChoice %}
+
+                                        <div class="form-check">
+                                            <input class="form-check-input answers" type="radio" name="choice{{curIndex}}" value="{{c}}" aria-label="{{currentQuestion}}">
+                                            <label class="form-check-label" for="choice">
+                                                {{c}}
+                                            </label>
+                                        </div>
+                                        {% endfor %}
+                                         
+
+                                         
+                                    
+                                    {% else %}
+                                        <h6 class="quiz-title">{{a['question'~(loop.index)]}}</h6>
+                                        <div class="quiz">
+                                            
+                                            <div class="quiz-textbox-choices">
+                                                <!-- Textboxes -->
+
+                                                <textarea class="form-control answers" aria-label="{{a['question'~(loop.index)]}}"  ></textarea>
+                                            </div>
+                                        </div>
+                                        
+                                    {% endif %}
+                                    {% set curIndex = curIndex + 1  %}
+                                {% endfor %}
+                               
+                    <button class="btn btn-primary btn-submit-quiz" onclick="submitAnswer({{quizquestions|json_encode}},{{activity.id}},'{{userID}}','{{activity.ProgramClass}}','{{activity.Course}}',{{id}})">Submit</button>
+                            </div>
+
+
+                            
+
+
+
+                            
+
+
+                            
+                        </div>
+                       {% endif %}
+
+
+                        
+                    </div>
+                    <div class="activity-info">
+                        <h5>{{activity.tasktype}}</h5>
+                        <ul>
+                            <li><i class='bx bx-paperclip'></i>Type: <span>{{activity.activitytype}}</span></li>
+                            <li><i class='bx bxs-note'></i>Max Score: <span>{{activity.maxscore}}</span></li>
+                            <li><i class='bx bxs-time'></i>Due: <span>{{activity.activitydeadline|date('d-m-Y h:m:s')}}</span></li>
+                            <li><i class='bx bxs-time'></i>Status: <span>{{activity.activitydeadline > date() ? "Active":"Inactive"}}</span></li>
+                        </ul>
+                    </div>
+                    <div class="activity-submission">
+                        <h5>Submission</h5>
+                        <ul>
+                            
+                            <li>Submitted: <span>{{allSubmission is not empty ? "2020-20-0":""}}</span></li>
+                            <li>Submission: <span></span></li>
+                            <li>Max attemps: <span>{{activity.maxattempt}}</span></li>
+                            <li>Allow Late Submission <span><i class='bx bx-check' style={{activity.isallowlatesubmission ? 'color:#1bdc6f':'color:#ff0000' }}></i></span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="activity-comment">
+                        <h5>Comment</h5>
+                        <ul>
+                            <li><a href="#" class="prof-name">Prof Name : </a><span class="comment">Lorem ipsum, dolor
+                                    sit
+                                    amet consectetur
+                                    adipisicing elit.</span></li>
+                        </ul>
+
+                        <textarea class="form-control" aria-label="With textarea"></textarea>
+
+                        <button class="btn btn-primary btn-submit-comment">Submit</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
+    <script src="{{ app.request.schemeAndHttpHost }}/assets/js/script.js"></script>
+    <script src="{{ app.request.schemeAndHttpHost }}/assets/js/submitactivities.js"></script>
+    <script src="{{ app.request.schemeAndHttpHost }}/assets/js/getFile.js"></script>
+
+</main>
+     
+{% endblock %}

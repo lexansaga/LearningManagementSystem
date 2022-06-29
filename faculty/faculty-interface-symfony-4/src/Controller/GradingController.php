@@ -20,17 +20,26 @@ class GradingController extends AbstractController
     
     public function index(): Response
     {
+
         return $this->render('grading/index.html.twig', [
             'controller_name' => 'GradingController',
         ]);
     }
 
     public function showMyGrades(){
+        $userID = $this->getUser()->getIdnum();
+        
+        $all = $this->getDoctrine()
+            ->getRepository(CourseEnrolled::class)->findBy(array('idnum' => $userID));
+        
+        $em = $this->getDoctrine()->getManager();
+       
         return $this->render('student/show.html.twig', [
-            
+            'grades'=>$all
         ]);
     }
-
+   
+    
     /**
      * @Route("/grading/grade/{id}", name="grade")
      */
@@ -50,6 +59,7 @@ class GradingController extends AbstractController
         $addgrade = $entityManager->getRepository(CourseEnrolled::class)
             ->find($id);
         $form=$this->createFormBuilder($addgrade)
+            
             ->add('interim1', TextType::class, [
                 'label' => false,
                 'attr' => [
@@ -140,7 +150,7 @@ class GradingController extends AbstractController
 
         return $this->render('grading/grade.html.twig', [
 
-                'id'=>"125",
+                'id'=>$id,
                 'course'=>$search1,
                 'course1'=>$search2,
                 'form' => $form->createView(),

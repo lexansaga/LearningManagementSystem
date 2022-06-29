@@ -1,14 +1,8 @@
+
 $(window).on('load', function () {
     // DataTable
 
-    $('#datatable').DataTable({
-        ordering: true,
-        pageLength: 20,
-        dom: 'B<"clear">lfrtip',
-        buttons: [
-            'copy', 'excel', 'pdf', 'csv', 'print'
-        ]
-    });
+    
 
     //Menu Bar 
 

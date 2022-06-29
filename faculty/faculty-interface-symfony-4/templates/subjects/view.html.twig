@@ -147,10 +147,10 @@
 {% endblock %}
 
 {% block body %}
-<body>
+<main>
 
-    <!--wrapper start-->
-    <div class="wrapper">
+   
+    <div class="main-content">
         <!--header menu start-->
         <div class="header">
             <div class="header-menu">
@@ -162,18 +162,21 @@
           
         <!--sidebar end-->
         <!--main container start-->
-        <div class="content">
+        <div class="main-content-wrapper content">
         <h1>{{ coursename }}</h1>
          
         <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
           Create Task    
         </button>
-
+        
          
 
          <h5>Active Task</h5>
-             <table class="table table-bordered">
-        <tr>
+
+         
+      <table id="datatable1" class="display">
+                    <thead>
+                        <tr>
                     <th>Task Title</th>
                     <th>Task Type</th>
                     <th>File</th>
@@ -182,40 +185,17 @@
                     <th>Action</th>
                     
                 </tr>
-          {% for s in allActivities %}
-              
-
-                {%  if date(s.activitydeadline) > date() %}
-
-                <tbody>
-                    <tr>
-                       <td>{{s.activityname}}</td>
-                       <td>{{s.activitytype}}</td>
-                       {% if s.file is not empty %}
-                       <td><button
-
-                       value="{{s.file}}"
-                        onclick="clickFile(this)"
-                       >FILE</button></td>
-                       {% else %}
-                       <td></td>
-                       {% endif %}
-                       <td>{{s.maxscore}}</td>
-                       <td >{{s.activitydeadline|date('d-m-Y h:m:s')}}</td>
-                        <td><button
-                        onclick="clickRemove({{s.id}})"
-                       >REMOVE</button></td>
-                    </tr>
-                </tbody>
-                {%  endif %}
-                
-                {% endfor %}
-
-
-    </table>
+                    </thead>
+                    <tbody>
+                  
+                        
+                    </tbody>
+                </table>
          <h5>Past Task</h5>
-             <table class="table table-bordered">
-           <tr>
+
+                 <table id="datatable2" class="display">
+                    <thead>
+                        <tr>
                     <th>Task Title</th>
                     <th>Task Type</th>
                     <th>File</th>
@@ -224,34 +204,12 @@
                     <th>Action</th>
                     
                 </tr>
-          {% for s in allActivities %}
-                {%  if date(s.activitydeadline) < date() %}
-
-                <tbody>
-                    <tr>
-                       <td>{{s.activityname}}</td>
-                       <td>{{s.activitytype}}</td>
-                       {% if s.file is not empty %}
-                       <td><button
-
-                       value="{{s.file}}"
-                        onclick="clickFile(this)"
-                       >FILE</button></td>
-                       {% else %}
-                       <td></td>
-                       {% endif %}
-                       
-                       <td>{{s.maxscore}}</td>
-                       <td >{{s.activitydeadline|date('d-m-Y h:m:s')}}</td>
-                       <td><button
-                        onclick="clickRemove({{s.id}})"
-                       >REMOVE</button></td>
-                    </tr>
-                </tbody>
-                {%  endif %}
-                {% endfor %}
-    </table>
-
+                    </thead>
+                    <tbody>
+                  
+                        
+                    </tbody>
+                </table>
 
       
 
@@ -263,13 +221,39 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body container" id="mymodal">
+              <div class="row">
+                  <label class="col"> Task Type</label>
+                   <select  class=" col"id="tasktype">
+                    <option>Activity</option>
+                    <option>Assignment</option>
+                  </select>
+                </div>
+                <div class="row">
+                  <label class="col"> Allow late submission</label>
+                  <input class="col" type="checkbox" id="allowlate"/>
+                  
+                </div>
+                <div
+                  class="row"
+                >
+                <label class="col"> Allow file submission</label>
+                  <input class="col" type="checkbox" id="allowfile"/>
+                </div>
+                <div
+                  class="row"
+                >
+                
+                <div class="row">
+                <label class="col"> Max attempts</label>
+                  <input class="col" type="number" id="maxattempt"/>
+                </div>
                 <div class="row">
                   <label class="col"> Task Title</label>
                   <input class="col" type="text" id="activityname"/>
                 </div>
                 <div class="row">
                   <label class="col"> Description</label>
-                  <input class="col" type="text" />
+                  <input class="col" type="text" id="description"/>
                 </div>
 
                 <div class="row">
@@ -283,12 +267,11 @@
                   <select  class=" col"id="selectdata">
                     <option>Essay</option>
                     <option>Quiz</option>
-                    <option>Activity</option>
-                    <option>Assignment</option>
+                    
                   </select>
                 </div>
                 <div  class="row">
-                <input class="col" type="file" id="fileinput"/>
+                <input class="col" type="file" id="fileinput" multiple/>
                   <button class="col" id="addquestion" hidden>Add Question</button>
                   <label class="col" id="maxScore" hidden>Score:</label>
                   <input class="col" id="scoreInput" placeholder="Enter Score"/>
@@ -301,10 +284,9 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary" id="actbutton" onclick="addActivity({{myid}})">Add Activity</button>
+              <button type="button" class="btn btn-primary" id="actbutton" onclick="addActivity({{myid}},'{{coursename}}','{{programclass}}')">Add Activity</button>
             </div>
                
-                
           </div>
         </div>
       </div>
@@ -324,8 +306,161 @@
 
     
 {% block javascripts %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
+    <script>
+    var activeact = [];
+    var pastactivities = [];
+    {% for a in allActivities %}
+      {% if a.activitydeadline > date() %}
+      var temp2 = []
+      {% for b in a.file %}
+        temp2.push("{{b}}")              
+      {% endfor %}
+        activeact.push({
+ 
+                  tasktype:"{{a.tasktype}}",
+                
+                 
+                  tasktitle:"{{a.activityname}}",
+                
+                 
+                  file:temp2,
+                
+                 
+                  score:{{a.maxscore}},
+                
+                  deadline:"{{a.activitydeadline|date('d-m-Y h:m:s')}}",
+                
+                  action:{{a.id}}
+                
+        })
+      {% else %}
+      var temp1 = []
+      {% for b in a.file %}
+        temp1.push("{{b}}")              
+      {% endfor %}
+       pastactivities.push({
+ 
+                  tasktype:"{{a.tasktype}}",
+                
+                 
+                  tasktitle:"{{a.activityname}}",
+                
+                 
+                  file:temp1,
+                
+                 
+                  score:{{a.maxscore}},
+                
+                  deadline:"{{a.activitydeadline|date('d-m-Y h:m:s')}}",
+                
+                  action:{{a.id}}
+                
+        })
+
+      {% endif %}
+    {% endfor %}
+
+    
+     $('#datatable1').DataTable({
+            ordering: true,
+            pageLength: 20,
+            data:activeact,
+            columns : [
+                 { title: "Activity Name", class: "center",data: "tasktitle", render: function(data, type, full, meta) {
+                        
+                            return `<a href=/subject/activities/${full.action}>`+data+'</a>'
+                        
+     
+  }
+  },
+                 {
+                  data:"tasktype"
+                },
+                              { title: "File", class: "center",data: "file", render: function(data, type, full, meta) {
+                              let temp = []
+                              
+                              data.forEach(a=>{
+                                temp.push(`<label
+                                     
+                                     onclick="getFile('${a}','activities','{{myid}}')"
+                                     >${a}</label>`)
+                              });
+                              
+                              
+                              
+                            return temp;
+                        
+     
+  }
+  },
+                 {
+                  data:"score"
+                },
+                 {
+                  data:"deadline"
+                },
+                    { title: "Action", class: "center",data: "action", render: function(data, type, full, meta) {
+                        
+                            return `<button onclick="clickRemove(${data})">REMOVE</button>`
+                        
+     
+  }
+  }
+
+            ],
+            dom: 'B<"clear">lfrtip',
+            buttons: [
+                'copy', 'excel', 'pdf', 'csv', 'print'
+            ]
+        });
+    $('#datatable2').DataTable({
+            ordering: true,
+            pageLength: 20,
+            data:pastactivities,
+            columns : [
+                  { title: "Activity Name", class: "center",data: "tasktitle", render: function(data, type, full, meta) {
+                       
+                            return `<a href=/subject/activities/${full.action}>`+data+'</a>'
+                        
+     
+  }
+  },
+                 {
+                  data:"tasktype"
+                },
+                 {
+                  data:"file"
+                },
+                 {
+                  data:"score"
+                },
+                 {
+                  data:"deadline"
+                },
+                { title: "Action", class: "center",data: "action", render: function(data, type, full, meta) {
+                        
+                            return `<button onclick="clickRemove(${data})">REMOVE</button>`
+                        
+     
+  }
+  }
+            ],
+            dom: 'B<"clear">lfrtip',
+            buttons: [
+                'copy', 'excel', 'pdf', 'csv', 'print'
+            ]
+        });
+    </script>
+    <script src="{{ app.request.schemeAndHttpHost }}/assets/js/script.js"></script>
     <script src={{asset('assets/activities.js')}}></script>
+    <script src="{{ app.request.schemeAndHttpHost }}/assets/js/getFile.js"></script>
 {% endblock %}
 
-</body>
+</main>
 {% endblock %}

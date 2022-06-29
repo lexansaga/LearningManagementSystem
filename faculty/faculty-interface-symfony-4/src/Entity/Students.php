@@ -152,6 +152,11 @@ class Students implements UserInterface
      */
     private $password;
 
+    /**
+     * @ORM\Column(type="json", nullable=true)
+     */
+    private $proofpayment = [];
+
     public function getId(): ?int
     {
         return $this->id;
@@ -402,6 +407,18 @@ class Students implements UserInterface
     public function setPassword(?string $password): self
     {
         $this->password = $password;
+
+        return $this;
+    }
+
+    public function getProofpayment(): ?array
+    {
+        return $this->proofpayment;
+    }
+
+    public function setProofpayment(?array $proofpayment): self
+    {
+        $this->proofpayment = $proofpayment;
 
         return $this;
     }
