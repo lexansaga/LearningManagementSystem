@@ -13,15 +13,36 @@
             <div class="main-content-wrapper">
 
                 <div class="mb-3 form-upload">
-                    <label for="formFileMultiple" class="form-label">Multiple files input example</label>
-                    <input class="form-control" type="file" id="formFileMultiple"  data-is-authenticated="{{id}}">
+                    <label for="formFileMultiple" class="form-label" >Multiple files input example</label>
+                    <span id="error" ></span>
+                    <input class="form-control" type="file" id="formFileMultiple" multiple data-is-authenticated="{{id}}">
+                    
+
+                    <button type="button" class="btn btn-primary" id="actbutton" onclick="uploadPayment()">UPLOAD</button>
                     <ul>
                         {% if payments is not empty %}
                             {% for receipt in payments %}
-                            <li>File {{receipt}}
-                                <div class="remove-file"><i class='bx bx-x'></i></div>
+                            
+                            {% if receipt.status == "pending" %}
+                            <li style="border-color:yellow" >File
+                                <span onclick="getFile('{{receipt.filename}}','payments',{{id}})" > {{receipt.filename}}</span>
+                                <div class="remove-file"><i class='bx bx-x' onclick="removePayment('{{receipt.filename}}',{{id}})"></i></div>
+                                </li>
+                            {% elseif receipt.status == "accepted"%}
+                            <li style="border-color:green" >File
+                            <span onclick="getFile('{{receipt.filename}}','payments',{{id}})" > {{receipt.filename}}</span>
+                            <div class="remove-file"><i class='bx bx-x' onclick="removePayment('{{receipt.filename}}',{{id}})"></i></div>
                             </li>
-                            {% endfor %}
+                            {% else %}
+                            <li style="border-color:red" >File
+                            <span onclick="getFile('{{receipt.filename}}','payments',{{id}})" > {{receipt.filename}}</span>
+                            <div class="remove-file"><i class='bx bx-x' onclick="removePayment('{{receipt.filename}}',{{id}})"></i></div>
+                            </li>
+                            {% endif %}
+                            
+                                
+                            
+                        {% endfor %}
                         {% endif %}
                     </ul>
                 </div>
@@ -37,5 +58,7 @@
     <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
     <script src="{{ app.request.schemeAndHttpHost }}/assets/js/script.js"></script>
     <script src="{{ app.request.schemeAndHttpHost }}/assets/js/uploadpayment.js"></script>
+    <script src="{{ app.request.schemeAndHttpHost }}/assets/js/getFile.js"></script>
+    <script src="{{ app.request.schemeAndHttpHost }}/assets/js/removeReceipt.js"></script>
     </main>
 {% endblock %}

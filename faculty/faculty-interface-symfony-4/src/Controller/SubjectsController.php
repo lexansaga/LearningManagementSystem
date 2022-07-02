@@ -15,6 +15,7 @@ use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
+use Symfony\Component\Filesystem\Filesystem;
 use \Datetime;
 
 class SubjectsController extends AbstractController
@@ -123,7 +124,40 @@ class SubjectsController extends AbstractController
             'activity'=>$activity
         ]);
     }
-
+    public function uploadModules(ManagerRegistry $doctrine,Request $request){
+        $courseID = $request->request->get("id");
+        $files = $request->files->all();
+        $all = $doctrine
+            ->getRepository(FacultyLoads::class)->find($courseID);
+        $entityManager = $doctrine->getManager();
+        if($files!=null){
+            
+            if (!file_exists($this->getParameter('kernel.project_dir') ."/data/modules/$courseID")) {
+                mkdir($this->getParameter('kernel.project_dir') ."/data/modules/$courseID", 0777, true);
+            }
+            $index = 0;
+            $tempArr = $all->getModules();
+            if($tempArr==null){
+                $tempArr = array();
+            }
+            foreach ($files as $file) {
+                $filename = $request->request->get('filename'.$index);
+                
+                $target = $this->getParameter('kernel.project_dir') ."/data/modules/$courseID/$filename";
+                array_push($tempArr,$filename);
+                move_uploaded_file($file, $target);    
+            
+                $index++;
+            }
+            $all->setModules($tempArr);
+        }
+        
+        $entityManager->flush();
+        $response = new Response("Successful");
+        $response->headers->set('Content-Type', 'text/html');
+        
+        return $response;
+    }
     public function addPoints(ManagerRegistry $doctrine,Request $request){
         $json = $request->getContent();
         $entityManager = $doctrine->getManager();
@@ -149,7 +183,11 @@ class SubjectsController extends AbstractController
         
         foreach($allActivities as $act){
             $subactivity = $entityManager->getRepository(ActivitiesSubmitted::class)->findBy(array('activityid'=>$act->getId()));
+            $latestAct = $entityManager->getRepository(ActivitiesSubmitted::class)->findBy(array('activityid'=>$act->getId(),'isvalid'=>true));
             $act->setMaxattempt($act->getMaxattempt()-count($subactivity));
+            if(count($latestAct) > 0 ){
+                $act->setMaxScore($latestAct[0]->getScore());
+            }
         }
         return $this->render('student/classroom.html.twig', [
             'id'=>$id,
@@ -166,12 +204,41 @@ class SubjectsController extends AbstractController
             ->getRepository(CourseEnrolled::class)->find($id);
 
         $allActivities = $this->getDoctrine()->getRepository(ActivitiesSubmitted::class)->findBy(array('studentid'=>$userID));
-            
+        
+        $modules = $this->getDoctrine()->getRepository(FacultyLoads::class)->findBy(array('courseName'=>$classroom->getCourse()));
+        
         return $this->render('student/classroom.html.twig', [
             'id'=>$id,
+            'load'=>$modules[0],
             'classroom'=>$classroom,
             'all'=>$allActivities
         ]);
+    }
+
+
+    public function removeModule(ManagerRegistry $doctrine,Request $request){
+        $entityManager = $doctrine->getManager();
+        $id = $request->request->get('id');
+        $filename = $request->request->get("filename");
+        $curClass = 
+            $doctrine->getRepository(FacultyLoads::class)
+            ->find($id);
+        
+        $array = $curClass->getModules();
+        $index = array_search($filename,$array);
+        if($index !== FALSE){
+            unset($array[$index]);
+        }
+        $curClass->setModules($array);
+        $entityManager->flush();
+        $target = $this->getParameter('kernel.project_dir') ."/data/modules/$id/$filename";
+        $filesystem = new Filesystem();
+        $filesystem->remove($target);
+        
+        $response = new Response("Successful");
+        $response->headers->set('Content-Type', 'application/json');
+        
+        return $response;
     }
    public function removeActivity(ManagerRegistry $doctrine,Request $request){
 
@@ -278,7 +345,7 @@ class SubjectsController extends AbstractController
         $id = $request->get('id');
         $class = $request->get('programclass');
         
-        
+        $currentRoom = $this->getDoctrine()->getRepository(FacultyLoads::class)->find($id);
         
         
         $latestActivities = $this->getDoctrine()->getRepository(Activities::class)->findBy(array('facultyload_id' => $id));
@@ -296,6 +363,7 @@ class SubjectsController extends AbstractController
         return $this->render('subjects/view.html.twig', [
             'coursename'=>$coursename,
             'myid'=>$id,
+            'modules'=>$currentRoom->getModules(),
             'programclass'=>$class,
             'allActivities'=>$latestActivities,
             'studentactivities'=> $tempArr

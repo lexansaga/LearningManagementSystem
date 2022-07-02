@@ -211,7 +211,21 @@
                     </tbody>
                 </table>
 
-      
+                <h5>Modules</h5>
+              <label id="error"></label>
+              <input type="file" id="formFileMultiple" data-is-authenticated="{{myid}}" multiple class="btn btn-success" />
+              <button type="button" class="btn btn-success"  onclick="uploadModules()">
+              UPLOAD
+              </button>
+          {% for module in modules %}
+             <li>File
+                            
+              <span onclick="getFile('{{module}}','modules',{{myid}})" > {{module}}</span>
+                  <div class="remove-file"><i class='bx bx-x' onclick="removeModule('{{module}}',{{myid}})"></i></div>
+              </li>
+          {% endfor %}
+                
+        
 
           <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -221,6 +235,8 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body container" id="mymodal">
+
+              <div id="errorACT"></div>
               <div class="row">
                   <label class="col"> Task Type</label>
                    <select  class=" col"id="tasktype">
@@ -460,6 +476,8 @@
     <script src="{{ app.request.schemeAndHttpHost }}/assets/js/script.js"></script>
     <script src={{asset('assets/activities.js')}}></script>
     <script src="{{ app.request.schemeAndHttpHost }}/assets/js/getFile.js"></script>
+    <script src="{{ app.request.schemeAndHttpHost }}/assets/js/uploadmodules.js"></script>
+    <script src="{{ app.request.schemeAndHttpHost }}/assets/js/removeModule.js"></script>
 {% endblock %}
 
 </main>

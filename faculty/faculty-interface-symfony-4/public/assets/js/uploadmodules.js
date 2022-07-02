@@ -1,5 +1,5 @@
-let inputFile = document.getElementById("formFileMultiple");
-let err = document.getElementById("error");
+var inputFile = document.getElementById("formFileMultiple");
+var err = document.getElementById("error");
 var formdata = new FormData();
 
 inputFile.addEventListener('change',(data)=>{
@@ -9,7 +9,6 @@ inputFile.addEventListener('change',(data)=>{
         const element =  data.target.files[index];
         formdata.append(`file${index}`,element);
         formdata.append(`filename${index}`,element.name);
-        
     }
     formdata.append('id',inputFile.dataset.isAuthenticated);
     
@@ -17,13 +16,13 @@ inputFile.addEventListener('change',(data)=>{
 })
 
 
-async function uploadPayment(){
+async function uploadModules(){
     if(inputFile.value==""){
         
         err.textContent = "PLEASE UPLOAD FILES";
         return;
     }
-    var res = await fetch('/students/api/uploadPayment',{
+    var res = await fetch('/students/api/uploadModules',{
         credentials: 'same-origin',
         
         method:"POST",

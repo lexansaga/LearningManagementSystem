@@ -49,6 +49,11 @@ class FacultyLoads
      */
     private $class;
 
+    /**
+     * @ORM\Column(type="json", nullable=true)
+     */
+    private $modules = [];
+
     public function getId(): ?int
     {
         return $this->id;
@@ -98,6 +103,18 @@ class FacultyLoads
     public function setClass(string $class): self
     {
         $this->class = $class;
+
+        return $this;
+    }
+
+    public function getModules(): ?array
+    {
+        return $this->modules;
+    }
+
+    public function setModules(?array $modules): self
+    {
+        $this->modules = $modules;
 
         return $this;
     }

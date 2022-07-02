@@ -46,11 +46,18 @@
                     </thead>
                 </table>
                 {% else %}
+                
+                {% for a in load.modules %}
+                    
                     <ul>
-                        <li>File 
-                            <div class="remove-file"><i class='bx bx-x'></i></div>
+                        <li>File <span
+                        onclick="getFile('{{a}}','modules','{{load.id}}')"
+                        >{{a}}</span>
+                            
                         </li>
                     </ul>
+                {% endfor %}
+                    
                 {% endif %}
                 
             </div>
@@ -75,7 +82,7 @@
                 activitytype:"{{b.activitytype}}",
                 activityname:"{{b.activityname}}",
                 description:"{{b.description}}",
-                score:0,
+                score:"{{b.maxscore}}",
                 activitydeadline:"{{b.activitydeadline|date('d-m-Y h:m:s')}}",
                 
                 attempts:{{b.maxattempt}},
@@ -111,6 +118,7 @@
         
     </script>
     <script src="assets/js/script.js"></script>
+    <script src="{{ app.request.schemeAndHttpHost }}/assets/js/getFile.js"></script>
     </main>
 
 {% endblock %}
