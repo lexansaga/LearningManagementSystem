@@ -165,15 +165,24 @@
         <div class="main-content-wrapper content">
         <h1>{{ coursename }}</h1>
          
-        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
-          Create Task    
-        </button>
+      
         
          
-
-         <h5>Active Task</h5>
-
-         
+  <ul class="nav nav-tabs">
+                      <li class="nav-item">
+                          <a class="{{"activities" in app.request.uri ? "nav-link active" : "nav-link" }}" href="/subjects/activities/{{myid}}?course={{coursename}}&programclass={{programclass}}">Activities</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="{{"module" in app.request.uri ? "nav-link active" : "nav-link" }}" href="/subjects/modules/{{myid}}?course={{coursename}}&programclass={{programclass}}">Modules</a>
+                      </li>
+                    
+    
+                  </ul>
+        
+         {% if "activities" in app.request.uri %}
+           <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          Create Task    
+        </button>
       <table id="datatable1" class="display">
                     <thead>
                         <tr>
@@ -191,26 +200,7 @@
                         
                     </tbody>
                 </table>
-         <h5>Past Task</h5>
-
-                 <table id="datatable2" class="display">
-                    <thead>
-                        <tr>
-                    <th>Task Title</th>
-                    <th>Task Type</th>
-                    <th>File</th>
-                    <th>Score</th>
-                    <th>Duration:</th>
-                    <th>Action</th>
-                    
-                </tr>
-                    </thead>
-                    <tbody>
-                  
-                        
-                    </tbody>
-                </table>
-
+         {% else %}
                 <h5>Modules</h5>
               <label id="error"></label>
               <input type="file" id="formFileMultiple" data-is-authenticated="{{myid}}" multiple class="btn btn-success" />
@@ -225,7 +215,7 @@
               </li>
           {% endfor %}
                 
-        
+        {% endif %}
 
           <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -332,7 +322,7 @@
     var activeact = [];
     var pastactivities = [];
     {% for a in allActivities %}
-      {% if a.activitydeadline > date() %}
+      
       var temp2 = []
       {% for b in a.file %}
         temp2.push("{{b}}")              
@@ -355,31 +345,7 @@
                   action:{{a.id}}
                 
         })
-      {% else %}
-      var temp1 = []
-      {% for b in a.file %}
-        temp1.push("{{b}}")              
-      {% endfor %}
-       pastactivities.push({
- 
-                  tasktype:"{{a.tasktype}}",
-                
-                 
-                  tasktitle:"{{a.activityname}}",
-                
-                 
-                  file:temp1,
-                
-                 
-                  score:{{a.maxscore}},
-                
-                  deadline:"{{a.activitydeadline|date('d-m-Y h:m:s')}}",
-                
-                  action:{{a.id}}
-                
-        })
-
-      {% endif %}
+    
     {% endfor %}
 
     
@@ -435,43 +401,7 @@
                 'copy', 'excel', 'pdf', 'csv', 'print'
             ]
         });
-    $('#datatable2').DataTable({
-            ordering: true,
-            pageLength: 20,
-            data:pastactivities,
-            columns : [
-                  { title: "Activity Name", class: "center",data: "tasktitle", render: function(data, type, full, meta) {
-                       
-                            return `<a href=/subject/activities/${full.action}>`+data+'</a>'
-                        
-     
-  }
-  },
-                 {
-                  data:"tasktype"
-                },
-                 {
-                  data:"file"
-                },
-                 {
-                  data:"score"
-                },
-                 {
-                  data:"deadline"
-                },
-                { title: "Action", class: "center",data: "action", render: function(data, type, full, meta) {
-                        
-                            return `<button onclick="clickRemove(${data})">REMOVE</button>`
-                        
-     
-  }
-  }
-            ],
-            dom: 'B<"clear">lfrtip',
-            buttons: [
-                'copy', 'excel', 'pdf', 'csv', 'print'
-            ]
-        });
+    
     </script>
     <script src="{{ app.request.schemeAndHttpHost }}/assets/js/script.js"></script>
     <script src={{asset('assets/activities.js')}}></script>

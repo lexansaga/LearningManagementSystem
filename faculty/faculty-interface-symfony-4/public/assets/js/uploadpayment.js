@@ -1,5 +1,6 @@
 let inputFile = document.getElementById("formFileMultiple");
 let err = document.getElementById("error");
+
 var formdata = new FormData();
 
 inputFile.addEventListener('change',(data)=>{
@@ -11,6 +12,7 @@ inputFile.addEventListener('change',(data)=>{
         formdata.append(`filename${index}`,element.name);
         
     }
+    
     formdata.append('id',inputFile.dataset.isAuthenticated);
     
     
@@ -23,6 +25,7 @@ async function uploadPayment(){
         err.textContent = "PLEASE UPLOAD FILES";
         return;
     }
+    
     var res = await fetch('/students/api/uploadPayment',{
         credentials: 'same-origin',
         

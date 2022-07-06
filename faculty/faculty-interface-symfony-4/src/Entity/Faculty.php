@@ -245,11 +245,11 @@ class Faculty implements UserInterface
      */
     public function getRoles(): array
     {
-        $roles = $this->roles;
+        
         // guarantee every user at least has ROLE_USER
-        $roles[] = 'FACULTY';
+        
 
-        return array_unique($roles);
+        return array('ROLE_USER','FACULTY');
     }
 
     public function setRoles(array $roles): self

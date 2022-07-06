@@ -7,9 +7,9 @@
     font-family: "Roboto", sans-serif;
   }
   
-  body{
+  /* body{
     background: #fff;
-  }
+  } */
   /********** HEADER **********/
   .wrapper .header{
     z-index: 1;

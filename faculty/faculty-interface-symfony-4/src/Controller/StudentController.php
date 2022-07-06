@@ -169,6 +169,7 @@ class StudentController extends AbstractController
 
         $entityManager = $doctrine->getManager();
         $id = $request->request->get("id");
+        $courseID = $request->request->get("courseid");
         $student = $entityManager->getRepository(Students::class)->find($id);
 
         if (!$student) {
@@ -195,7 +196,7 @@ class StudentController extends AbstractController
                 $filename = $request->request->get('filename'.$index);
                 
                 $target = $this->getParameter('kernel.project_dir') ."/data/payments/$id/$filename";
-                array_push($payments,array('filename'=>$filename,'status'=>'pending'));
+                array_push($payments,array('filename'=>$filename,'status'=>'pending','courseid'=>$courseID));
                 move_uploaded_file($file, $target);    
             
                 $index++;
@@ -217,11 +218,11 @@ class StudentController extends AbstractController
         $entityManager = $doctrine->getManager();
         $payments = $this->getUser()->getProofpayment();
         $id = $this->getUser()->getId();
-
-
+        $allenrolledcourses = $entityManager->getRepository(CourseEnrolled::class)->findBy(array('idnum'=>$this->getUser()->getIdnum()));
         return $this->render('student/uploadpayment.html.twig', [
             'payments'=>$payments,
-            'id'=>$id
+            'id'=>$id,
+            'all'=>$allenrolledcourses,
         ]);
     }
 
@@ -234,20 +235,27 @@ class StudentController extends AbstractController
             ->find($id);
         
         $array = $curStudent->getProofpayment();
-        $index = array_search($filename,$array);
+        $index = $this->getFilename($array,$filename);
         if($index !== FALSE){
             unset($array[$index]);
         }
+        
         $curStudent->setProofpayment($array);
         $entityManager->flush();
         $target = $this->getParameter('kernel.project_dir') ."/data/payments/$id/$filename";
         $filesystem = new Filesystem();
         $filesystem->remove($target);
-        dd($id);
+        
         $response = new Response("Successful");
         $response->headers->set('Content-Type', 'application/json');
         
         return $response;
+    }
+    public function getFilename($files, $filename) {
+        foreach($files as $index => $file) {
+            if($file['filename'] == $filename) return $index;
+        }
+        return FALSE;
     }
     /**
      * @Route("/student/mystudent/{id}", name="view")

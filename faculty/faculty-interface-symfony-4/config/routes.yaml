@@ -1,9 +1,12 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
+
 
 
 # config/routes.yaml
+
+# index:
+#    path: /
+#    controller: App\Controller\SecurityController::login
+
 dashboard:
     path: /dashboard
     controller: App\Controller\DashboardController::index
@@ -39,7 +42,11 @@ subjects:
     controller: App\Controller\SubjectsController::index
     
 viewSubjects:
-    path: /subjects/{id}
+    path: /subjects/activities/{id}
+    controller: App\Controller\SubjectsController::view
+    defaults: { id: 1 }
+viewSubjectsModules:
+    path: /subjects/modules/{id}
     controller: App\Controller\SubjectsController::view
     defaults: { id: 1 }
 
