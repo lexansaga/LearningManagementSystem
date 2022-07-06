@@ -385,9 +385,9 @@ class Students implements UserInterface
     public function getRoles(){
         
         // guarantee every user at least has ROLE_USER
-        $roles[] = 'STUDENT';
+       
 
-        return array_unique($roles);
+        return array('ROLE_USER','STUDENT');
     }
     public function getPassword(){
          

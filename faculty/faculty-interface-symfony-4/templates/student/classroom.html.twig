@@ -46,11 +46,18 @@
                     </thead>
                 </table>
                 {% else %}
+                
+                {% for a in load.modules %}
+                    
                     <ul>
-                        <li>File 
-                            <div class="remove-file"><i class='bx bx-x'></i></div>
+                        <li>File <span
+                        onclick="getFile('{{a}}','modules','{{load.id}}')"
+                        >{{a}}</span>
+                            
                         </li>
                     </ul>
+                {% endfor %}
+                    
                 {% endif %}
                 
             </div>
@@ -65,9 +72,9 @@
     <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
       <script>
-        
-        {% if all is not empty and "activities" in app.request.uri  %}
         let c = []
+        {% if all is not empty and "activities" in app.request.uri  %}
+        
        {% for b in all %}
             
             c.push({
@@ -75,13 +82,15 @@
                 activitytype:"{{b.activitytype}}",
                 activityname:"{{b.activityname}}",
                 description:"{{b.description}}",
-                score:0,
+                score:"{{b.maxscore}}",
                 activitydeadline:"{{b.activitydeadline|date('d-m-Y h:m:s')}}",
                 
                 attempts:{{b.maxattempt}},
             });   
         {% endfor %}
-        
+     
+        {% endif %}
+           
         $('#datatable').DataTable({
             ordering: true,
             pageLength: 20,
@@ -107,10 +116,10 @@
                 'copy', 'excel', 'pdf', 'csv', 'print'
             ]
         });
-        {% endif %}
         
     </script>
     <script src="assets/js/script.js"></script>
+    <script src="{{ app.request.schemeAndHttpHost }}/assets/js/getFile.js"></script>
     </main>
 
 {% endblock %}

@@ -27,17 +27,19 @@ security:
             entity:
                 class: App\Entity\Faculty
                 property: username
+            
         student_user_provider:
             entity:
                 class: App\Entity\Students
                 property: email
+            
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
             lazy: true
-            
+            pattern: ^/
             custom_authenticator: App\Security\AppCustomAuthenticator
             logout:
                 path: app_logout
@@ -55,4 +57,32 @@ security:
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
-        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        
+        - { path: dashboard, roles: ROLE_USER }
+        - { path: student, roles: ROLE_USER }
+        - { path: retake, roles: ROLE_USER }
+        - { path: showallactivities, roles: ROLE_USER }
+        - { path: grading, roles: ROLE_USER }
+        - { path: profile, roles: ROLE_USER }
+        - { path: viewStudent, roles: ROLE_USER }
+        - { path: subjects, roles: ROLE_USER }
+        - { path: viewSubjects, roles: ROLE_USER }
+        - { path: removeActivity, roles: ROLE_USER }
+        - { path: grades, roles: ROLE_USER }
+        - { path: classrooms, roles: ROLE_USER }
+        - { path: gradeStudent, roles: ROLE_USER }
+        - { path: showClassroom, roles: ROLE_USER }
+        - { path: showClassroomModule, roles: ROLE_USER }
+        - { path: showClassroomActivities, roles: ROLE_USER }
+        - { path: showUploadPayment, roles: ROLE_USER }
+        - { path: getUploadedFile, roles: ROLE_USER }
+        - { path: showstudentactivity, roles: ROLE_USER }
+        - { path: addActivity, roles: ROLE_USER }
+        - { path: submitActivity, roles: ROLE_USER }
+        - { path: addReceipt, roles: ROLE_USER }
+        - { path: removeReceipt, roles: ROLE_USER }
+        - { path: removeModule, roles: ROLE_USER }
+        - { path: uploadModules, roles: ROLE_USER }
+        - { path: addpoints, roles: ROLE_USER }
+        - { path: app_login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        

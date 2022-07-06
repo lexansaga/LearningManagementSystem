@@ -46,15 +46,16 @@ if(addquestion!=null){
         questionlabel.textContent = "Question"
         let question = document.createElement("input");
         question.addEventListener('change',(data)=>{
-            obj[`question${currentindex}`] = data.target.value;
+            obj[`question`] = data.target.value;
         });
         let answerlabel = document.createElement("label");
         answerlabel.textContent = "Correct Answer"
         let score = document.createElement("input");
         score.addEventListener('change',(data)=>{
             if(Number.isInteger(parseInt(data.target.value))){
+
                 maxScore.textContent = parseInt(maxScore.textContent) + parseInt(data.target.value);
-                obj[`score${currentindex}`] = data.target.value;
+                obj['score'] = data.target.value;
             }
             
             
@@ -77,7 +78,7 @@ if(addquestion!=null){
         
 
         answer.addEventListener('change',(data)=>{
-            obj[`answer${currentindex}`] = data.target.value;
+            obj[`answer`] = data.target.value;
         });
         let row5 = document.createElement("div");
         let selectTemp = document.createElement("select");
@@ -117,15 +118,15 @@ if(addquestion!=null){
                 let label3 = document.createElement("label");
                 choice1.classList.add("questions");
                 choice1.addEventListener('change',(data)=>{
-                    obj[`firstchoice${currentindex}`]=data.target.value
+                    obj[`firstchoice`]=data.target.value
                 });
                 choice2.classList.add("questions");
                 choice2.addEventListener('change',(data)=>{
-                    obj[`secondchoice${currentindex}`]=data.target.value
+                    obj[`secondchoice`]=data.target.value
                 });
                 choice3.classList.add("questions");
                 choice3.addEventListener('change',(data)=>{
-                    obj[`thirdchoice${currentindex}`]=data.target.value
+                    obj[`thirdchoice`]=data.target.value
                 });
                 let row = document.createElement("div");
 
@@ -187,6 +188,9 @@ if(addquestion!=null){
         modal.appendChild(row3);
         modal.appendChild(row4);
         modal.appendChild(row5);
+        
+        console.log(obj.hasOwnProperty(`question${currentindex}`),obj);
+
         tempQ.push(obj);
         currentindex++;
     }
@@ -208,30 +212,77 @@ if(temp!=null){
     })
     
 }
-async function addActivity(data,coursename,programclass){
-    
-    
-    objTemp.append('activityname',document.getElementById("activityname").value);
+async function addActivity(data,coursename,programclass){   
+    let err = document.getElementById("errorACT");
+    let hasvalue = true;
+
+    let description = document.getElementById("description").value;
+    let activityname = document.getElementById("activityname").value;
+    let maxAttempt = document.getElementById("maxattempt").value;
+    let deadline = document.getElementById("deadline").value;
     objTemp.append('activitytype',select.value);
-        
+
+
+    objTemp.append('activityname',activityname);
+    
+    let currentScore = 0;
+    let somemutiplesareequal = false;
     if(select.value=="Quiz"){
+        
+        tempQ.forEach((a)=>{
+            if(a.activitytype!="Essay"&&(!a.hasOwnProperty("question")||!a.hasOwnProperty("answer")||!a.hasOwnProperty("score"))){
+                hasvalue = false;
+                
+            }else{
+                if(!a.hasOwnProperty("question")||!a.hasOwnProperty("score")){
+                    hasvalue = false;
+                }
+            }
+            if(a.activitytype=="Multiple"){
+                if(!a.hasOwnProperty('firstchoice')||!a.hasOwnProperty('secondchoice')||!a.hasOwnProperty('thirdchoice')){
+                    hasvalue = false;
+                }else{
+                    if(a.firstchoice==a.secondchoice||a.firstchoice==a.thirdchoice||a.secondchoice==a.thirdchoice||a.answer==a.firstchoice||a.answer==a.secondchoice||a.answer==a.thirdchoice){
+                        somemutiplesareequal = true;
+                    }
+
+                }
+            }
+            
+        })
+
+        console.log(hasvalue,somemutiplesareequal);
         objTemp.append('questions',JSON.stringify(tempQ));
-        objTemp.append('maxscore',parseInt(maxScore.textContent));
+        currentScore = parseInt(maxScore.textContent);
+        objTemp.append('maxscore',currentScore);
     }else{
-
-        objTemp.append('maxscore',parseInt(scoreInput.value))
+        currentScore = parseInt(scoreInput.value);
+        objTemp.append('maxscore',currentScore);
     }
-
-    objTemp.append('description',document.getElementById("description").value);
+    
+    if(currentScore==NaN||currentScore==0||description==""||activityname==""||maxAttempt==""||deadline==""){
+        err.textContent = "COMPLETE MISSING FIELDS";
+        return;
+    }
+    if(hasvalue&&somemutiplesareequal){
+        err.textContent = "PLEASE CHECK THE CHOICES IF IT HAS A SAME VALUE WITH THE OTHER CHOICES";
+        return
+    }
+    
+    err.textContent = "";
+    
+    objTemp.append('description',description);
     objTemp.append('allowfile',document.getElementById("allowfile").value);
     objTemp.append('tasktype',document.getElementById("tasktype").value);
-    objTemp.append('maxattempt',document.getElementById("maxattempt").value);
+    objTemp.append('maxattempt',maxAttempt);
     objTemp.append('allowlate',document.getElementById("allowlate").value);
     objTemp.append('facultyloadid',data);
-    objTemp.append('deadline',document.getElementById("deadline").value);
+    
+    objTemp.append('deadline',deadline);
+
     objTemp.append('course',coursename);
     objTemp.append('programclass',programclass);
-    console.log(objTemp);
+    
     var res = await fetch('/subjects/api/addActivity',{
         credentials: 'same-origin',
         
