@@ -168,7 +168,7 @@
       
         
          
-  <ul class="nav nav-tabs">
+        <ul class="nav nav-tabs">
                       <li class="nav-item">
                           <a class="{{"activities" in app.request.uri ? "nav-link active" : "nav-link" }}" href="/subjects/activities/{{myid}}?course={{coursename}}&programclass={{programclass}}">Activities</a>
                       </li>
@@ -180,7 +180,7 @@
                   </ul>
         
          {% if "activities" in app.request.uri %}
-           <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+           <button type="button" class="btn btn-success m-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
           Create Task    
         </button>
       <table id="datatable1" class="display">
@@ -308,7 +308,7 @@
     <!--wrapper end-->
 
     
-    </div>
+    
 
     
 {% block javascripts %}
@@ -387,9 +387,9 @@
                  {
                   data:"deadline"
                 },
-                    { title: "Action", class: "center",data: "action", render: function(data, type, full, meta) {
+                    { title: "Action", class: "center ",data: "action", render: function(data, type, full, meta) {
                         
-                            return `<button onclick="clickRemove(${data})">REMOVE</button>`
+                            return `<button class="btn-success p-2" onclick="clickRemove(${data})">REMOVE</button>`
                         
      
   }

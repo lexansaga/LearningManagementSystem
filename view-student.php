@@ -111,6 +111,7 @@
 					$lname = $row['lname'];
 					$entlev = $row['entlev'];
 					$gender = $row['gender'];
+					$revcent = $row['reviewcenter'];
 					$cnum = $row['cnum'];
 					$email = $row['email'];
 					$prevschool = $row['prevschool'];
@@ -169,6 +170,8 @@
 							<b>Gender:</b><?php echo "\t" . $gender; ?>
 							<br>
 							<b>Highest Education:</b><?php echo "\t" . $hea; ?>
+							<br>
+							<b>Review Center:</b><?php echo "\t" . $revcent; ?>
 							<br>
 							<b>Last School Attended:</b><?php echo "\t" . $prevschool; ?>
 							<br>
