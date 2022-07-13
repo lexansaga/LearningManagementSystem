@@ -74,6 +74,7 @@
 		$lname = htmlspecialchars($_POST['lname']);
 		$gender = $_POST['gender'];
 		$cnum = htmlspecialchars($_POST['cnum']);
+		$reviewcenter = htmlspecialchars($_POST['reviewcenter']);
 		$email = htmlspecialchars($_POST['email']);
 		$prevschool = htmlspecialchars($_POST['prevschool']);
 		$hea = $_POST['hea'];
@@ -148,6 +149,10 @@
 			$errors['1'] = "All field is required";
 			return;
 		}
+		if (empty($reviewcenter)) {
+			$errors['1'] = "All field is required";
+			return;
+		}
 		if (empty($gender)) {
 			$errors['1'] = "All field is required";
 			return;
@@ -197,11 +202,11 @@
 			date_default_timezone_set('Asia/Manila');
 			$reg_date = date("F j\, Y \| g:i A", time());
 			$mypass = password_hash($_POST['pass'], PASSWORD_BCRYPT);
-			$sql = "INSERT INTO students (idnum, fname, mname, lname, entlev,
-				gender, cnum, email, prevschool, hea, img, g_moral, NSO, reg_date, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
+			$sql = "INSERT INTO students (idnum, fname, mname, lname, entlev, reviewcenter,
+				gender, cnum, email, prevschool, hea, img, g_moral, NSO, reg_date, password) VALUES (?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
 			$stmt = $connection->prepare($sql);
-			$stmt->bind_param('sssssssssssssss', $idnum, $fname, $mname, $lname, 
-				$entlev, $gender, $cnum, $email, $prevschool, $hea, $image, 
+			$stmt->bind_param('ssssssssssssssss', $idnum, $fname, $mname, $lname, 
+				$entlev,$reviewcenter, $gender, $cnum, $email, $prevschool, $hea, $image, 
 				$g_moral, $NSO, $reg_date, $mypass);
 			
 			move_uploaded_file($_FILES['image']['tmp_name'], $target);
@@ -604,11 +609,11 @@
 			$username = $lname ."". $initials ."". $middle . "@faculty-aja.educa.com";
 			$faculty_id = $dyear .'-'. $increment;
 
-			$sql = "INSERT INTO faculty (fullname, gender, special, status,
+			$sql = "INSERT INTO faculty (fullname, gender, special, status, reviewcenter,
 			email, password, username, faculty_id, reg_date)
-			VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			$stmt = $connection->prepare($sql);
-			$stmt->bind_param('sssssssss', $fullname, $gender, $special, $status,
+			$stmt->bind_param('ssssssssss', $fullname, $gender, $special, $status, $reviewcenter,
 			$email, $pass, $username, $faculty_id, $reg_date);
 
 			if ($stmt->execute()) {

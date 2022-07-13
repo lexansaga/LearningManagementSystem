@@ -363,6 +363,21 @@
                                 <option
                                 <?php if (isset($reviewcenter) && $reviewcenter=="Seminar/Training") echo "selected";?>
                                 value="Seminar/Training">Seminar/Training</option>
+                                <option
+                                <?php if (isset($reviewcenter) && $reviewcenter=="Tutorials") echo "selected";?>
+                                value="Tutorials">Tutorials</option>
+                                <option
+                                <?php if (isset($reviewcenter) && $reviewcenter=="Elementary") echo "selected";?>
+                                value="Elementary">Elementary</option>
+                                <option
+                                <?php if (isset($reviewcenter) && $reviewcenter=="Highschool") echo "selected";?>
+                                value="Highschool">Highschool</option>
+                                <option
+                                <?php if (isset($reviewcenter) && $reviewcenter=="College") echo "selected";?>
+                                value="College">College</option>
+                                <option
+                                <?php if (isset($reviewcenter) && $reviewcenter=="Research") echo "selected";?>
+                                value="Research">Research</option>
                                 
                             </select>
                             <br>
