@@ -6,7 +6,7 @@ async function addPoints(actID,prevAnswers){
         allpoints += parseInt(element.value);
 
     }
-
+    
     console.log(actID,prevAnswers)
     var res = await fetch(`/students/api/addpoints`,{
         credentials: 'same-origin',

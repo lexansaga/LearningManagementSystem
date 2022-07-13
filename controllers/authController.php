@@ -541,6 +541,7 @@
 
 		$gender = htmlspecialchars($_POST['gender']);
 		$special = htmlspecialchars($_POST['special']);
+		$reviewcenter = htmlspecialchars($_POST['reviewcenter']);
 		$status = htmlspecialchars($_POST['status']);
 		$email = htmlspecialchars($_POST['email']);
 		$pass = htmlspecialchars($_POST['pass']);
@@ -555,6 +556,9 @@
 		}
 		if (empty($special)) {
 			$errors['special'] = "";
+		}
+		if (empty($reviewcenter)) {
+			$errors['reviewcenter'] = "";
 		}
 		if (empty($status)) {
 			$errors['status'] = "";
