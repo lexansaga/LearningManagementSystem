@@ -10,7 +10,7 @@
         {% endblock %}
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico"/>
 	<!-- CUSTOM STYLESHEET -->
-	<link rel="stylesheet" href="{{ app.request.schemeAndHttpHost}}/assets/student.css">
+	
 	<!-- FONT AWESOME -->
 	<script src="https://kit.fontawesome.com/575abfd474.js" crossorigin="anonymous"></script>
 	<!-- BOOTSTRAP -->
@@ -112,16 +112,17 @@
   }
         </style>
     {% else %}
+    <link rel="stylesheet" href="{{ app.request.schemeAndHttpHost}}/assets/student.css">
     <link rel="stylesheet" href="{{ app.request.schemeAndHttpHost }}/assets/css/style.css"/>
     <link rel="stylesheet" href="{{ app.request.schemeAndHttpHost }}assets/css/style-media-queries.css"/>
     
+    <link rel="stylesheet" href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+    <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet" />
 
   
     {% endif %}
 
-    <link rel="stylesheet" href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
-    <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet" />
     </head>
     <body>
     <div class="wrapper">
@@ -136,7 +137,7 @@
                 </center>
                 <hr></hr>
                 
-                {% if app.user.roles[0] == "FACULTY" %}
+                {% if app.user.roles[1] == "FACULTY" %}
                 
                 <li class="item">
                     <a href="/dashboard" class="menu-btn">
@@ -186,7 +187,7 @@
                 </li>
                 <li class="item">
                     <a  href="{{ path('app_logout') }}" class="menu-btn">
-                        <i class="fas fa-users-cog"></i>Logout
+                        <i class="fas fa-sign-out-alt"></i>Logout
                     </a>
                 </li>
                 {% else %}

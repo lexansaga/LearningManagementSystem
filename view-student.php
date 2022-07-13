@@ -99,7 +99,7 @@
 			
 			<?php
 				$id = $_GET['id'];
-			
+				
 				error_reporting(E_ERROR | E_PARSE);
 				$res = mysqli_query ($connection, "SELECT * FROM students WHERE id='$id'");
 				while ($row = mysqli_fetch_array($res))
@@ -111,6 +111,7 @@
 					$lname = $row['lname'];
 					$entlev = $row['entlev'];
 					$gender = $row['gender'];
+					$revcent = $row['reviewcenter'];
 					$cnum = $row['cnum'];
 					$email = $row['email'];
 					$prevschool = $row['prevschool'];
@@ -118,7 +119,9 @@
 					$img = $row['img'];
 					$g_moral = $row['g_moral'];
 					$NSO = $row['NSO'];
+					$receipt = $row['proofpayment'];
 				}
+				
 			?>
 			
 			
@@ -167,6 +170,8 @@
 							<b>Gender:</b><?php echo "\t" . $gender; ?>
 							<br>
 							<b>Highest Education:</b><?php echo "\t" . $hea; ?>
+							<br>
+							<b>Review Center:</b><?php echo "\t" . $revcent; ?>
 							<br>
 							<b>Last School Attended:</b><?php echo "\t" . $prevschool; ?>
 							<br>
@@ -221,6 +226,19 @@
 							
 						
 						</div>
+						<div>
+						<h4>Receipts</h4>
+						<ul>
+						<?php  
+						$arr = json_decode($receipt);
+							foreach($arr as $res ):
+						?>
+						 <li><a href="<?php echo "/LearningManagementSystem/faculty/faculty-interface-symfony-4/data/payments/{$id}/{$filename}"; ?>"><?php echo $res->filename; ?></a></li>
+						 
+						<?php endforeach;?>
+						
+						</div>
+							</ul>
 					</div>
 				</div>
 			

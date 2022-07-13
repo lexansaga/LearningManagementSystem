@@ -53,17 +53,17 @@
                                 {% set curIndex = 0 %}
                                 {% for a in quizquestions %}
                                     {% if a.activitytype == "Identification" %}
-                                        <h6 class="quiz-title">{{a['question'~(loop.index)]}}</h6>
-                                        <textarea class="form-control answers" aria-label="{{a['question'~(loop.index)]}}"  ></textarea>
+                                        <h6 class="quiz-title">{{a.question}}</h6>
+                                        <textarea class="form-control answers" aria-label="{{a.question}}"  ></textarea>
                                     {% elseif a.activitytype == "Multiple" %}
                                         
-                                        <h6 class="quiz-title">{{a['question'~(loop.index)]}}</h6>
+                                        <h6 class="quiz-title">{{a.question}}</h6>
 
-                                        {% set question = [a['firstchoice'~(loop.index)], a['secondchoice'~(loop.index)], a['thirdchoice'~(loop.index)], a['answer'~(loop.index)]]%}
+                                        {% set question = [a.firstchoice, a.secondchoice, a.thirdchoice, a.answer ]%}
                                         
                                         {% set randomChoice = [] %}
                                         {% set curIndex = loop.index %}
-                                        {% set currentQuestion = a['question'~(loop.index)]%}
+                                        {% set currentQuestion = a.question %}
                                         
                                         
                                         
@@ -85,13 +85,13 @@
                                          
                                     
                                     {% else %}
-                                        <h6 class="quiz-title">{{a['question'~(loop.index)]}}</h6>
+                                        <h6 class="quiz-title">{{a.question}}</h6>
                                         <div class="quiz">
                                             
                                             <div class="quiz-textbox-choices">
                                                 <!-- Textboxes -->
 
-                                                <textarea class="form-control answers" aria-label="{{a['question'~(loop.index)]}}"  ></textarea>
+                                                <textarea class="form-control answers" aria-label="{{a.question}}"  ></textarea>
                                             </div>
                                         </div>
                                         
@@ -99,7 +99,7 @@
                                     {% set curIndex = curIndex + 1  %}
                                 {% endfor %}
                                
-                    <button class="btn btn-primary btn-submit-quiz" onclick="submitAnswer({{quizquestions|json_encode}},{{activity.id}},'{{userID}}','{{activity.ProgramClass}}','{{activity.Course}}',{{id}})">Submit</button>
+                    
                             </div>
 
 
@@ -114,7 +114,7 @@
                         </div>
                        {% endif %}
 
-
+<button class="btn btn-primary btn-submit-quiz" onclick="submitAnswer({{quizquestions|json_encode}},{{activity.id}},'{{userID}}','{{activity.ProgramClass}}','{{activity.Course}}',{{id}})">Submit</button>
                         
                     </div>
                     <div class="activity-info">
@@ -137,19 +137,7 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="activity-comment">
-                        <h5>Comment</h5>
-                        <ul>
-                            <li><a href="#" class="prof-name">Prof Name : </a><span class="comment">Lorem ipsum, dolor
-                                    sit
-                                    amet consectetur
-                                    adipisicing elit.</span></li>
-                        </ul>
-
-                        <textarea class="form-control" aria-label="With textarea"></textarea>
-
-                        <button class="btn btn-primary btn-submit-comment">Submit</button>
-                    </div>
+                 
 
                 </div>
             </div>
@@ -163,6 +151,14 @@
     <script src="{{ app.request.schemeAndHttpHost }}/assets/js/script.js"></script>
     <script src="{{ app.request.schemeAndHttpHost }}/assets/js/submitactivities.js"></script>
     <script src="{{ app.request.schemeAndHttpHost }}/assets/js/getFile.js"></script>
+
+    <script>
+    
+   $(window).on('beforeunload', function(){
+  return "Good Bye";
+});
+    
+    </script>
 
 </main>
      

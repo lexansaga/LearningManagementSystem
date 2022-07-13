@@ -12,7 +12,7 @@
     <div class="main-content">
             <h3>Grades</h3>
             <div class="main-content-wrapper">   
-                 <h4>1st year 1st Term</h4>
+                 
                 <table id="datatable" class="display">
                     <thead>
                         <tr>
@@ -55,15 +55,16 @@
         
         let c = []
         {% for b in grades %}
-            let tempObj = {};
-            tempObj.course = "{{b.course}}";
-            tempObj.interim1 = "{{b.interim1}}";
-            tempObj.midterm = "{{b.midterm}}";
-            tempObj.interim2 = "{{b.interim2}}";
-            tempObj.final = "{{b.final}}";
-            tempObj.grade = "{{b.grade}}";
-            tempObj.remarks = "{{b.remarks}}";
-            c.push(tempObj);   
+            c.push({
+                course:"{{b.course}}",
+                interim1:"{{b.interim1}}",
+                midterm:"{{b.midterm}}",
+                interim2:"{{b.interim2}}",
+                final:"{{b.final}}",
+                grade:"{{b.grade}}",
+                remarks:"{{b.remarks}}"
+
+            });   
         {% endfor %}
         
         $('#datatable').DataTable({

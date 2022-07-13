@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Security\Core\Security;
+use Symfony\Component\Filesystem\Filesystem;
 use \Datetime;
 class StudentController extends AbstractController
 {
@@ -168,6 +169,7 @@ class StudentController extends AbstractController
 
         $entityManager = $doctrine->getManager();
         $id = $request->request->get("id");
+        $courseID = $request->request->get("courseid");
         $student = $entityManager->getRepository(Students::class)->find($id);
 
         if (!$student) {
@@ -175,20 +177,34 @@ class StudentController extends AbstractController
                 'No user found for id '.$id
             );
         }
-        $file = $request->files->get('file');
+        $files = $request->files->all();
 
-        if (!file_exists($this->getParameter('kernel.project_dir') ."/data/payments/$id")) {
-            mkdir($this->getParameter('kernel.project_dir') ."/data/payments/$id", 0777, true);
-        }
-        $filename = $request->request->get('filename');
-        $target = $this->getParameter('kernel.project_dir') ."/data/payments/$id/$filename";
-        move_uploaded_file($file, $target);
-        
         $payments = $student->getProofpayment();
         if($payments==null){
             $payments = array();
         }
-        array_push($payments,$filename);
+
+        
+        if(isset($files)){
+
+            if (!file_exists($this->getParameter('kernel.project_dir') ."/data/payments/$id")) {
+                mkdir($this->getParameter('kernel.project_dir') ."/data/payments/$id", 0777, true);
+            }
+            $index = 0;
+            
+            foreach ($files as $file) {
+                $filename = $request->request->get('filename'.$index);
+                
+                $target = $this->getParameter('kernel.project_dir') ."/data/payments/$id/$filename";
+                array_push($payments,array('filename'=>$filename,'status'=>'pending','courseid'=>$courseID));
+                move_uploaded_file($file, $target);    
+            
+                $index++;
+            }
+            
+            
+        }
+        
         $student->setProofpayment($payments);
         $entityManager->flush();
 
@@ -198,14 +214,48 @@ class StudentController extends AbstractController
         
         return $response;
     }
-    public function showUploadPayment(Request $request){
-        
+    public function showUploadPayment(ManagerRegistry $doctrine,Request $request){
+        $entityManager = $doctrine->getManager();
         $payments = $this->getUser()->getProofpayment();
         $id = $this->getUser()->getId();
+        $allenrolledcourses = $entityManager->getRepository(CourseEnrolled::class)->findBy(array('idnum'=>$this->getUser()->getIdnum()));
         return $this->render('student/uploadpayment.html.twig', [
             'payments'=>$payments,
-            'id'=>$id
+            'id'=>$id,
+            'all'=>$allenrolledcourses,
         ]);
+    }
+
+    public function removeStudentRecepit(ManagerRegistry $doctrine,Request $request){
+        $entityManager = $doctrine->getManager();
+        $id = $request->request->get('id');
+        $filename = $request->request->get("filename");
+        $curStudent = 
+            $doctrine->getRepository(Students::class)
+            ->find($id);
+        
+        $array = $curStudent->getProofpayment();
+        $index = $this->getFilename($array,$filename);
+        if($index !== FALSE){
+            unset($array[$index]);
+        }
+        
+        $curStudent->setProofpayment($array);
+        $entityManager->flush();
+        $target = $this->getParameter('kernel.project_dir') ."/data/payments/$id/$filename";
+        $filesystem = new Filesystem();
+        $filesystem->remove($target);
+        
+        $response = new Response("Successful");
+        $response->headers->set('Content-Type', 'application/json');
+        
+        return $response;
+    }
+    public function getFilename($files, $filename) {
+        foreach($files as $index => $file) {
+            if($file['filename'] == $filename) return $index;
+        }
+        return FALSE;
     }
     /**
      * @Route("/student/mystudent/{id}", name="view")

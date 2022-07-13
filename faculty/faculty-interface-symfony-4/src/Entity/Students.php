@@ -157,6 +157,11 @@ class Students implements UserInterface
      */
     private $proofpayment = [];
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $reviewcenter;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -385,9 +390,9 @@ class Students implements UserInterface
     public function getRoles(){
         
         // guarantee every user at least has ROLE_USER
-        $roles[] = 'STUDENT';
+       
 
-        return array_unique($roles);
+        return array('ROLE_USER','STUDENT');
     }
     public function getPassword(){
          
@@ -419,6 +424,18 @@ class Students implements UserInterface
     public function setProofpayment(?array $proofpayment): self
     {
         $this->proofpayment = $proofpayment;
+
+        return $this;
+    }
+
+    public function getReviewcenter(): ?string
+    {
+        return $this->reviewcenter;
+    }
+
+    public function setReviewcenter(?string $reviewcenter): self
+    {
+        $this->reviewcenter = $reviewcenter;
 
         return $this;
     }

@@ -31,12 +31,12 @@ async function submitAnswer(data,actid,studentid,programclass,course,roomID) {
             console.log(element.activitytype);        
             if(element.activitytype=="Multiple" ){
                 
-                if(element['question'+(i+1)].trim()==eachelement.ariaLabel){
+                if(element.question.trim()==eachelement.ariaLabel){
                     if(eachelement.checked){
                         let judge = "wrong";
-                        if(eachelement.value==element['answer'+(i+1)]){
+                        if(eachelement.value==element.answer){
 
-                            points += parseInt(element['score'+(i+1)]);
+                            points += parseInt(element.score);
                             judge = "right";
                         }
                         correctanswers = [...correctanswers,{
@@ -51,13 +51,13 @@ async function submitAnswer(data,actid,studentid,programclass,course,roomID) {
                 }
             }else{
 
-                if(element['question'+(i+1)].trim()==eachelement.ariaLabel){
+                if(element.question.trim()==eachelement.ariaLabel){
                    
                     if(element.activitytype=="Identification"){
                         let judge = "wrong";
-                        if(element['answer'+(i+1)].trim()==eachelement.value.trim()){
+                        if(element.answer.trim()==eachelement.value.trim()){
 
-                            points += parseInt(element['score'+(i+1)]);
+                            points += parseInt(element.score);
                             judge = "right"
                         }
                         correctanswers = [...correctanswers,{

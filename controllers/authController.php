@@ -74,6 +74,7 @@
 		$lname = htmlspecialchars($_POST['lname']);
 		$gender = $_POST['gender'];
 		$cnum = htmlspecialchars($_POST['cnum']);
+		$reviewcenter = htmlspecialchars($_POST['reviewcenter']);
 		$email = htmlspecialchars($_POST['email']);
 		$prevschool = htmlspecialchars($_POST['prevschool']);
 		$hea = $_POST['hea'];
@@ -84,9 +85,22 @@
 		if (!empty($_FILES['image']['name'])) {
 			if (!in_array($img, ["jpg", "png", "jpeg"])){
 				$errors['file'] = "File type is Invalid";
+				return;
 			}
-		} else { $errors['1'] = "All field is required"; }
-		
+		} else { $errors['1'] = "All field is required"; 
+			return;
+		}
+
+
+		if(empty($_POST['pass'])||empty($_POST['passConf'])){
+			$errors['1'] = "All field is required";
+			return;
+		}
+
+		if(!empty($_POST['pass'])&&!empty($_POST['passConf'])&&$_POST['pass']!=$_POST['passConf']){
+			$errors['1'] = "Password do not match";
+			return;
+		}
 		$image = time() . '_' . $_FILES['image']['name'];
 		
 		// FOR UPLOADING PDF FILES
@@ -97,13 +111,20 @@
 			if (!in_array($upload_file, ["pdf"])){
 				$errors['file'] = "File type is Invalid";
 			}
-		} else { $errors['1'] = "All field is required"; }
+		} else { 
+			$errors['1'] = "All field is required"; 
+			return;
+		}
 		
 		if (!empty($_FILES['NSO']['name'])) {
 			if (!in_array($upload_file1, ["pdf"])){
 				$errors['file1'] = "File type is Invalid";
+				return;
 			}
-		} else { $errors['1'] = "All field is required"; }
+		} else { 
+			$errors['1'] = "All field is required";
+			return;
+		 }
 		
 		$g_moral = time() . '_' . $_FILES['g_moral']['name'];
 		$NSO = time() . '_' . $_FILES['NSO']['name'];
@@ -114,65 +135,78 @@
 		// VALIDATION IF EMPTY
 		if (empty($entlev)) {
 			$errors['1'] = "All field is required";
-			
+			return;
 		}
 		if (empty($fname)) {
 			$errors['1'] = "All field is required";
-			
+			return;
 		}
 		if (empty($mname)) {
 			$errors['1'] = "All field is required";
-			
+			return;
 		}
 		if (empty($lname)) {
 			$errors['1'] = "All field is required";
-			
+			return;
+		}
+		if (empty($reviewcenter)) {
+			$errors['1'] = "All field is required";
+			return;
 		}
 		if (empty($gender)) {
 			$errors['1'] = "All field is required";
-			
+			return;
 		}
 		if (empty($cnum)) {
 			$errors['1'] = "All field is required";
+			return;
 		}
 		if (empty($email)) {
 			$errors['1'] = "All field is required";
+			return;
 			
 		} else {
 			if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 			$errors['email'] = "Email address is invalid";
+			return;
 			}
+			
 		}
 		if (empty($prevschool)) {
 			$errors['1'] = "All field is required";
+			return;
 		}
 		if (empty($hea)) {
 			$errors['1'] = "All field is required";
+			return;
 		}
 		
 		
 		//CHECK EMAIL IF EXISTING IN DATABASE
-		$emailQuery = "SELECT * From students WHERE email=? Limit 1";
-		$stmt = $connection->prepare($emailQuery);
-		$stmt->bind_param('s', $email);
-		$stmt->execute();
-		$result=$stmt->get_result();
-		$userCount = $result->num_rows;
-		$stmt->close();
+		if(isset($email)){
+			$emailQuery = "SELECT * From students WHERE email=? Limit 1";
+			$stmt = $connection->prepare($emailQuery);
+			$stmt->bind_param('s', $email);
+			$stmt->execute();
+			$result=$stmt->get_result();
+			$userCount = $result->num_rows;
+			$stmt->close();
+		}
 		
 		if ($userCount > 0) {
 			$errors['email'] = "Email Error!";
+			return;
 		}
 		//********************* IF NO ERRORS ***************************
 		if (count($errors) == 0) {
 			date_default_timezone_set('Asia/Manila');
 			$reg_date = date("F j\, Y \| g:i A", time());
-			$mypass = password_hash("hehe", PASSWORD_BCRYPT);
-			$sql = "INSERT INTO students (idnum, fname, mname, lname, entlev,
-				gender, cnum, email, prevschool, hea, img, g_moral, NSO, reg_date, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
+			$mypass = password_hash($_POST['pass'], PASSWORD_BCRYPT);
+			$sql = "INSERT INTO students (idnum, fname, mname, lname, entlev, reviewcenter,
+				gender, cnum, email, prevschool, hea, img, g_moral, NSO, reg_date, password) VALUES (?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
 			$stmt = $connection->prepare($sql);
-			$stmt->bind_param('sssssssssssssss', $idnum, $fname, $mname, $lname, 
-				$entlev, $gender, $cnum, $email, $prevschool, $hea, $image, 
+			$stmt->bind_param('ssssssssssssssss', $idnum, $fname, $mname, $lname, 
+				$entlev,$reviewcenter, $gender, $cnum, $email, $prevschool, $hea, $image, 
 				$g_moral, $NSO, $reg_date, $mypass);
 			
 			move_uploaded_file($_FILES['image']['tmp_name'], $target);
@@ -512,6 +546,7 @@
 
 		$gender = htmlspecialchars($_POST['gender']);
 		$special = htmlspecialchars($_POST['special']);
+		$reviewcenter = htmlspecialchars($_POST['reviewcenter']);
 		$status = htmlspecialchars($_POST['status']);
 		$email = htmlspecialchars($_POST['email']);
 		$pass = htmlspecialchars($_POST['pass']);
@@ -526,6 +561,9 @@
 		}
 		if (empty($special)) {
 			$errors['special'] = "";
+		}
+		if (empty($reviewcenter)) {
+			$errors['reviewcenter'] = "";
 		}
 		if (empty($status)) {
 			$errors['status'] = "";
@@ -571,11 +609,11 @@
 			$username = $lname ."". $initials ."". $middle . "@faculty-aja.educa.com";
 			$faculty_id = $dyear .'-'. $increment;
 
-			$sql = "INSERT INTO faculty (fullname, gender, special, status,
+			$sql = "INSERT INTO faculty (fullname, gender, special, status, reviewcenter,
 			email, password, username, faculty_id, reg_date)
-			VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			$stmt = $connection->prepare($sql);
-			$stmt->bind_param('sssssssss', $fullname, $gender, $special, $status,
+			$stmt->bind_param('ssssssssss', $fullname, $gender, $special, $status, $reviewcenter,
 			$email, $pass, $username, $faculty_id, $reg_date);
 
 			if ($stmt->execute()) {

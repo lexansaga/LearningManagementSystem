@@ -93,6 +93,11 @@ class Faculty implements UserInterface
      */
     private $roles = [];
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $reviewcenter;
+
 
     //----------------------------------------------------------------------------
     public function getId(): ?int
@@ -245,16 +250,28 @@ class Faculty implements UserInterface
      */
     public function getRoles(): array
     {
-        $roles = $this->roles;
+        
         // guarantee every user at least has ROLE_USER
-        $roles[] = 'FACULTY';
+        
 
-        return array_unique($roles);
+        return array('ROLE_USER','FACULTY');
     }
 
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
+
+        return $this;
+    }
+
+    public function getReviewcenter(): ?string
+    {
+        return $this->reviewcenter;
+    }
+
+    public function setReviewcenter(?string $reviewcenter): self
+    {
+        $this->reviewcenter = $reviewcenter;
 
         return $this;
     }

@@ -351,7 +351,35 @@
                                 <?php if (isset($status) && $status=="Seasonal") echo "selected";?>
                                 value="Seasonal">Seasonal</option>
                             </select>
-
+                            <label>Enrolled In Review Center: </label><br>
+                            <select name="reviewcenter">
+                                <option value="" selected disabled>-- Status --</option>
+                                <option
+                                <?php if (isset($reviewcenter) && $reviewcenter=="LET Review") echo "selected";?>
+                                value="LET Review">LET Review</option>
+                                <option
+                                <?php if (isset($reviewcenter) && $reviewcenter=="CSE Review") echo "selected";?>
+                                value="CSE Review">CSE Review</option>
+                                <option
+                                <?php if (isset($reviewcenter) && $reviewcenter=="Seminar/Training") echo "selected";?>
+                                value="Seminar/Training">Seminar/Training</option>
+                                <option
+                                <?php if (isset($reviewcenter) && $reviewcenter=="Tutorials") echo "selected";?>
+                                value="Tutorials">Tutorials</option>
+                                <option
+                                <?php if (isset($reviewcenter) && $reviewcenter=="Elementary") echo "selected";?>
+                                value="Elementary">Elementary</option>
+                                <option
+                                <?php if (isset($reviewcenter) && $reviewcenter=="Highschool") echo "selected";?>
+                                value="Highschool">Highschool</option>
+                                <option
+                                <?php if (isset($reviewcenter) && $reviewcenter=="College") echo "selected";?>
+                                value="College">College</option>
+                                <option
+                                <?php if (isset($reviewcenter) && $reviewcenter=="Research") echo "selected";?>
+                                value="Research">Research</option>
+                                
+                            </select>
                             <br>
                             <label>Email: </label><br>
                             <input type="text" name="email" placeholder="email">
@@ -363,7 +391,7 @@
                             <input type="password" name="passConf" placeholder="confirm password">
                             <br>
                         </div>
-                    
+                                
 
                         <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
