@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 02, 2022 at 10:51 AM
+-- Generation Time: Jul 13, 2022 at 05:52 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -85,7 +85,9 @@ CREATE TABLE `activities` (
 --
 
 INSERT INTO `activities` (`id`, `activityname`, `questions`, `timestamp`, `facultyload_id`, `activity_deadline`, `file`, `description`, `activitytype`, `maxscore`, `course`, `program_class`, `tasktype`, `isallowlatesubmission`, `allowfileupload`, `maxattempt`) VALUES
-(43, 'sdfsdfs', '[{\"activitytype\":\"Identification\",\"question\":\"sdfsdf\",\"answer\":\"dsfsdf\",\"score\":\"5\"},{\"activitytype\":\"Multiple\",\"question\":\"sdfdsfsd\",\"answer\":\"dffgdgdfgdg\",\"score\":\"5\",\"firstchoice\":\"dsfdsf\",\"secondchoice\":\"hgjgj\",\"thirdchoice\":\"rtrtrt\"},{\"activitytype\":\"Identification\",\"question\":\"dsf\",\"answer\":\"r\",\"score\":\"5\"}]', '2022-07-02 09:44:47', 47, '2022-07-23 15:44:00', NULL, 'sdfsdf', 'Quiz', 15, 'Advance Communciations', 'BSCS181A', 'Activity', 1, 1, 4);
+(43, 'sdfsdfs', '[{\"activitytype\":\"Identification\",\"question\":\"sdfsdf\",\"answer\":\"dsfsdf\",\"score\":\"5\"},{\"activitytype\":\"Multiple\",\"question\":\"sdfdsfsd\",\"answer\":\"dffgdgdfgdg\",\"score\":\"5\",\"firstchoice\":\"dsfdsf\",\"secondchoice\":\"hgjgj\",\"thirdchoice\":\"rtrtrt\"},{\"activitytype\":\"Identification\",\"question\":\"dsf\",\"answer\":\"r\",\"score\":\"5\"}]', '2022-07-02 09:44:47', 47, '2022-07-23 15:44:00', NULL, 'sdfsdf', 'Quiz', 15, 'Advance Communciations', 'BSCS181A', 'Activity', 1, 1, 4),
+(44, 'sadasdasd', '[]', '2022-07-06 09:00:25', 47, '2022-07-21 15:00:00', '[\"1632290851_NSO.pdf\"]', 'sadasd', 'Essay', 34, 'Advance Communciations', 'BSCS181A', 'Activity', 1, 1, 3),
+(45, 'dsfsdf', '[]', '2022-07-06 09:00:44', 47, '2022-07-22 15:00:00', NULL, 'fdgdfg', 'Essay', 45, 'Advance Communciations', 'BSCS181A', 'Activity', 1, 1, 3);
 
 -- --------------------------------------------------------
 
@@ -104,7 +106,7 @@ CREATE TABLE `activities_submitted` (
   `correctanswers` longtext COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '(DC2Type:json)',
   `timestamp` datetime NOT NULL,
   `elapsedtime` datetime DEFAULT NULL,
-  `isvalid` tinyint(1) NOT NULL DEFAULT 0
+  `isvalid` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -112,7 +114,8 @@ CREATE TABLE `activities_submitted` (
 --
 
 INSERT INTO `activities_submitted` (`id`, `activityid`, `studentid`, `score`, `file`, `program_class`, `course`, `correctanswers`, `timestamp`, `elapsedtime`, `isvalid`) VALUES
-(73, 43, '2022-10019', 0, '[]', 'BSCS181A', 'Advance Communciations', '[{\"activitytype\":\"Identification\",\"answer\":\"dsfsdfdsfds\",\"type\":\"wrong\",\"question\":\"dsf\"},{\"activitytype\":\"Multiple\",\"answer\":\"rtrtrt\",\"type\":\"wrong\",\"question\":\"sdfdsfsd\"},{\"activitytype\":\"Identification\",\"answer\":\"asdasdasd\",\"type\":\"wrong\",\"question\":\"sdfsdf\"}]', '2022-07-02 09:45:33', NULL, 1);
+(73, 43, '2022-10019', 0, '[]', 'BSCS181A', 'Advance Communciations', '[{\"activitytype\":\"Identification\",\"answer\":\"dsfsdfdsfds\",\"type\":\"wrong\",\"question\":\"dsf\"},{\"activitytype\":\"Multiple\",\"answer\":\"rtrtrt\",\"type\":\"wrong\",\"question\":\"sdfdsfsd\"},{\"activitytype\":\"Identification\",\"answer\":\"asdasdasd\",\"type\":\"wrong\",\"question\":\"sdfsdf\"}]', '2022-07-02 09:45:33', NULL, 1),
+(74, 44, '2022-10019', 50, '[\"1632035523_Good_Moral.pdf\"]', 'BSCS181A', 'Advance Communciations', '[]', '2022-07-13 16:51:24', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -275,7 +278,8 @@ INSERT INTO `course_enrolled` (`id`, `idnum`, `fullname`, `year_term`, `program_
 (174, '2021-10015', 'PETERSON, Jimena  H.', '1st Year 2nd Term', 'BSA211C', 'Accounting', '90', '91', '92', '93', '91.5', '3.5', ''),
 (175, '2021-10016', 'SANDOVAL, Peston P.', '1st Year 1st Term', 'BSCS181A', 'Automata', '50', '50', '50', '50', '50', 'R', ''),
 (176, '2021-10016', 'SANDOVAL, Peston P.', '1st Year 2nd Term', 'BSP211D', 'Into to Psychology', '95', '95', '97', '98', '96.25', '4', ''),
-(183, '2022-10019', 'CRUZ, Juan D D.', '3rd Year 1st Term', 'BSCS181A', 'Advance Communciations', '', '', '', '', '', '', '');
+(183, '2022-10019', 'CRUZ, Juan D D.', '3rd Year 1st Term', 'BSCS181A', 'Advance Communciations', '', '', '', '', '', '', ''),
+(184, '2022-10019', 'CRUZ, Juan D D.', '3rd Year 1st Term', 'BSCS181A', 'Thesis 2', '', '', '', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -322,7 +326,9 @@ INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_
 ('DoctrineMigrations\\Version20220628073010', '2022-06-28 09:30:41', 204),
 ('DoctrineMigrations\\Version20220628135735', '2022-06-29 08:33:25', 181),
 ('DoctrineMigrations\\Version20220629062605', '2022-06-29 08:33:25', 25),
-('DoctrineMigrations\\Version20220629155123', '2022-06-29 17:53:27', 259);
+('DoctrineMigrations\\Version20220629155123', '2022-06-29 17:53:27', 259),
+('DoctrineMigrations\\Version20220713150950', '2022-07-13 17:14:13', 1762),
+('DoctrineMigrations\\Version20220713151648', '2022-07-13 17:16:56', 227);
 
 -- --------------------------------------------------------
 
@@ -341,22 +347,24 @@ CREATE TABLE `faculty` (
   `gender` varchar(10) NOT NULL,
   `reg_date` varchar(50) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `roles` longtext NOT NULL COMMENT '(DC2Type:json)'
+  `roles` longtext NOT NULL COMMENT '(DC2Type:json)',
+  `reviewcenter` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `faculty`
 --
 
-INSERT INTO `faculty` (`id`, `fullname`, `faculty_id`, `special`, `status`, `email`, `username`, `gender`, `reg_date`, `password`, `roles`) VALUES
-(14, 'Asta Y. Liebe', '2021-50005', 'MIT', 'Full-time', 'Asta@gmail.com', 'Liebeay@faculty-aja.edu.com', 'male', 'November 5, 2021', '', ''),
-(15, 'Albert E. Tesla', '2021-50006', 'MIT', 'Full-time', 'albert@gmail.com', 'Teslaae@faculty-aja.edu.com', 'male', 'November 5, 2021', '', ''),
-(20, 'Billie J. Eillish', '2021-50008', 'MIT', 'Part-time', 'billie@gmail.com', 'Eillishbj@faculty-aja.edu.com', 'female', 'November 5, 2021', '$2y$10$4OZgSKFwAxmq70KbbAtn5Oo1ypdkKcDnb4nN4rHgLVAcKBe4jGB.W', ''),
-(21, 'Skusta C. Clee', '2021-50009', 'MIT', 'Full-time', 'skusta@gmail.com', 'Cleesc@faculty-aja.edu.com', 'male', 'November 5, 2021', '$2y$10$JvhKXHX5ZijtCmg/fWgGVexjxqwzpwWYcMZjKOjKUxiHsUUPtAN7S', ''),
-(28, 'Tony M. Stark', '2021-50010', 'MIT', 'Full-time', 'stark@gmail.com', 'Starktm@faculty-aja.edu.com', 'male', 'November 13, 2021', '$2y$10$aFhdPfeYF.mKFCYsrfhDSuxgyYYRIYUJnybY9ewGypLIYJH.loeeS', ''),
-(29, 'Ellis  M. Stevenson', '2021-50011', 'MIT', 'Full-time', 'ellis@gmail.com', 'Stevensonem@faculty-aja.edu.com', 'male', 'November 13, 2021', '$2y$10$8V.JOdJTvWa0q6yOrWQ2a.NA0S/AS762fK7ZAODio//EKB9GEulbC', ''),
-(30, 'Rocco F. Valencia', '2021-50012', 'MIT', 'Full-time', 'valencia@gmail.com', 'Valenciarf@faculty-aja.edu.com', 'male', 'November 13, 2021', '$2y$10$TJOrxHWuehGHf9MuUPOuIO5Qx5t8em1dXlT.m3afMfgQLf9Lg20hu', ''),
-(32, 'Juan D. Cruz', '2022-50013', 'Math', 'Full-time', 'test1@gmail.com', 'Cruzjd@faculty-aja.edu.com', 'male', 'June 21, 2022', '$2y$10$.Jw8Cs0iwjqMkPL3a2Od/uGYRbz/MwH6dA1qgAIgj74nasHRpv0T6', '');
+INSERT INTO `faculty` (`id`, `fullname`, `faculty_id`, `special`, `status`, `email`, `username`, `gender`, `reg_date`, `password`, `roles`, `reviewcenter`) VALUES
+(14, 'Asta Y. Liebe', '2021-50005', 'MIT', 'Full-time', 'Asta@gmail.com', 'Liebeay@faculty-aja.educa.com', 'male', 'November 5, 2021', '', '', NULL),
+(15, 'Albert E. Tesla', '2021-50006', 'MIT', 'Full-time', 'albert@gmail.com', 'Teslaae@faculty-aja.educa.com', 'male', 'November 5, 2021', '', '', NULL),
+(20, 'Billie J. Eillish', '2021-50008', 'MIT', 'Part-time', 'billie@gmail.com', 'Eillishbj@faculty-aja.educa.com', 'female', 'November 5, 2021', '$2y$10$4OZgSKFwAxmq70KbbAtn5Oo1ypdkKcDnb4nN4rHgLVAcKBe4jGB.W', '', NULL),
+(21, 'Skusta C. Clee', '2021-50009', 'MIT', 'Full-time', 'skusta@gmail.com', 'Cleesc@faculty-aja.educa.com', 'male', 'November 5, 2021', '$2y$10$JvhKXHX5ZijtCmg/fWgGVexjxqwzpwWYcMZjKOjKUxiHsUUPtAN7S', '', NULL),
+(28, 'Tony M. Stark', '2021-50010', 'MIT', 'Full-time', 'stark@gmail.com', 'Starktm@faculty-aja.educa.com', 'male', 'November 13, 2021', '$2y$10$aFhdPfeYF.mKFCYsrfhDSuxgyYYRIYUJnybY9ewGypLIYJH.loeeS', '', NULL),
+(29, 'Ellis  M. Stevenson', '2021-50011', 'MIT', 'Full-time', 'ellis@gmail.com', 'Stevensonem@faculty-aja.educa.com', 'male', 'November 13, 2021', '$2y$10$8V.JOdJTvWa0q6yOrWQ2a.NA0S/AS762fK7ZAODio//EKB9GEulbC', '', NULL),
+(30, 'Rocco F. Valencia', '2021-50012', 'MIT', 'Full-time', 'valencia@gmail.com', 'Valenciarf@faculty-aja.educa.com', 'male', 'November 13, 2021', '$2y$10$TJOrxHWuehGHf9MuUPOuIO5Qx5t8em1dXlT.m3afMfgQLf9Lg20hu', '', NULL),
+(32, 'Juan D. Cruz', '2022-50013', 'Math', 'Full-time', 'test1@gmail.com', 'Cruzjd@faculty-aja.educa.com', 'male', 'June 21, 2022', '$2y$10$.Jw8Cs0iwjqMkPL3a2Od/uGYRbz/MwH6dA1qgAIgj74nasHRpv0T6', '', NULL),
+(33, 'Juan D D. Cruz', '2022-50014', 'Math', 'Part-time', 'test20@gmail.com', 'Cruzjdd@faculty-aja.educa.com', 'male', 'July 13, 2022', '$2y$10$hTlYtg6aUvlHOVFGXy2LUODAJbRNU.HnnSN6uSWzO7w7sc/7ZzNsa', '', 'LET Review');
 
 -- --------------------------------------------------------
 
@@ -510,30 +518,34 @@ CREATE TABLE `students` (
   `NSO` varchar(50) NOT NULL,
   `reg_date` varchar(30) NOT NULL,
   `password` varchar(255) DEFAULT NULL,
-  `proofpayment` longtext DEFAULT NULL COMMENT '(DC2Type:json)'
+  `proofpayment` longtext DEFAULT NULL COMMENT '(DC2Type:json)',
+  `reviewcenter` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `students`
 --
 
-INSERT INTO `students` (`id`, `idnum`, `fname`, `mname`, `lname`, `entlev`, `academic_year`, `term`, `program`, `class`, `gender`, `cnum`, `email`, `prevschool`, `hea`, `img`, `g_moral`, `NSO`, `reg_date`, `password`, `proofpayment`) VALUES
-(26, '2021-10002', 'Janine', 'Bermudo', 'Berdin', '1st Year', '2021-11-12 to 2022-11-12', '3rd Term', 'Bachelor of Science in Computer Science', '181A', 'female', '01924135234', 'janine@gmail.com', 'STI', 'Senior High School', '1633491394_girl.jpg', '1633491394_Good_Moral.pdf', '1633491394_NSO.pdf', 'October 6, 2021 | 11:36 AM', NULL, NULL),
-(27, '2021-10003', 'Stephene', 'Siason', 'Fuentes', '3rd Year', '2021-11-13 to 2022-01-13', '1st Term', 'Bachelor of Science in Education', '181A', 'male', '0935245436', 'stepehene@gmail.com', 'AMA', 'Senior High School', '1633491597_boy.jpg', '1633491597_Good_Moral.pdf', '1633491597_NSO.pdf', 'October 6, 2021 | 11:39 AM', NULL, NULL),
-(28, '2021-10004', 'Chashar', 'Ramon', 'Velayo', '3rd Year', '2021-11-13 to 2022-01-13', '1st Term', 'Bachelor of Science in Education', '191B', 'male', '0912343251', 'chashar@gmail.com', 'Perpetual Help Laguna', 'Senior High School', '1633491635_boy.jpg', '1633491635_Good_Moral.pdf', '1633491635_NSO.pdf', 'October 6, 2021 | 11:40 AM', NULL, NULL),
-(29, '2021-10005', 'Uniqe', 'Blaster', 'Salonga', '4th Year', '2021-10-6 to 2022-02-28', '1st Term', 'Bachelor of Science in Computer Science', '191A', 'male', '091234141243', 'unique@gmail.com', 'Pamantasan ng Lungsod ng Muntinlupa', 'Senior High School', '1633491671_unique.jpg', '1633491671_Good_Moral.pdf', '1633491671_NSO.pdf', 'October 6, 2021 | 11:41 AM', NULL, NULL),
-(30, '2021-10006', 'Zack', 'King', 'Tabuldo', '3rd Year', '2021-11-13 to 2022-01-13', '1st Term', 'Bachelor of Science in Education', '181C', 'male', '0912412414134', 'zack@gmail.com', 'Lyceum of the Philippines', 'Senior High School', '1633491710_boy.jpg', '1633491710_Good_Moral.pdf', '1633491710_NSO.pdf', 'October 6, 2021 | 11:41 AM', NULL, NULL),
-(32, '2021-10008', 'Monty', 'Chan', 'Reyes', '1st Year', '2021-11-12 to 2022-11-12', '1st Term', 'Bachelor of Science in Computer Engineering', '211A', 'male', '093452341324', 'monty@gmail.com', 'University of Makati', 'Senior High School', '1633491818_boy.jpg', '1633491818_Good_Moral.pdf', '1633491818_NSO.pdf', 'October 6, 2021 | 11:43 AM', NULL, NULL),
-(33, '2021-10009', 'Zild', 'Benitez', 'Cruz', '2nd Year', '2021-11-12 to 2021-11-13', '2nd Term', 'Bachelor of Science in Computer Science', '181A', 'male', '091412323423', 'zild@gmail.com', 'University of Makati', 'Senior High School', '1633491855_boy.jpg', '1633491855_Good_Moral.pdf', '1633491855_NSO.pdf', 'October 6, 2021 | 11:44 AM', NULL, NULL),
-(34, '2021-10010', 'Post', 'Gomez', 'Malone', '3rd Year', '2021-10-23 to 2022-04-28', '1st Term', 'Bachelor of Science in Computer Science', '181A', 'male', '0912421342', 'malone@gmail.com', 'STI', 'Senior High School', '1633491918_boy.jpg', '1633491918_Good_Moral.pdf', '1633491918_NSO.pdf', 'October 6, 2021 | 11:45 AM', NULL, NULL),
-(35, '2021-10011', 'Jerome', 'Repasa', 'Villamore', '4th Year', '', '', '', '', 'male', '09123123123', 'jerome@gmail.com', 'Lyceum of the Philippines', 'Senior High School', '1633494693_boy.jpg', '1633494693_Good_Moral.pdf', '1633494693_NSO.pdf', 'October 6, 2021 | 12:31 PM', NULL, NULL),
-(37, '2021-10012', 'Micheal', 'Hammilton', 'Clifford', '1st Year', '2021-11-12 to 2022-11-12', '1st Term', 'Bachelor of Science in Computer Science', '191A', 'male', '09985454874', 'mc123@gmail.com', 'Perpetual Help Laguna', 'Senior High School', '1636700313_unique.jpg', '1636700313_Good_Moral.pdf', '1636700313_NSO.pdf', 'November 12, 2021 | 2:58 PM', NULL, NULL),
-(38, '2021-10013', 'Jericho', 'Burgos', 'Zamora', '1st Year', '2021-11-13 to 2022-01-13', '1st Term', 'Bachelor of Science in Computer Science', '181A', 'male', '09121455124', 'zamora@gmail.com', 'Lyceum of the Philippines', 'Senior High School', '1636701872_unique.jpg', '1636701872_Good_Moral.pdf', '1636701872_NSO.pdf', 'November 12, 2021 | 3:24 PM', NULL, NULL),
-(40, '2021-10014', 'Joslyn ', 'Hanson ', 'Villanueva', '3rd Year', '2021-11-13 to 2022-01-13', '1st Term', 'Bachelor of Science in Education', '181C', 'female', '09215414878', 'villanueva@gmail.com', 'AMA', 'Senior High School', '1636770873_girl.jpg', '1636770873_Good_Moral.pdf', '1636770873_NSO.pdf', 'November 13, 2021 | 10:34 AM', NULL, NULL),
-(41, '2021-10015', 'Jimena ', 'Hayes ', 'Peterson', '1st Year', '2021-11-13 to 2022-02-13', '2nd Term', 'Bachelor of Science in Accountancy', '211C', 'female', '09215421547', 'jimena@gmail.com', 'AMA', 'Senior High School', '1636782591_girl.jpg', '1636782591_Good_Moral.pdf', '1636782591_NSO.pdf', 'November 13, 2021 | 1:49 PM', NULL, NULL),
-(42, '2021-10016', 'Peston', 'Payne', 'Sandoval', '1st Year', '2021-11-13 to 2022-06-13', '2nd Term', 'Bachelor of Science in Psychology', '211D', 'male', '09213454555', 'sandoval@gmail.com', 'University of Makati', 'Senior High School', '1636788797_boy.jpg', '1636788797_Good_Moral.pdf', '1636788797_NSO.pdf', 'November 13, 2021 | 3:33 PM', NULL, NULL),
-(46, '2022-10017', 'Juan D', 'Dela', 'Cruz', '1st Year', '2021-11-13 to 2022-06-13', '1st Term', 'Bachelor of Science in Information System', '181A', 'male', '54645645645', 'test2@gmail.com', 'DLSU', 'Senior High School', '1655996697_1632037766_girl.jpg', '1655996697_1632037766_Good_Moral.pdf', '1655996697_1632037766_NSO.pdf', 'June 23, 2022 | 11:04 PM', '$2y$10$53R5ex7ebScJFvDu1LMEHuhzTh0RWPzz0OpYz0DrmO21uiKeJxctO', NULL),
-(48, '2022-10019', 'Juan D', 'Dela', 'Cruz', '3rd Year', '2021-11-13 to 2022-06-13', '1st Term', 'Bachelor of Science in Computer Science', '181A', 'male', '09134627346', 'test20@gmail.com', 'DLSU', 'Senior High School', '1656246352_1632037766_girl.jpg', '1656246352_1632037766_Good_Moral.pdf', '1656246352_1632037766_NSO.pdf', 'June 26, 2022 | 8:25 PM', '$2y$10$lEcq5gh8b.GucI6iPLJ2UOfucpbCCT4irzW9oO.wjKRxeimB2OQqu', '[{\"filename\":\"1632037766_Good_Moral.pdf\",\"status\":\"pending\"},{\"filename\":\"1632037890_Good_Moral.pdf\",\"status\":\"pending\"},{\"filename\":\"1632288221_Good_Moral.pdf\",\"status\":\"pending\"},{\"filename\":\"1632288464_Good_Moral.pdf\",\"status\":\"pending\"},{\"filename\":\"1632288827_Good_Moral.pdf\",\"status\":\"pending\"},{\"filename\":\"1632290700_Good_Moral.pdf\",\"status\":\"pending\"},{\"filename\":\"1632290786_Good_Moral.pdf\",\"status\":\"pending\"}]');
+INSERT INTO `students` (`id`, `idnum`, `fname`, `mname`, `lname`, `entlev`, `academic_year`, `term`, `program`, `class`, `gender`, `cnum`, `email`, `prevschool`, `hea`, `img`, `g_moral`, `NSO`, `reg_date`, `password`, `proofpayment`, `reviewcenter`) VALUES
+(26, '2021-10002', 'Janine', 'Bermudo', 'Berdin', '1st Year', '2021-11-12 to 2022-11-12', '3rd Term', 'Bachelor of Science in Computer Science', '181A', 'female', '01924135234', 'janine@gmail.com', 'STI', 'Senior High School', '1633491394_girl.jpg', '1633491394_Good_Moral.pdf', '1633491394_NSO.pdf', 'October 6, 2021 | 11:36 AM', NULL, NULL, NULL),
+(27, '2021-10003', 'Stephene', 'Siason', 'Fuentes', '3rd Year', '2021-11-13 to 2022-01-13', '1st Term', 'Bachelor of Science in Education', '181A', 'male', '0935245436', 'stepehene@gmail.com', 'AMA', 'Senior High School', '1633491597_boy.jpg', '1633491597_Good_Moral.pdf', '1633491597_NSO.pdf', 'October 6, 2021 | 11:39 AM', NULL, NULL, NULL),
+(28, '2021-10004', 'Chashar', 'Ramon', 'Velayo', '3rd Year', '2021-11-13 to 2022-01-13', '1st Term', 'Bachelor of Science in Education', '191B', 'male', '0912343251', 'chashar@gmail.com', 'Perpetual Help Laguna', 'Senior High School', '1633491635_boy.jpg', '1633491635_Good_Moral.pdf', '1633491635_NSO.pdf', 'October 6, 2021 | 11:40 AM', NULL, NULL, NULL),
+(29, '2021-10005', 'Uniqe', 'Blaster', 'Salonga', '4th Year', '2021-10-6 to 2022-02-28', '1st Term', 'Bachelor of Science in Computer Science', '191A', 'male', '091234141243', 'unique@gmail.com', 'Pamantasan ng Lungsod ng Muntinlupa', 'Senior High School', '1633491671_unique.jpg', '1633491671_Good_Moral.pdf', '1633491671_NSO.pdf', 'October 6, 2021 | 11:41 AM', NULL, NULL, NULL),
+(30, '2021-10006', 'Zack', 'King', 'Tabuldo', '3rd Year', '2021-11-13 to 2022-01-13', '1st Term', 'Bachelor of Science in Education', '181C', 'male', '0912412414134', 'zack@gmail.com', 'Lyceum of the Philippines', 'Senior High School', '1633491710_boy.jpg', '1633491710_Good_Moral.pdf', '1633491710_NSO.pdf', 'October 6, 2021 | 11:41 AM', NULL, NULL, NULL),
+(32, '2021-10008', 'Monty', 'Chan', 'Reyes', '1st Year', '2021-11-12 to 2022-11-12', '1st Term', 'Bachelor of Science in Computer Engineering', '211A', 'male', '093452341324', 'monty@gmail.com', 'University of Makati', 'Senior High School', '1633491818_boy.jpg', '1633491818_Good_Moral.pdf', '1633491818_NSO.pdf', 'October 6, 2021 | 11:43 AM', NULL, NULL, NULL),
+(33, '2021-10009', 'Zild', 'Benitez', 'Cruz', '2nd Year', '2021-11-12 to 2021-11-13', '2nd Term', 'Bachelor of Science in Computer Science', '181A', 'male', '091412323423', 'zild@gmail.com', 'University of Makati', 'Senior High School', '1633491855_boy.jpg', '1633491855_Good_Moral.pdf', '1633491855_NSO.pdf', 'October 6, 2021 | 11:44 AM', NULL, NULL, NULL),
+(34, '2021-10010', 'Post', 'Gomez', 'Malone', '3rd Year', '2021-10-23 to 2022-04-28', '1st Term', 'Bachelor of Science in Computer Science', '181A', 'male', '0912421342', 'malone@gmail.com', 'STI', 'Senior High School', '1633491918_boy.jpg', '1633491918_Good_Moral.pdf', '1633491918_NSO.pdf', 'October 6, 2021 | 11:45 AM', NULL, NULL, NULL),
+(35, '2021-10011', 'Jerome', 'Repasa', 'Villamore', '4th Year', '', '', '', '', 'male', '09123123123', 'jerome@gmail.com', 'Lyceum of the Philippines', 'Senior High School', '1633494693_boy.jpg', '1633494693_Good_Moral.pdf', '1633494693_NSO.pdf', 'October 6, 2021 | 12:31 PM', NULL, NULL, NULL),
+(37, '2021-10012', 'Micheal', 'Hammilton', 'Clifford', '1st Year', '2021-11-12 to 2022-11-12', '1st Term', 'Bachelor of Science in Computer Science', '191A', 'male', '09985454874', 'mc123@gmail.com', 'Perpetual Help Laguna', 'Senior High School', '1636700313_unique.jpg', '1636700313_Good_Moral.pdf', '1636700313_NSO.pdf', 'November 12, 2021 | 2:58 PM', NULL, NULL, NULL),
+(38, '2021-10013', 'Jericho', 'Burgos', 'Zamora', '1st Year', '2021-11-13 to 2022-01-13', '1st Term', 'Bachelor of Science in Computer Science', '181A', 'male', '09121455124', 'zamora@gmail.com', 'Lyceum of the Philippines', 'Senior High School', '1636701872_unique.jpg', '1636701872_Good_Moral.pdf', '1636701872_NSO.pdf', 'November 12, 2021 | 3:24 PM', NULL, NULL, NULL),
+(40, '2021-10014', 'Joslyn ', 'Hanson ', 'Villanueva', '3rd Year', '2021-11-13 to 2022-01-13', '1st Term', 'Bachelor of Science in Education', '181C', 'female', '09215414878', 'villanueva@gmail.com', 'AMA', 'Senior High School', '1636770873_girl.jpg', '1636770873_Good_Moral.pdf', '1636770873_NSO.pdf', 'November 13, 2021 | 10:34 AM', NULL, NULL, NULL),
+(41, '2021-10015', 'Jimena ', 'Hayes ', 'Peterson', '1st Year', '2021-11-13 to 2022-02-13', '2nd Term', 'Bachelor of Science in Accountancy', '211C', 'female', '09215421547', 'jimena@gmail.com', 'AMA', 'Senior High School', '1636782591_girl.jpg', '1636782591_Good_Moral.pdf', '1636782591_NSO.pdf', 'November 13, 2021 | 1:49 PM', NULL, NULL, NULL),
+(42, '2021-10016', 'Peston', 'Payne', 'Sandoval', '1st Year', '2021-11-13 to 2022-06-13', '2nd Term', 'Bachelor of Science in Psychology', '211D', 'male', '09213454555', 'sandoval@gmail.com', 'University of Makati', 'Senior High School', '1636788797_boy.jpg', '1636788797_Good_Moral.pdf', '1636788797_NSO.pdf', 'November 13, 2021 | 3:33 PM', NULL, NULL, NULL),
+(46, '2022-10017', 'Juan D', 'Dela', 'Cruz', '1st Year', '2021-11-13 to 2022-06-13', '1st Term', 'Bachelor of Science in Information System', '181A', 'male', '54645645645', 'test2@gmail.com', 'DLSU', 'Senior High School', '1655996697_1632037766_girl.jpg', '1655996697_1632037766_Good_Moral.pdf', '1655996697_1632037766_NSO.pdf', 'June 23, 2022 | 11:04 PM', '$2y$10$53R5ex7ebScJFvDu1LMEHuhzTh0RWPzz0OpYz0DrmO21uiKeJxctO', NULL, NULL),
+(48, '2022-10019', 'Juan D', 'Dela', 'Cruz', '3rd Year', '2021-11-13 to 2022-06-13', '1st Term', 'Bachelor of Science in Computer Science', '181A', 'male', '09134627346', 'test20@gmail.com', 'DLSU', 'Senior High School', '1656246352_1632037766_girl.jpg', '1656246352_1632037766_Good_Moral.pdf', '1656246352_1632037766_NSO.pdf', 'June 26, 2022 | 8:25 PM', '$2y$10$lEcq5gh8b.GucI6iPLJ2UOfucpbCCT4irzW9oO.wjKRxeimB2OQqu', '{\"6\":{\"filename\":\"1632290851_NSO.pdf\",\"status\":\"pending\",\"courseid\":\"183\"}}', NULL),
+(49, '2022-10020', 'Jim', 'Example', 'Lang', 'Grade 12', '', '', '', '', 'male', '09123456789', 'test23@gmail.com', 'DLSU', 'Senior High School', '1657076713_1632035523_boy.jpg', '1657076713_1632035523_Good_Moral.pdf', '1657076713_1632037766_NSO.pdf', 'July 6, 2022 | 11:05 AM', '$2y$10$AnRDiW1.O13o1cgJdboEA.2mTXA/nOuUKZgzsR0NZJKi1.6XNbsbC', NULL, NULL),
+(50, '2022-10021', 'test', 'subject', 'huehue', 'Grade 12', '', '', '', '', 'male', '09174570106', 'admin01@admin-aja.ed', 'DLSU', 'High School', '1657108537_1632035523_boy.jpg', '1657108537_1632035523_Good_Moral.pdf', '1657108537_1632037766_NSO.pdf', 'July 6, 2022 | 7:55 PM', '$2y$10$d2bbDChy.waL7w1Z89AxyObGuojTPpd2iTUnLfgvPplKkMcRUQQ0W', NULL, NULL),
+(51, '2022-10022', 'Juan D', 'Dela', 'Cruz', '3rd Year', '', '', '', '', 'male', '54645546546', 'test1@gmail.com', 'DLSU', 'High School', '1657726092_1632035523_boy.jpg', '1657726092_1632035523_Good_Moral.pdf', '1657726092_1632037766_NSO.pdf', 'July 13, 2022 | 11:28 PM', '$2y$10$Go988.WoMkuoxCXua6o6ru/GDaXF9leFeAYxd.HfHs07gvXJww.1C', NULL, 'Highschool');
 
 -- --------------------------------------------------------
 
@@ -559,13 +571,13 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `id_user`, `admin_name`, `username`, `email`, `acctype`, `verified`, `OTP`, `password`, `reg_date`) VALUES
-(41, '2021-80001', 'Default Admin', 'admin01@admin-aja.edu.com', 'iammeksung@gmail.com', 'admin', 1, 0, '$2y$10$dUTC13gnR8TVvdylj3xwXOSzDuF/JICwato94cIgu18SfEb30AiVm', 'October 10, 2021'),
-(44, '2021-80002', 'Mendez, Shawn, Gomez', 'Mendezsg@admin-aja.edu.com', 'shawnmendez@yahoo.com', 'admin', 1, 0, '$2y$10$00qmnxqSB1pXu50dSDCOHuKVmK1f9H8H7vSTUfZ/MOmqnE0opJwFu', 'October 10, 2021'),
-(45, '2021-80003', 'Fuentes, Stephene Andrei, Siason', 'Fuentessas@admin-aja.edu.com', 'stepehene@gmail.com', 'admin', 1, 0, '$2y$10$RPw1mwZ.mEyccM/K.1Uehu3QTn4ZnOKX0kKMEp9.kUQ0gxkRIMTw2', 'October 10, 2021'),
-(47, '2021-80004', 'Jackson, Jessica, Pompey', 'Jacksonjp@admin-aja.edu.com', 'jp@gmail.com', 'admin', 0, 844108, '$2y$10$4996rFicq06lfRYibZsyBu8ntDCZ.2oZkreYzgp7R.fbdo47iVl.q', 'October 10, 2021'),
-(48, '2021-80005', 'vidallon, dave, vidallon', 'vidallondv@admin-aja.edu.com', 'iamdeybb@gmail.com', 'admin', 1, 0, '$2y$10$z9.yJa8UHtRlc2P.IEQGCuOzLPnpps28nTs1elaUjiXQz1BPfgU/y', 'October 23, 2021'),
-(50, '2021-80006', 'odinson, loki, jones', 'odinsonlj@admin-aja.edu.com', 'loki@gmail.com', 'admin', 1, 0, '$2y$10$N.BZ.q4sdjUlJDdALD95mO/D4qatNQJvzExn8x7zjt1cBycOciycy', 'November 12, 2021'),
-(51, '2021-80007', 'Legaspi, Marc Ace, Jumao-as', 'Legaspimaj@admin-aja.edu.com', 'marclegaspi2@gmail.com', 'admin', 1, 0, '$2y$10$5pF4BHp47Pv5Wm0YozVn1OupJngiFTjoRbLMERICLPuT8qtVzSQgu', 'November 13, 2021');
+(41, '2021-80001', 'Default Admin', 'admin01@admin-aja.educa.com', 'iammeksung@gmail.com', 'admin', 1, 0, '$2y$10$dUTC13gnR8TVvdylj3xwXOSzDuF/JICwato94cIgu18SfEb30AiVm', 'October 10, 2021'),
+(44, '2021-80002', 'Mendez, Shawn, Gomez', 'Mendezsg@admin-aja.educa.com', 'shawnmendez@yahoo.com', 'admin', 1, 0, '$2y$10$00qmnxqSB1pXu50dSDCOHuKVmK1f9H8H7vSTUfZ/MOmqnE0opJwFu', 'October 10, 2021'),
+(45, '2021-80003', 'Fuentes, Stephene Andrei, Siason', 'Fuentessas@admin-aja.educa.com', 'stepehene@gmail.com', 'admin', 1, 0, '$2y$10$RPw1mwZ.mEyccM/K.1Uehu3QTn4ZnOKX0kKMEp9.kUQ0gxkRIMTw2', 'October 10, 2021'),
+(47, '2021-80004', 'Jackson, Jessica, Pompey', 'Jacksonjp@admin-aja.educa.com', 'jp@gmail.com', 'admin', 0, 844108, '$2y$10$4996rFicq06lfRYibZsyBu8ntDCZ.2oZkreYzgp7R.fbdo47iVl.q', 'October 10, 2021'),
+(48, '2021-80005', 'vidallon, dave, vidallon', 'vidallondv@admin-aja.educa.com', 'iamdeybb@gmail.com', 'admin', 1, 0, '$2y$10$z9.yJa8UHtRlc2P.IEQGCuOzLPnpps28nTs1elaUjiXQz1BPfgU/y', 'October 23, 2021'),
+(50, '2021-80006', 'odinson, loki, jones', 'odinsonlj@admin-aja.educa.com', 'loki@gmail.com', 'admin', 1, 0, '$2y$10$N.BZ.q4sdjUlJDdALD95mO/D4qatNQJvzExn8x7zjt1cBycOciycy', 'November 12, 2021'),
+(51, '2021-80007', 'Legaspi, Marc Ace, Jumao-as', 'Legaspimaj@admin-aja.educa.com', 'marclegaspi2@gmail.com', 'admin', 1, 0, '$2y$10$5pF4BHp47Pv5Wm0YozVn1OupJngiFTjoRbLMERICLPuT8qtVzSQgu', 'November 13, 2021');
 
 --
 -- Indexes for dumped tables
@@ -669,13 +681,13 @@ ALTER TABLE `academic_year`
 -- AUTO_INCREMENT for table `activities`
 --
 ALTER TABLE `activities`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT for table `activities_submitted`
 --
 ALTER TABLE `activities_submitted`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
 
 --
 -- AUTO_INCREMENT for table `announcements`
@@ -699,13 +711,13 @@ ALTER TABLE `courses`
 -- AUTO_INCREMENT for table `course_enrolled`
 --
 ALTER TABLE `course_enrolled`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=184;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=185;
 
 --
 -- AUTO_INCREMENT for table `faculty`
 --
 ALTER TABLE `faculty`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `faculty_loads`
@@ -729,7 +741,7 @@ ALTER TABLE `studentrecords`
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT for table `users`

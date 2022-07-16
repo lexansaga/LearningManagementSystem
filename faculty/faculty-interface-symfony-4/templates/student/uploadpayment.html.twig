@@ -2,6 +2,7 @@
 
 
 {% block body %}
+<link rel="stylesheet" href="assets/css/style.css" />
     <main>
     <div class=" header">
             <div class="header-menu">
@@ -22,10 +23,10 @@
                     </select>
                     <label for="formFileMultiple" class="form-label" >Multiple files input example</label>
                     <span id="error" ></span>
-                    <input class="form-control" type="file" id="formFileMultiple" multiple data-is-authenticated="{{id}}" hidden>
+                    <input class="form-control upload-file" type="file" id="formFileMultiple" multiple data-is-authenticated="{{id}}" hidden>
                     
 
-                    <button type="button" class="btn btn-primary" id="actbutton" onclick="uploadPayment()" hidden>UPLOAD</button>
+                    <button type="button" class="btn btn-def" id="actbutton" onclick="uploadPayment()" hidden>UPLOAD</button>
                     <ul id="receipts" hidden>
                         {# {% if payments is not empty %}
                             {% for receipt in payments %}
@@ -96,7 +97,8 @@
                     $('.receiptsli').remove();
                     filtered.map((a)=>{
                         
-                        let li = $(`<li class="receiptsli" style="border-color:red"  >File<span onclick="getFile('${a.filename}','payments',{{id}})" >${a.filename}</span><div class="remove-file"><i class='bx bx-x' onclick="removePayment('${a.filename}',{{id}})"></i></div></li>`);
+                        let li = $(`<li class="receiptsli" style="border-color:red"  ><div>
+                        <p>File <span onclick="getFile('${a.filename}','payments',{{id}})" >${a.filename}</span></p><div class="remove-file"><i class='bx bx-x' onclick="removePayment('${a.filename}',{{id}})"></i></div></li>`);
                         $( "#receipts" ).append(li[0].outerHTML);
                         
                     })

@@ -10,15 +10,16 @@
 <div class="main-content">
 <h3>{{activity.tasktype}}</h3>
             
-            <div class="main-content-wrapper content">
-                <div class="activity-container">
+            <div>
+                <div class="activity-container-flex">
 
-                    <div class="activity-content">
+                    <div class="activity-content" style="width:90%">
 
                         <h2 class="activity-title">{{activity.activityname}}</h2>
                         <h2>SCORE: {{activity.score}}</h2>
                        {% if activity.activitytype == "Essay" %}
-                            <div class="activity-upload">
+                            <div class="activity-upload"
+                            style="margin:22px  0">
                                     {% if subfiles is not empty %}
     <ul>
     
@@ -27,6 +28,9 @@
 
 
                                      <li>File <label
+                                     style="cursor:pointer;color:var(--secondary-color);
+                                     font-weight:600;
+                                     margin:0 0 0 22px"
                                      
                                      onclick="getFile('{{a}}','submittedactivities','{{userid}}')"
                                      >{{a}}</label>
@@ -39,9 +43,9 @@
 
                             </div>
                             <input
-                                placeholder="add score"
-                                class="points"
-                            />
+                                placeholder="Add score"
+                                class="points form-control"
+                            style="width:30%"/>
                         {% elseif activity.activitytype == "Quiz" %}
 
                         
@@ -99,7 +103,7 @@
                         
                     </div>
                   
-                    <button class="btn btn-primary btn-submit-quiz" onclick="addPoints({{id}},{{activity.quizquestions|json_encode}})">DONE</button>
+                    <button class="btn btn-primary btn-submit-quiz" onclick="addPoints({{id}},{{activity.quizquestions|json_encode}})" style="margin:28px 0 0 0;width:fit-content">DONE</button>
 
                 </div>
             </div>
