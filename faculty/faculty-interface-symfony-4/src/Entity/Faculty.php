@@ -98,6 +98,11 @@ class Faculty implements UserInterface
      */
     private $reviewcenter;
 
+    /**
+     * @ORM\Column(type="json", nullable=true)
+     */
+    private $schedule = [];
+
 
     //----------------------------------------------------------------------------
     public function getId(): ?int
@@ -272,6 +277,18 @@ class Faculty implements UserInterface
     public function setReviewcenter(?string $reviewcenter): self
     {
         $this->reviewcenter = $reviewcenter;
+
+        return $this;
+    }
+
+    public function getSchedule(): ?array
+    {
+        return $this->schedule;
+    }
+
+    public function setSchedule(?array $schedule): self
+    {
+        $this->schedule = $schedule;
 
         return $this;
     }

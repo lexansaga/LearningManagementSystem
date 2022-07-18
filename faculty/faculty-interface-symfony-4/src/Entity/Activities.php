@@ -78,10 +78,6 @@ class Activities
      */
     private $tasktype;
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $isallowlatesubmission;
 
     /**
      * @ORM\Column(type="boolean")
@@ -92,6 +88,11 @@ class Activities
      * @ORM\Column(type="integer")
      */
     private $maxattempt;
+
+    /**
+     * @ORM\Column(type="json",nullable=true)
+     */
+    private $timer;
 
     
 
@@ -248,17 +249,7 @@ class Activities
         return $this;
     }
 
-    public function getIsallowlatesubmission(): ?bool
-    {
-        return $this->isallowlatesubmission;
-    }
-
-    public function setIsallowlatesubmission(bool $isallowlatesubmission): self
-    {
-        $this->isallowlatesubmission = $isallowlatesubmission;
-
-        return $this;
-    }
+ 
 
     public function getAllowfileupload(): ?bool
     {
@@ -280,6 +271,18 @@ class Activities
     public function setMaxattempt(int $maxattempt): self
     {
         $this->maxattempt = $maxattempt;
+
+        return $this;
+    }
+
+    public function getTimer(): ?array
+    {
+        return $this->timer;
+    }
+
+    public function setTimer(?array $timer): self
+    {
+        $this->timer = $timer;
 
         return $this;
     }

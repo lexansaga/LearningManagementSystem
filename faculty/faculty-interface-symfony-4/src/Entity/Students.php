@@ -162,6 +162,11 @@ class Students implements UserInterface
      */
     private $reviewcenter;
 
+    /**
+     * @ORM\Column(type="json", nullable=true)
+     */
+    private $extrafees = [];
+
     public function getId(): ?int
     {
         return $this->id;
@@ -436,6 +441,18 @@ class Students implements UserInterface
     public function setReviewcenter(?string $reviewcenter): self
     {
         $this->reviewcenter = $reviewcenter;
+
+        return $this;
+    }
+
+    public function getExtrafees(): ?array
+    {
+        return $this->extrafees;
+    }
+
+    public function setExtrafees(?array $extrafees): self
+    {
+        $this->extrafees = $extrafees;
 
         return $this;
     }

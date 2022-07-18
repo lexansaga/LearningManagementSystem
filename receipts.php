@@ -89,15 +89,14 @@
             <!--main container start-->
             <div class="content">
 				<div class="directory">
-					<p>Student Module / View Student</p>
+					<p>Student Module / View Receipts</p>
 				</div>
-				
-				<hr></hr>
-			
-			<!--START OF FORM -->
-			<form action="view-student.php" method="POST" enctype="multipart/form-data">
-			
-			<?php
+
+                <h1>Receipts</h1>
+
+             
+   
+				<?php
 				$id = $_GET['id'];
 				
 				error_reporting(E_ERROR | E_PARSE);
@@ -110,136 +109,27 @@
 					$mname = $row['mname'];
 					$lname = $row['lname'];
 					$entlev = $row['entlev'];
-					$gender = $row['gender'];
-					$revcent = $row['reviewcenter'];
-					$cnum = $row['cnum'];
-					$email = $row['email'];
-					$prevschool = $row['prevschool'];
-					$hea = $row['hea'];
-					$img = $row['img'];
-					$g_moral = $row['g_moral'];
-					$NSO = $row['NSO'];
-					$receipt = $row['proofpayment'];
-				}
-				
+					$term = $row['term'];
+					$program = $row['program'];
+					$class = $row['class'];
+                    $proofpayment = json_decode($row['proofpayment']);
+                    
+                    
+					$name = strtoupper($lname) .", ". $fname ." ". substr($mname, 0, 1) . ".";
+				}	
 			?>
-			
-			
-				<div class="back-btn">
-					<button type="submit" name="enroll-backbtn" class="btn btn-danger">Back
-						<i class="fas fa-backspace"></i>
-					</button>
-					
-					<a href="">
-						<button type="button" class="btn btn-success">Download PDF 
-							<i class="fas fa-file-download"></i>
-						</button>
-					</a>
-					
-				</div>
-				<!-- REGISTRATION FORM -->
-				<div class="registration">
-					<h4>View Student Information</h4>
-					<hr></hr>
-					
-					<div class="view-flex">
-						<div class="student-requirements">
-						<center>
-							<img src="data/images/<?php echo $img; ?>" alt="">
-							<br>
-							<h5>Primary</h5>
-							<b>Student number:</b><?php echo "\t" . $idnum; ?>
-							<br>
-							<b>First name:</b><?php echo "\t" . $fname; ?>
-							<br>
-							<b>Middle name:</b><?php echo "\t" . $mname; ?>
-							<br>
-							<b>Last name:</b><?php echo "\t" . $lname; ?>
-							<br>
-						</center>
-						</div>
-						
-						<div class="student-info">
-						<h5>Contact</h5>
-							<b>Email Address:</b><?php echo "\t" . $email; ?>
-							<br>
-							<b>Contact no:</b><?php echo "\t" . $cnum; ?>
-							<br>
-							<hr></hr>
-						<h5>Personal</h5>
-							<b>Gender:</b><?php echo "\t" . $gender; ?>
-							<br>
-							<b>Highest Education:</b><?php echo "\t" . $hea; ?>
-							<br>
-							<b>Review Center:</b><?php echo "\t" . $revcent; ?>
-							<br>
-							<b>Last School Attended:</b><?php echo "\t" . $prevschool; ?>
-							<br>
-							<hr></hr>
-						<h5>Other</h5>
-							<input type="checkbox" checked disabled="disabled" >
-							<b>Good Moral:</b>
-							<a href="data/files/GMORAL/<?php echo $row['g_moral']; ?>"><?php echo $g_moral; ?></a>
-							<br>
-							<input type="checkbox" checked disabled="disabled" >
-							<b>NSO:</b>
-							<a href="data/files/NSO/<?php echo $row['NSO']; ?>"><?php echo $NSO; ?></a>
-						</div>
-						
-						<div class="student-acad">
-						<h4>Student Information</h4>
-							<?php
-								$id = $_GET['id'];
-							
-								error_reporting(E_ERROR | E_PARSE);
-								$res = mysqli_query ($connection, "SELECT * FROM students WHERE id='$id'");
-								while ($row = mysqli_fetch_array($res))
-								{
-									$id = $row['id'];
-									$idnum = $row['idnum'];
-									$year = $row['entlev'];
-									$term = $row['term'];
-									$program = $row['program'];
-									$class = $row['class'];
-								}
-							?>
-						
-						
-							<label>Year:</label><br>
-								<input type="text" value="<?php echo $year; ?>" class="form-input" disabled>
-							<br>
-							<label>Term:</label><br>
-								<input type="text" value="<?php echo $term; ?>" class="form-input"disabled>	
-							<br>
-							<label>Program:</label><br>
-								<input type="text" value="<?php echo $program; ?>" class="form-input" disabled>
-							<br>
-							<label>Class:</label><br>
-								<input type="text" value="<?php echo $class; ?>" class="form-input" disabled>
-							<br><br>
+				
 
-							<a href="student-records.php?id=<?php echo $id; ?>">
-								<button type="button" name="student-recordbtn" class="btn btn-danger">Student Records
-										<i class="fas fa-eye"></i>
-								</button>
-							</a>
-							<a href="payment-module.php?id=<?php echo $id; ?>">
-								<button type="button" name="student-recordbtn" class="btn btn-danger">Student Balance
-										<i class="fas fa-eye"></i>
-								</button>
-							</a>
+            <?php foreach($proofpayment as $proof){
+                
+                ?>
+                <a href=""> <?php echo $proof->filename?></a>
+            <?php }?>					
+                                    
+									
 							
-						
-						</div>
-						<div>
-						
-					
-					</div>
-				</div>
-			
-			</form>
-			<!--END OF FORM -->
-			
+                                    
+		
 			</div>
             <!--main container end-->
         </div>

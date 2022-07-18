@@ -11,7 +11,7 @@
 <h3>{{activity.tasktype}}</h3>
             
             <div class="main-content-wrapper">
-                <div class="activity-container">
+                <div class="activity-container-grid">
 
                     <div class="activity-content">
 
@@ -112,10 +112,33 @@
 
                             
                         </div>
-                       {% endif %}
+                        {%else%}
+                        <div id="examarea" hidden>
+                            <label id="demo"></label>
+                            <div  class="container-fluid" id="quescont">
+                            
+                                
+                            
+                                
+                                
+                                
+                                
+                                
+                            </div>
 
-<button class="btn btn-primary btn-submit-quiz" onclick="submitAnswer({{quizquestions|json_encode}},{{activity.id}},'{{userID}}','{{activity.ProgramClass}}','{{activity.Course}}',{{id}})">Submit</button>
+
+                            <button onclick="prev()">{{"<"}}</button>
+                            <button onclick="next()">{{">"}}</button>
+                            
+                        </div>
                         
+                       {% endif %}
+    {% if activity.activitytype=="Exam" %}
+        <button class="btn btn-primary btn-submit-quiz" onclick="startExam()"id="startbutton" >Start</button>
+        <button id="subbtn" class="btn btn-primary btn-submit-quiz" onclick="submitAnswer({{quizquestions|json_encode}},{{activity.id}},'{{userID}}','{{activity.ProgramClass}}','{{activity.Course}}','{{activity.activitytype}}')" hidden>Submit</button>
+    {%else%}
+    <button class="btn btn-primary btn-submit-quiz" onclick="submitAnswer({{quizquestions|json_encode}},{{activity.id}},'{{userID}}','{{activity.ProgramClass}}','{{activity.Course}}','{{activity.activitytype}}')">Submit</button>
+    {% endif %}                
                     </div>
                     <div class="activity-info">
                         <h5>{{activity.tasktype}}</h5>
@@ -133,7 +156,6 @@
                             <li>Submitted: <span>{{allSubmission is not empty ? "2020-20-0":""}}</span></li>
                             <li>Submission: <span></span></li>
                             <li>Max attemps: <span>{{activity.maxattempt}}</span></li>
-                            <li>Allow Late Submission <span><i class='bx bx-check' style={{activity.isallowlatesubmission ? 'color:#1bdc6f':'color:#ff0000' }}></i></span>
                             </li>
                         </ul>
                     </div>
@@ -149,16 +171,212 @@
     <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
     <script src="{{ app.request.schemeAndHttpHost }}/assets/js/script.js"></script>
-    <script src="{{ app.request.schemeAndHttpHost }}/assets/js/submitactivities.js"></script>
+    
     <script src="{{ app.request.schemeAndHttpHost }}/assets/js/getFile.js"></script>
 
     <script>
+    {% if activity.activitytype == "Exam" %}
     
+    var temp = [];
+        {% for b in quizquestions %}
+            temp.push({
+                question:"{{b.question}}",
+                answer:"{{b.activitytype=="Essay"? "":b.answer}}",
+                type:"{{b.activitytype}}",
+                points:{{b.score}},
+                choices:["{{b.activitytype=="Multiple"?b.firstchoice:""}}","{{b.activitytype=="Multiple"?b.secondchoice:""}}","{{b.activitytype=="Multiple"?b.thirdchoice:""}}","{{b.activitytype=="Multiple"?b.answer:""}}"]
+            })
+        {% endfor %}
+    
+    var currentIndex = 0;
+    function generateElement(activity){
+        switch(activity.type){
+            case "Essay":
+                var essayQues = document.createElement('h6');
+                essayQues.classList.add('quiz-title');
+                essayQues.textContent = activity.question;
+                var essay = document.createElement('textarea');
+                essay.setAttribute("id", "answer");
+                if(activity.currentAnswer!=null&&activity.currentAnswer!=undefined){
+                    essay.value = activity.currentAnswer;
+                }
+                essay.classList.add('form-control');
+                essay.addEventListener('change',(data)=>{
+                    activity.currentAnswer = data.target.value;
+
+                });
+                activity.isCorrect = false;
+                essay.classList.add('answers');
+                $('#quescont').append(essayQues);
+                $('#quescont').append(essay);
+                break;
+            case "Identification":
+                var lab = document.createElement('h6');
+                lab.classList.add('quiz-title');
+                lab.textContent = activity.question;
+                var ta = document.createElement('textarea');
+                ta.setAttribute("id", "answer");
+                if(activity.currentAnswer!=null&&activity.currentAnswer!=undefined){
+                    ta.value = activity.currentAnswer;
+                }else{
+                    activity.isCorrect = false;
+                }
+                ta.classList.add('form-control');
+                ta.addEventListener('change',(data)=>{
+                    activity.currentAnswer = data.target.value;
+                    if(data.target.value.toLowerCase()==activity.answer.toLowerCase()){
+                        activity.isCorrect = true;
+                    }else{
+                        activity.isCorrect = false;
+                    }
+                });
+                ta.classList.add('answers');
+                $('#quescont').append(lab);
+                $('#quescont').append(ta);
+                
+                break;
+            case "Multiple":
+                var mutipleQues = document.createElement('h6');
+                mutipleQues.classList.add('quiz-title');
+                mutipleQues.textContent = activity.question;
+                $('#quescont').append(mutipleQues);
+                shuffle(activity.choices);
+                
+                activity.choices.forEach((data)=>{
+                    
+                    var choices = document.createElement('input');
+                    var label = document.createElement('label');
+                    choices.setAttribute("name", "choices");
+                    label.textContent = data;
+                    choices.classList.add('form-check-input');
+                    choices.classList.add('answers');
+                    if(activity.currentAnswer!=null&&activity.currentAnswer!=undefined&&data==activity.currentAnswer){
+                        choices.checked = true;
+                    }else{
+                        activity.isCorrect = false;
+                    }
+                    choices.value = data;
+                    choices.type = "radio";
+                    $('#quescont').append(choices);
+                    $('#quescont').append(label);
+                })
+                
+                $(".answers").on("click", function(){
+                    if($(this).prop('checked')){
+                        activity.currentAnswer = $(this).val();
+                        if(activity.currentAnswer.toLowerCase()==activity.answer.toLowerCase()){
+                            activity.isCorrect = true;
+                        }else{
+                            activity.isCorrect = false;
+                        }
+                            
+                    }
+                }); 
+                
+                
+                break;
+        }
+
+        
+    }
+    function shuffle(array) {
+    let currentIndex = array.length,  randomIndex;
+
+    // While there remain elements to shuffle.
+    while (currentIndex != 0) {
+
+        // Pick a remaining element.
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+
+        // And swap it with the current element.
+        [array[currentIndex], array[randomIndex]] = [
+        array[randomIndex], array[currentIndex]];
+    }
+
+    return array;
+    }
+    Date.prototype.addHours = function(h) {
+        this.setTime(this.getTime() + (h*60*60*1000));
+        return this;
+    }
+    Date.prototype.addMinutes = function(m) {
+        this.setTime(this.getTime() + (m*60*1000));
+        return this;
+    }
+    Date.prototype.addSeconds = function(s) {
+        this.setTime(this.getTime() + (s*1000));
+        return this;
+    }
+
+    
+    
+    
+    function startExam(){
+    
+     var  countDownDate = new Date().addHours({{activity.timer.hours}}).addMinutes({{activity.timer.minutes}}).addSeconds({{activity.timer.seconds}}).getTime();
+    var x = setInterval(function() {
+
+    var now = new Date().getTime();
+    var distance = countDownDate - now;
+    console.log(distance,countDownDate,now);
+
+    
+    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+
+    document.getElementById("demo").innerHTML = hours + "h "
+    + minutes + "m " + seconds + "s ";
+
+    // If the count down is finished, write some text
+    if (distance < 0) {
+        clearInterval(x);
+        submitAnswer([],{{activity.id}},'{{userID}}','{{activity.ProgramClass}}','{{activity.Course}}','{{activity.activitytype}}');
+    }
+    }, 1000);
+        generateElement(temp[currentIndex]);
+        $('#startbutton')[0].hidden = true;
+        $('#examarea')[0].hidden = false;
+        console.log($('#examarea'));
+    }
+    function next(){
+        if(currentIndex!=temp.length-1){
+            currentIndex +=1;
+            $("#quescont").empty();
+            generateElement(temp[currentIndex]);
+               
+        }
+        if(currentIndex==temp.length-1){
+            $('#subbtn')[0].hidden = false;
+        }
+         
+        
+        
+        
+    }
+   
+    function prev(){
+        $('#subbtn')[0].hidden = true;
+        if(currentIndex!=0){
+            currentIndex -=1;
+            $("#quescont").empty();
+            generateElement(temp[currentIndex]);
+        }
+    }
+        
+        
+    {% endif %}
+    
+   
    $(window).on('beforeunload', function(){
-  return "Good Bye";
-});
+    
+    return "Good Bye";
+    });
     
     </script>
+    <script src="{{ app.request.schemeAndHttpHost }}/assets/js/submitactivities.js"></script>
 
 </main>
      
