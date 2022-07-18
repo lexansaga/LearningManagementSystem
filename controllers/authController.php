@@ -62,7 +62,35 @@
 			}
 		}
 	}
-	
+	/**************************** ADD NEW FEES ***************************/
+	if(isset($_POST['add-new-fees'])){
+		$idnum = htmlspecialchars($_POST['idnum']);
+		$term = htmlspecialchars($_POST['term']);
+		$expensename = htmlspecialchars($_POST['expensename']);
+		$expenseprice = htmlspecialchars($_POST['expenseprice']);
+		$result = mysqli_query ($connection, "SELECT * FROM students WHERE idnum = '$idnum' ");
+		while ($r = mysqli_fetch_array($result)) {
+			if(isset($r['extrafees'])){
+				$oldJson = json_decode($r['extrafees']);
+				if(isset($oldJson->$term)){
+					array_push($oldJson->$term,array('expensename'=>$expensename,'expenseprice'=>$expenseprice));
+				}else{
+					$oldJson->$term = array(array('expensename'=>$expensename,'expenseprice'=>$expenseprice));
+				}
+				$modJson = json_encode($oldJson);
+			}else{
+				$freshArr = array();
+				$freshArr[$term] = array(array('expensename'=>$expensename,'expenseprice'=>$expenseprice));
+				$modJson = json_encode($freshArr);
+			}
+			
+			mysqli_query($connection,"UPDATE students SET extrafees = '$modJson' WHERE id = {$r['id']} ");
+			header("location: payment-module.php?id=".$r['id']);
+			exit();
+		}
+		
+		
+	}
 	/**************************** ENROLL BUTTON ***************************/
 	if (isset($_POST['enroll-success'])) {
 		
@@ -551,7 +579,12 @@
 		$email = htmlspecialchars($_POST['email']);
 		$pass = htmlspecialchars($_POST['pass']);
 		$passConf = htmlspecialchars($_POST['passConf']);
-
+		$sched = array();
+		foreach($_POST['schedule']as $check) {
+            $sched["{$check}"] = array("start"=>$_POST["{$check}starttime"],"end"=>$_POST["{$check}endtime"]);
+    	}
+        $myjson = json_encode($sched);
+		
 		// VALIDATION IF EMPTY
 		if (empty($fullname)) {
 			$errors['fullname'] = "";
@@ -609,14 +642,15 @@
 			$username = $lname ."". $initials ."". $middle . "@faculty-aja.educa.com";
 			$faculty_id = $dyear .'-'. $increment;
 
-			$sql = "INSERT INTO faculty (fullname, gender, special, status, reviewcenter,
+			$sql = "INSERT INTO faculty (fullname, gender, special,schedule, status, reviewcenter,
 			email, password, username, faculty_id, reg_date)
-			VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
 			$stmt = $connection->prepare($sql);
-			$stmt->bind_param('ssssssssss', $fullname, $gender, $special, $status, $reviewcenter,
+			$stmt->bind_param('sssssssssss', $fullname, $gender, $special, $myjson,$status, $reviewcenter,
 			$email, $pass, $username, $faculty_id, $reg_date);
 
 			if ($stmt->execute()) {
+
 				header('location: faculty-module.php');
 			}
 			else  {

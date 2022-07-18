@@ -16,7 +16,7 @@
                     <div class="activity-content" style="width:90%">
 
                         <h2 class="activity-title">{{activity.activityname}}</h2>
-                        <h2>SCORE: {{activity.score}}</h2>
+                        <h2 id="myScore">SCORE: {{activity.score}}</h2>
                        {% if activity.activitytype == "Essay" %}
                             <div class="activity-upload"
                             style="margin:22px  0">
@@ -96,6 +96,39 @@
 
 
                             
+                        </div>
+                        {%else%}
+                        <div class="quiz-wrapper">
+                              {% for a in activity.quizquestions %}
+                                    {% if a.type == "Identification" %}
+                                    <br/>
+                                       <label>QUESTION: {{a.question}}</label>
+                                        <br/>
+                                        <label> ANSWER: {{a.currentAnswer}}</label>
+                                    {% elseif a.type == "Multiple" %}
+                                        <br/>
+                                        <label>MULTIPLE CHOICE QUESTION: {{a.question}}</label>
+                                        <br/>
+                                        <label>ANSWER:{{a.currentAnswer}}</label>
+                                        <br/>
+                                    {% else %}
+                                        <br/>
+                                        <label>ESSAY QUESTION: {{a.question}}</label>
+                                        <br/>
+                                        <label
+                                        
+                                        >ANSWER: {{a.currentAnswer}}</label>
+                                        <br/>
+                                        
+                                            <input 
+                                                placeholder="addpoints"
+                                                class="points"
+                                            />
+                                        
+                                        
+                                    {% endif %}
+                                    
+                                {% endfor %}
                         </div>
                        {% endif %}
 

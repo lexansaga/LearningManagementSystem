@@ -51,10 +51,11 @@
                 {% for s in students %}
                 <tbody>
                     <tr>
+                        
                         <td>{{ s.fullname }}</td>
-                        <td>{{ s.Midterm }}</td>
-                        <td>{{ s.Final }}</td>
-                        <td>{{ s.Grade }}</td>
+                        <td>{{ s.reviewcenter!=null and s.reviewcenter != "LET" ? s.Midterm : "N/A"}}</td>
+                        <td>{{ s.reviewcenter!=null and s.reviewcenter != "LET" ? s.Final  : "N/A"}}</td>
+                        <td>{{ s.reviewcenter!=null and s.reviewcenter != "LET" ? s.Grade  : "N/A"}}</td>
                         <td>{{ s.Remarks }}</td>
 
                         <td>
@@ -63,7 +64,7 @@
                             
                             <a style="text-decoration: none; color: blue;" href="{{ path('gradeStudent', {'id':s.id,'course':s.course,'fullname':s.fullname}) }}">| Edit |</a>
                             {% else %}
-                            <label>{{s.id}}</label>
+                            
                             <a style="text-decoration: none; color: red;" href="{{ path('gradeStudent', {'id':s.id,'course':s.course,'fullname':s.fullname}) }}">Grade</a>
                             {% endif %}
                         </td>

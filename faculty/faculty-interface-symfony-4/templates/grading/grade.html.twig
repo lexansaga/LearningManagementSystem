@@ -47,6 +47,7 @@ class="wrapper"
             <br><br>
             <div class="flex">
                 <div class="grades">
+                    {%if stud.reviewcenter != "LET"%}
                     <table class="table table-bordered grade-table">
                         <thead >
                             <tr>
@@ -89,34 +90,45 @@ class="wrapper"
                             </tr>
                         </tbody>
                     </table>
+                    {%else%}
+                    
+                    {%endif%}
                 </div>
 
                 <div class="add-grades">
                     {{ form_start(form) }}
                     <table class="table table-hover table-add-grade">
                         <tr>
-                            <th>Course Name          </th>
+                            <th>Course Name </th>
+
                             <th>Name    </th>
+                            {% if stud.reviewcenter != "LET" %}
                             <th>Interim 1</th>
                             <th>Midterm</th>
                             <th>Interim 2</th>
                             <th>Final</th>
                             <th>Grade</th>
                             <th>Remark</th>
+                            {% else %}
+                            <th>Remark</th>
+                            {% endif %}
                         </tr>
                             {% for s in students %}
                             <tbody>
                                 <tr>
                                     <td>{{ s.course }}</td>
                                     <td>{{ s.fullname }}</td>
-                                    
+                                    {% if stud.reviewcenter != "LET" %}
                                     <td>{{ form_row(form.interim1)}}</td>
                                     <td>{{ form_row(form.midterm) }}</td>
                                     <td>{{ form_row(form.interim2) }}</td>
                                     <td>{{ form_row(form.final) }}</td>
-                                    
                                     <td>{{ s.Grade }}</td>
                                     <td>{{ s.Remarks }}</td>
+                                    {% else %}
+                                    <td>{{ form_row(form.remarks) }}</td>
+                                    {% endif%}
+                                    
                                 </tr>
                             </tbody>
                             {% endfor %}

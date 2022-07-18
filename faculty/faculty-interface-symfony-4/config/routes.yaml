@@ -15,6 +15,10 @@ student:
     path: /student
     controller: App\Controller\StudentController::index
 
+createActivity:
+    path: /subject/createactivity
+    controller:  App\Controller\SubjectsController::createActivity
+
 
 retake:
     path: /activity/retake/{id}

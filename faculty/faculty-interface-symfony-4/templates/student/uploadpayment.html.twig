@@ -53,6 +53,69 @@
                         {% endfor %}
                         {% endif %} #}
                     </ul>
+
+                    {% for b in allterm %}
+                    <h2> {{ b.entlev ~ b.term }}</h2>
+                    <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Course</th>
+                            <th>Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% set total = 0 %}
+                        {% for a in all %}
+                        
+                        {% if b.entlev ~ " " ~ b.term == a.yearterm %}
+                            {% set total = total + 100 %}
+                            <tr>
+                                <td>{{a.course}}</td>
+                                <td>100</td>
+                            </tr>        
+                        {% endif %}
+                        {% endfor %}
+                        <tr>
+                                <td>Total</td>
+                                <td>{{total}}</td>
+                            </tr>        
+                    </tbody>
+                    {% set total1 = 714.5%}
+                    </table>
+                      <table class ="table table-bordered">
+                                <thead>
+                                    <tr>
+                                    <th> Title</th>
+                                    <th> Price</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Tuition Fees:</td>
+                                        <td>109.50</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Miscellaneous Fees:</td>
+                                        <td>105.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Other School Fees:</td>
+                                        <td>500.00</td>
+                                    </tr>
+                                    {% for c in extrafess[b.entlev ~ " " ~ b.term] %}
+                                    {% set total1 = total1 + c.expenseprice %}
+                                        <tr>
+                                            <td>{{c.expensename}}</td>
+                                            <td>{{c.expenseprice}}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    <tr>
+                                            <td>Total</td>
+                                            <td>{{total1}}</td>
+                                    </tr>
+                                </tbody>
+                                </table>
+                                {% endfor %}
                 </div>
             </div>
         </div>

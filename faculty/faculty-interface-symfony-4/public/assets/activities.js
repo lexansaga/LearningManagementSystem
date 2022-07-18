@@ -4,14 +4,21 @@ var modal = document.getElementById("mymodal");
 var addquestion = document.getElementById('addquestion');
 var scoreInput = document.getElementById('scoreInput');
 var maxScore = document.getElementById('maxScore');
+var timer = document.getElementById('timer');
 maxScore.textContent = 0;
 var tempQ = [];
 
 if(select!=null){
     select.value = "Essay";
     select.onchange = function(data){
-        
-        if(data.target.value=="Quiz"){
+        if(data.target.value=="Exam"){
+            timer.hidden = false;
+
+        }else{
+            timer.hidden = true;
+        }
+        if(data.target.value=="Quiz" || data.target.value=="Exam"){
+            
             maxScore.hidden = false;
             scoreInput.hidden = true;
             fileinput.hidden = true;
@@ -227,7 +234,7 @@ async function addActivity(data,coursename,programclass){
     
     let currentScore = 0;
     let somemutiplesareequal = false;
-    if(select.value=="Quiz"){
+    if(select.value=="Quiz"||select.value=="Exam"){
         
         tempQ.forEach((a)=>{
             if(a.activitytype!="Essay"&&(!a.hasOwnProperty("question")||!a.hasOwnProperty("answer")||!a.hasOwnProperty("score"))){
@@ -252,10 +259,20 @@ async function addActivity(data,coursename,programclass){
         })
 
         console.log(hasvalue,somemutiplesareequal);
+        if(select.value=="Exam"){
+            objTemp.append('timer',JSON.stringify({
+                hours: document.getElementById("hours").value,
+                minutes:document.getElementById("minutes").value,
+                seconds:document.getElementById("seconds").value
+            }));
+        }
         objTemp.append('questions',JSON.stringify(tempQ));
         currentScore = parseInt(maxScore.textContent);
         objTemp.append('maxscore',currentScore);
+        
+
     }else{
+        objTemp.append('allowfile',true);
         currentScore = parseInt(scoreInput.value);
         objTemp.append('maxscore',currentScore);
     }
@@ -272,10 +289,10 @@ async function addActivity(data,coursename,programclass){
     err.textContent = "";
     
     objTemp.append('description',description);
-    objTemp.append('allowfile',document.getElementById("allowfile").value);
+    
     objTemp.append('tasktype',document.getElementById("tasktype").value);
     objTemp.append('maxattempt',maxAttempt);
-    objTemp.append('allowlate',document.getElementById("allowlate").value);
+    
     objTemp.append('facultyloadid',data);
     
     objTemp.append('deadline',deadline);
@@ -292,6 +309,7 @@ async function addActivity(data,coursename,programclass){
     })
    window.location.reload();
 }
+currentDate = new Date().getTime();
 
 async function clickRemove(id){
     var res = await fetch('/subjects/api/removeActivity',{

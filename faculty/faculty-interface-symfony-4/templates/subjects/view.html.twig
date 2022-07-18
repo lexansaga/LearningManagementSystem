@@ -48,9 +48,9 @@
                   </ul>
         
          {% if "activities" in app.request.uri %}
-           <button type="button" class="btn btn-success m-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
+           <a type="button" class="btn btn-success m-2" href="{{path('createActivity', {'id':myid ,'coursename': coursename,'programclass':programclass} )}}">
           Create Task    
-        </button>
+        </a>
       <table id="datatable1" class="display">
                     <thead>
                         <tr>
@@ -95,82 +95,7 @@
                </ul> 
         {% endif %}
 
-          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Create Task</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body container modal-create-activity" id="mymodal">
-
-              <div id="errorACT"></div>
-              <div class="row">
-                  <label class="col"> Task Type</label>
-                   <select  class=" col"id="tasktype">
-                    <option>Activity</option>
-                    <option>Assignment</option>
-                  </select>
-                </div>
-                <div class="row">
-                  <label class="col"> Allow late submission</label>
-                  <input class="col" type="checkbox" id="allowlate"/>
-                  
-                </div>
-                <div
-                  class="row"
-                >
-                <label class="col"> Allow file submission</label>
-                  <input class="col" type="checkbox" id="allowfile"/>
-                </div>
-               
-                <div class="row">
-                <label class="col"> Max attempts</label>
-                  <input class="col" type="number" id="maxattempt"/>
-                </div>
-                <div class="row">
-                  <label class="col"> Task Title</label>
-                  <input class="col" type="text" id="activityname"/>
-                </div>
-                <div class="row">
-                  <label class="col"> Description</label>
-                  <input class="col" type="text" id="description"/>
-                </div>
-
-                <div class="row">
-                  <label class="col">Duration</label>
-                  <input id="deadline" class="col" type='datetime-local' name="activity_deadline"/>
-                </div>
-
-                <div class="row">
-                <label class="col"> Task type</label>
-                  
-                  <select  class=" col"id="selectdata">
-                    <option>Essay</option>
-                    <option>Quiz</option>
-                    
-                  </select>
-                </div>
-                <div  class="row">
-                <input class="col" type="file" id="fileinput" multiple/>
-                  <button class="col" id="addquestion" hidden>Add Question</button>
-                  <label class="col" id="maxScore" hidden>Score:</label>
-                  <input class="col" id="scoreInput" placeholder="Enter Score"/>
-                </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary" id="actbutton" onclick="addActivity({{myid}},'{{coursename}}','{{programclass}}')">Add Activity</button>
-            </div>
-               
-          </div>
-        </div>
-      </div>
-
-
-
-
-        </div>
-  
+        
 
         <!--main container end-->
     </div>
@@ -273,7 +198,7 @@
     
     </script>
     <script src="{{ app.request.schemeAndHttpHost }}/assets/js/script.js"></script>
-    <script src={{asset('assets/activities.js')}}></script>
+    
     <script src="{{ app.request.schemeAndHttpHost }}/assets/js/getFile.js"></script>
     <script src="{{ app.request.schemeAndHttpHost }}/assets/js/uploadmodules.js"></script>
     <script src="{{ app.request.schemeAndHttpHost }}/assets/js/removeModule.js"></script>

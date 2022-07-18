@@ -7,6 +7,7 @@ use App\Entity\Faculty;
 use App\Entity\CourseEnrolled;
 use App\Entity\Students;
 use App\Entity\Activities;
+use App\Entity\Studentrecords;
 use App\Entity\ActivitiesSubmitted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -217,12 +218,17 @@ class StudentController extends AbstractController
     public function showUploadPayment(ManagerRegistry $doctrine,Request $request){
         $entityManager = $doctrine->getManager();
         $payments = $this->getUser()->getProofpayment();
+        $extrafess = $this->getUser()->getExtrafees();
         $id = $this->getUser()->getId();
         $allenrolledcourses = $entityManager->getRepository(CourseEnrolled::class)->findBy(array('idnum'=>$this->getUser()->getIdnum()));
+        $allTerm = $entityManager->getRepository(Studentrecords::class)->findBy(array('idnum'=>$this->getUser()->getIdnum()));
+
         return $this->render('student/uploadpayment.html.twig', [
             'payments'=>$payments,
             'id'=>$id,
             'all'=>$allenrolledcourses,
+            'allterm'=>$allTerm,
+            'extrafess'=> $extrafess
         ]);
     }
 
@@ -268,14 +274,19 @@ class StudentController extends AbstractController
 
         $search1 = $request->get('course');
         $search2 = $request->get('class');
-        
+        $temp = array();
         $students = $this->getDoctrine()
             ->getRepository(CourseEnrolled::class)
             ->findStudent($search1, $search2);
+        foreach($students as $student){
+            $found = $this->getDoctrine()->getRepository(Students::class)->findBy(array('idnum'=>$student->getIdnum()));
+            array_push($temp,array('fullname'=>$student->getFullname(),'reviewcenter'=>$found[0]->getReviewcenter(),'Midterm'=>$student->getMidterm(),'Final'=>$student->getFinal(),'Grade'=>$student->getGrade(),'Remarks'=>$student->getRemarks(),'id'=>$student->getId(),'course'=>$student->getCourse()));
+
+        }
         
         return $this->render('student/view.html.twig', [
             'course' => $course,
-            'students' => $students
+            'students' => $temp
         ]);
     }
 }
