@@ -276,7 +276,7 @@
 									<i class="fas fa-backspace"></i>
 								</button>
 								
-								<button type="submit" name="enroll-success" class="btn btn-success">Enroll
+								<button type="submit" name="enroll-success" class="btn btn-success">Submit
 									<i class="fas fa-save"></i>
 								</button>
 							</div>

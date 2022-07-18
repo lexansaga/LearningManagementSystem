@@ -1,8 +1,9 @@
-
 $(window).on('load', function () {
     // DataTable
+    $('#table_stud_sub').DataTable({
+        ordering: true
+    })
 
-    
 
     //Menu Bar 
 
@@ -23,7 +24,9 @@ $(window).on('load', function () {
 
     // Calendar Script
     // Link : https://www.jqueryscript.net/time-clock/animated-event-calendar.html
-    if ($('body').hasClass('hasCalendar')) {
+
+
+    if ($('main').hasClass('hasCalendar')) {
 
         $(function () {
             $('#calendar-container').calendar();

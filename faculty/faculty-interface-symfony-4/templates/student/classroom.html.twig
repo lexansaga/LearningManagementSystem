@@ -6,7 +6,9 @@
     <link rel="stylesheet" href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
     <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet" />
-    <main>
+        <link href="/assets/css/calendar-style.css" rel="stylesheet" />
+            <link href="/assets/css/style.css" rel="stylesheet" />
+    <main class="hasCalendar">
          <div class=" header">
             <div class="header-menu">
                 <div class="title">Educa Academy</div>
@@ -19,7 +21,7 @@
             <div
                 class="main-content-wrapper"
             >
-                <ul class="nav nav-tabs">
+                <ul class="nav nav-tabs" style="margin:0 0 48px 0" >
                     <li class="nav-item">
                         <a class="{{"activities" in app.request.uri ? "nav-link active" : "nav-link" }}" href="{{path('showClassroom',{'id':id})}}">Activity</a>
                     </li>
@@ -32,7 +34,7 @@
 
 
                 {% if "activities" in app.request.uri %}
-                 <table id="datatable" class="display">
+                 <table id="datatable" class="display" >
                     <thead>
                         <tr>
                             <th>Type</th>
@@ -46,8 +48,93 @@
                     </thead>
                 </table>
                 {% else %}
-                
-                {% for a in load.modules %}
+                  <div class="activity-container-grid">
+
+                    <div class="activity-content">
+                        <div class="module-container">
+                            <a href="#" class="module">
+                                <img src="/assets/module-image.jpg" alt="module-image">
+                                <div class="module-content">
+                                    <h5>Module Title</h5>
+                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nostrum asperiores
+                                        voluptatem consectetur magnam accusamus quas nam placeat praesentium, nesciunt
+                                        qui,
+                                        ipsa sapiente dignissimos, inventore illo non modi vel perferendis sequi?</p>
+                                    <button class="btn btn-primary">Download</button>
+                                </div>
+                            </a>
+
+
+                            <a href="#" class="module">
+                                <img src="/assets/module-image.jpg" alt="module-image">
+                                <div class="module-content">
+                                    <h5>Module Title</h5>
+                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nostrum asperiores
+                                        voluptatem consectetur magnam accusamus quas nam placeat praesentium, nesciunt
+                                        qui,
+                                        ipsa sapiente dignissimos, inventore illo non modi vel perferendis sequi?</p>
+                                    <button class="btn btn-primary">Download</button>
+                                </div>
+                            </a>
+
+
+                            <a href="#" class="module">
+                                <img src="/assets/module-image.jpg" alt="module-image">
+                                <div class="module-content">
+                                    <h5>Module Title</h5>
+                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nostrum asperiores
+                                        voluptatem consectetur magnam accusamus quas nam placeat praesentium, nesciunt
+                                        qui,
+                                        ipsa sapiente dignissimos, inventore illo non modi vel perferendis sequi?</p>
+                                    <button class="btn btn-primary">Download</button>
+                                </div>
+                            </a>
+
+
+                            <a href="#" class="module">
+                                <img src="/assets/module-image.jpg" alt="module-image">
+                                <div class="module-content">
+                                    <h5>Module Title</h5>
+                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nostrum asperiores
+                                        voluptatem consectetur magnam accusamus quas nam placeat praesentium, nesciunt
+                                        qui,
+                                        ipsa sapiente dignissimos, inventore illo non modi vel perferendis sequi?</p>
+                                    <button class="btn btn-primary">Download</button>
+                                </div>
+                            </a>
+
+
+                            <a href="#" class="module">
+                                <img src="/assets/module-image.jpg" alt="module-image">
+                                <div class="module-content">
+                                    <h5>Module Title</h5>
+                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nostrum asperiores
+                                        voluptatem consectetur magnam accusamus quas nam placeat praesentium, nesciunt
+                                        qui,
+                                        ipsa sapiente dignissimos, inventore illo non modi vel perferendis sequi?</p>
+                                    <button class="btn btn-primary">Download</button>
+                                </div>
+                            </a>
+
+
+                        </div>
+                    </div>
+                    <div class="activity-info">
+                        <div id="calendar-container"></div>
+                    </div>
+                    <div class="activity-submission module-todo">
+                        <h5>TODO</h5>
+                        <ul>
+                            <li><a href="#"> <i class='bx bxs-notepad bx-tada'
+                                        style='color:#00b686'></i>&nbsp;&nbsp;&nbsp;7
+                                    Assignments</a></li>
+
+                        </ul>
+                    </div>
+
+
+                </div>
+                {# {% for a in load.modules %}
                     
                     <ul>
                         <li>File <span
@@ -56,7 +143,7 @@
                             
                         </li>
                     </ul>
-                {% endfor %}
+                {% endfor %} #}
                     
                 {% endif %}
                 
@@ -118,7 +205,8 @@
         });
         
     </script>
-    <script src="assets/js/script.js"></script>
+     <script src="/assets/js/calendar.js"></script>
+    <script src="/assets/js/script.js"></script>
     <script src="{{ app.request.schemeAndHttpHost }}/assets/js/getFile.js"></script>
     </main>
 

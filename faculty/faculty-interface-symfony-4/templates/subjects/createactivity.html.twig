@@ -1,0 +1,100 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} 
+    
+ {% endblock %}
+{% block stylesheets %}
+    <style>
+
+    </style>
+{% endblock %}
+
+{% block body %}
+<main>
+
+   
+ <div>
+    <div class="header">
+            <div class="header-menu">
+                <div class="title">Educa Academy</div>
+            </div>
+        </div>
+        
+        <div class="main-content-wrapper content view-module" id="mymodal">
+        <h1> Create Activity</h1>
+          <div id="errorACT"></div>
+              <div class="row">
+                  <label class="col"> Task Type</label>
+                   <select  class=" col"id="tasktype">
+                    <option>Activity</option>
+                    <option>Assignment</option>
+                  </select>
+                </div>
+                <div
+                  class="row"
+                >
+               
+                <div class="row">
+                <label class="col"> Max attempts</label>
+                  <input class="col" type="number" id="maxattempt"/>
+                </div>
+                <div class="row">
+                  <label class="col"> Task Title</label>
+                  <input class="col" type="text" id="activityname"/>
+                </div>
+                <div class="row">
+                  <label class="col"> Description</label>
+                  <input class="col" type="text" id="description"/>
+                </div>
+
+                <div class="row">
+                  <label class="col">Duration</label>
+                  <input id="deadline" class="col" type='datetime-local' name="activity_deadline"/>
+                </div>
+
+                <div class="row">
+                <label class="col"> Task type</label>
+                  
+                  <select  class=" col"id="selectdata">
+                    <option>Essay</option>
+                    <option>Quiz</option>
+                    <option>Exam</option>
+                  </select>
+                </div>
+                <div  class="row">
+                <input class="col" type="file" id="fileinput" multiple/>
+                  <button class="col" id="addquestion" hidden>Add Question</button>
+                  <label class="col" id="maxScore" hidden>Score:</label>
+                  <input class="col" id="scoreInput" placeholder="Enter Score"/>
+                </div>
+                
+                <div id="timer" hidden>
+                    <label>Timer:</label>
+                    <label>Hours:</label>
+                    <input id="hours" type="number" value="0"/>
+                    <label>Minutes:</label>
+                    <input id="minutes" type="number" value="0"/>
+                    <label>Seconds:</label>
+                    <input id="seconds" type="number" value="0"/>
+                </div>
+            <div class="modal-footer">
+              
+              <button type="button" class="btn btn-primary" id="actbutton" onclick="addActivity({{id}},'{{coursename}}','{{programclass}}')">Add Activity</button>
+            </div>
+        </div>
+
+ </div>
+    
+
+    
+    
+
+    
+{% block javascripts %}
+   
+    <script src={{asset('assets/activities.js')}}></script>
+    
+{% endblock %}
+
+</main>
+{% endblock %}

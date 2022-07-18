@@ -33,7 +33,14 @@ class SubjectsController extends AbstractController
             'subjects'=>$all
         ]);
     }
+    public function createActivity(Request $request){
+        return $this->render('subjects/createactivity.html.twig',[
+            'id'=>$request->get('id'),
+            'programclass'=>$request->get('programclass'),
+            'coursename'=>$request->get('coursename')
 
+        ]);
+    }
     public function showClassrooms(){
         $userID = $this->getUser()->getIdnum();
         
@@ -165,7 +172,7 @@ class SubjectsController extends AbstractController
         
         $subactivity = $entityManager->getRepository(ActivitiesSubmitted::class)->find($myJson->id);
         
-        $subactivity->setScore($myJson->score);
+        $subactivity->setScore($subactivity->getScore() + $myJson->score);
         $entityManager->flush();
         $response = new Response("Successful");
         $response->headers->set('Content-Type', 'text/html');
@@ -267,10 +274,8 @@ class SubjectsController extends AbstractController
         $questions = $request->request->get('questions');
         $course = $request->request->get('course');
         $programclass = $request->request->get('programclass');
-        $allowlate = $request->request->get('allowlate');
         $tasktype = $request->request->get('tasktype');
         $description = $request->request->get('description');
-        $allowfile = $request->request->get('allowfile');
         $maxattempt = $request->request->get('maxattempt');
 
 
@@ -300,20 +305,28 @@ class SubjectsController extends AbstractController
         $deadline = $request->request->get('deadline');
         $maxScore = $request->request->get('maxscore');
         $activity = new Activities();
+        
         $activity->setActivityname($actname);
-        if($acttype=="Quiz"){
+        if($acttype=="Essay"){
+            $activity->setAllowfileupload(true);
+        }
+        if($acttype=="Exam"){
+            $myTimer = $request->request->get('timer');
+            $dyObj = json_decode($myTimer);
+            
+             $activity->setTimer(array('hours'=>$dyObj->hours,'minutes'=>$dyObj->minutes,'seconds'=>$dyObj->seconds));
+        }
+        if($acttype=="Quiz"||$acttype=="Exam"){
             $activity->setQuestions(json_decode($questions));
         }
         if(isset($file)&&$acttype!="Quiz"){
             $activity->setFile(json_encode($tempArr));
         }
         $activity->setMaxattempt($maxattempt);
-        $activity->setAllowfileupload($allowfile);
         $activity->setActivitytype($acttype);
         $activity->setTimestamp(new DateTime(date("Y-m-d H:i:s")));
         $activity->setFacultyloadId($facultyID);
         $activity->setMaxScore($maxScore);
-        $activity->setIsallowlatesubmission($allowlate);
         $activity->setTasktype($tasktype);
         $activity->setDescription($description);
         $activity->setDescription($description);

@@ -332,25 +332,55 @@
                             
                             <br>
                             <label>Specialization: </label><br>
-                            <input type="text" name="special" placeholder="specialization">
+                            <select name="special">
+                                <option value="" selected disabled>-- Specialization --</option>
+                                <option
+                                <?php if (isset($special) && $special=="Math") echo "selected";?>
+                                value="Math">Math</option>
+                                <option
+                                <?php if (isset($special) && $special=="English") echo "selected";?>
+                                value="English">English</option>
+                            </select>
                             <br>
 
                             <label>Employment Status: </label><br>
-                            <select name="status">
-                                <option value="" selected disabled>-- Status --</option>
-                                <option
-                                <?php if (isset($status) && $status=="Full-time") echo "selected";?>
-                                value="Full-time">Full-time</option>
-                                <option
-                                <?php if (isset($status) && $status=="Part-time") echo "selected";?>
-                                value="Part-time">Part-time</option>
-                                <option
-                                <?php if (isset($status) && $status=="Temporary") echo "selected";?>
-                                value="Temporary">Temporary</option>
-                                <option
-                                <?php if (isset($status) && $status=="Seasonal") echo "selected";?>
-                                value="Seasonal">Seasonal</option>
-                            </select>
+                            <input type="text" name="status" value="Part-time" readonly/>
+                            <legend>Schedule:</legend>      
+                            <input type="checkbox" name="schedule[]" value="monday" onchange="show(this)">Mon<br>   
+                            <label for="mondaystarttime" hidden>Start:</label>
+                            <input type="time" name="mondaystarttime" hidden/> <br>
+                            <label for="mondayendtime" hidden>End:</label>
+                            <input type="time" name="mondayendtime" hidden/>
+                            <input type="checkbox" name="schedule[]" value="tuesday" onchange="show(this)">Tue<br>      
+                            <label for="tuesdaystarttime" hidden>Start:</label>
+                            <input type="time" name="tuesdaystarttime"hidden/> <br>
+                            <label for="tuesdayendtime"hidden >End:</label>
+                            <input type="time" name="tuesdayendtime"hidden/> 
+                            <input type="checkbox" name="schedule[]" value="wednesday" onchange="show(this)">Wed<br> 
+                            <label for="wednesdaystarttime" hidden>Start:</label>
+                            <input type="time" name="wednesdaystarttime" hidden/> <br>
+                            <label for="wednesdayendtime"hidden >End:</label>
+                            <input type="time" name="wednesdayendtime" hidden/>  
+                            <input type="checkbox" name="schedule[]" value="thursday" onchange="show(this)">Thu<br> 
+                            <label for="thursdaystarttime" hidden >Start:</label>
+                            <input type="time" name="thursdaystarttime" hidden/> <br>
+                            <label for="thursdayendtime" hidden >End:</label>
+                            <input type="time" name="thursdayendtime" hidden/>   
+                            <input type="checkbox" name="schedule[]" value="friday" onchange="show(this)">Fri<br> 
+                            <label for="fridaystarttime" hidden>Start:</label>
+                            <input type="time" name="fridaystarttime" hidden/> <br>
+                            <label for="fridayendtime" hidden>End:</label>
+                            <input type="time" name="fridayendtime" hidden/>   
+                            <input type="checkbox" name="schedule[]" value="saturday" onchange="show(this)">Sat<br> 
+                            <label for="saturdaystarttime" hidden>Start:</label>
+                            <input type="time" name="saturdaystarttime" hidden/> <br>
+                            <label for="saturdayendtime" hidden >End:</label>
+                            <input type="time" name="saturdayendtime" hidden/>
+                            <input type="checkbox" name="schedule[]" value="sunday" onchange="show(this)">Sun<br> 
+                            <label for="sundaystarttime" hidden>Start:</label>
+                            <input type="time" name="sundaystarttime" hidden/> <br>
+                            <label for="sundayendtime" hidden>End:</label>
+                            <input type="time" name="sundayendtime" hidden/>   
                             <label>Enrolled In Review Center: </label><br>
                             <select name="reviewcenter">
                                 <option value="" selected disabled>-- Status --</option>
@@ -414,11 +444,30 @@
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
         
         <script type="text/javascript">
+
+
         $(document).ready(function(){
             $(".sidebar-btn").click(function(){
                 $(".wrapper").toggleClass("collapse");
             });
         });
+        var checked = [];
+        function show(data){
+            if(!checked.includes(data.value)){
+                $(`label[for='${data.value}starttime']`)[0].hidden = false; 
+                $(`label[for='${data.value}endtime']`)[0].hidden = false; 
+                $(`input[name='${data.value}starttime']`)[0].hidden = false; 
+                $(`input[name='${data.value}endtime']`)[0].hidden = false; 
+                checked.push(data.value);
+            }else{
+                $(`label[for='${data.value}starttime']`)[0].hidden = true; 
+                $(`label[for='${data.value}endtime']`)[0].hidden = true; 
+                $(`input[name='${data.value}starttime']`)[0].hidden = true; 
+                $(`input[name='${data.value}endtime']`)[0].hidden = true; 
+                checked.splice(checked.indexOf(data.value),1);
+            }
+            
+        }
         </script>
 
     </body>

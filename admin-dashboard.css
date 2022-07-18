@@ -1,26 +1,35 @@
-*{
+:root {
+  --color-primary: #023047;
+  --color-primary-accent: #c6ecff;
+  --color-secondary: #fb8500;
+  --color-secondary-accent: #ffe9d1;
+  --font-color-default: #202020;
+}
+
+* {
   margin: 0;
   padding: 0;
   list-style: none;
   text-decoration: none;
   box-sizing: border-box;
   font-family: "Roboto", sans-serif;
+  color: var(--font-color-default);
 }
 
-body{
+body {
   background: #fff;
 }
 /********** HEADER **********/
-.wrapper .header{
+.wrapper .header {
   z-index: 1;
-  background: #A41034;
+  background: var(--color-primary);
   position: fixed;
   width: calc(100% - 0%);
   height: 70px;
   display: flex;
   top: 0;
 }
-.wrapper .header .header-menu{
+.wrapper .header .header-menu {
   width: calc(100% - 0%);
   height: 100%;
   display: flex;
@@ -28,46 +37,47 @@ body{
   align-items: center;
   padding: 0 20px;
 }
-.wrapper .header .header-menu .title{
+.wrapper .header .header-menu .title {
   color: #fff;
   font-size: 20px;
   text-transform: uppercase;
   font-weight: 900;
 }
 /********** SIDEBAR **********/
-.wrapper .sidebar{
+.wrapper .sidebar {
   z-index: 1;
-  background: #FFF;
-  box-shadow: 10px 10px 15px grey;
+  background: #fff;
+  box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 20%),
+    0 1px 5px 0 rgb(0 0 0 / 12%);
   position: fixed;
   top: 70px;
-  width: 180px;
+  width: 220px;
   height: calc(100% - 9%);
   transition: 0.3s;
   transition-property: width;
   overflow-y: auto;
 }
-.wrapper .sidebar .sidebar-menu{
+.wrapper .sidebar .sidebar-menu {
   overflow: hidden;
 }
-.wrapper .sidebar .sidebar-menu .profile img{
+.wrapper .sidebar .sidebar-menu .profile img {
   margin: 20px 0;
-  width: 90px;
-  height: 90px;
+  width: 70%;
+  /* height: 901px; */
 }
-.wrapper .sidebar .sidebar-menu .profile p{
+.wrapper .sidebar .sidebar-menu .profile p {
   color: grey;
   font-weight: 650;
 }
-.wrapper .sidebar .sidebar-menu .item{
-  width: 250px;
+.wrapper .sidebar .sidebar-menu .item {
+  width: 100%;
   overflow: hidden;
   font-size: 14px;
 }
-.wrapper .sidebar .sidebar-menu .item a{
+.wrapper .sidebar .sidebar-menu .item a {
   text-decoration: none;
 }
-.wrapper .sidebar .sidebar-menu .item .menu-btn{
+.wrapper .sidebar .sidebar-menu .item .menu-btn {
   display: block;
   color: #000;
   position: relative;
@@ -76,43 +86,52 @@ body{
   transition-property: color;
 }
 .wrapper .sidebar .sidebar-menu .item button {
-	border: none;
-	background: none;
+  border: none;
+  background: none;
 }
 .wrapper .sidebar .sidebar-menu .item button:hover {
-	color: #FFF;
+  color: #fff;
 }
 /********** SIDEBAR BUTTONS **********/
-.wrapper .sidebar .sidebar-menu .item .menu-btn span{
-	padding: 20px;
-	background: #A41034;
-	border-radius: 2em;
-	color: #fff;
+.wrapper .sidebar .sidebar-menu .item .menu-btn span {
+  padding: 14px;
+  background: var(--color-secondary);
+  /* border-radius: 2em; */
+  color: #fff;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
-.wrapper .sidebar .sidebar-menu .item .menu-btn span:hover{
-	background: #C2133D;
+.wrapper .sidebar .sidebar-menu .item .menu-btn span i {
+  color: white;
 }
-.wrapper .sidebar .sidebar-menu .item .menu-btn:hover{
-	background: #C2133D;
-	color: #FFF;
-	text-decoration: none;
+.wrapper .sidebar .sidebar-menu .item .menu-btn span:hover {
+  background: var(--color-secondary);
 }
-.wrapper .sidebar .sidebar-menu .item .menu-btn i{
-	margin-right: 20px;
+.wrapper .sidebar .sidebar-menu .item .menu-btn:hover {
+  background: var(--color-secondary);
+  color: white;
+  text-decoration: none;
+}
+
+.wrapper .sidebar .sidebar-menu .item .menu-btn:hover i {
+  color: white;
+}
+.wrapper .sidebar .sidebar-menu .item .menu-btn i {
+  margin-right: 20px;
 }
 /********** LOGOUT MODAL **********/
 .modal .modal-dialog .modal-content .modal-footer button {
-	font-size: 14px;
+  font-size: 14px;
 }
 .modal .modal-dialog .modal-content .modal-footer button a {
-	text-decoration: none;
-	color: #FFF;
+  text-decoration: none;
+  color: #fff;
 }
 
-
-
 /********** MAIN CONTAINER **********/
-.wrapper .content{
+.wrapper .content {
   width: (100% - 250px);
   margin-top: 70px;
   margin-left: 220px;
@@ -124,393 +143,384 @@ body{
 
 /********** SEARCH ANIMATION **********/
 .wrapper .content .search-box {
-	display: flex;
+  display: flex;
 }
 .wrapper .content .search-box:hover input {
-	width: 400px;
+  width: 400px;
 }
 .wrapper .content .search-box input {
-	padding: 10px 35px;
-	width: 0;
-	outline: none;
-	border: none;
-	font-weight: 500;
-	transition: 0.8s;
-	background: #FFF;
-	border-radius: 30px;
-	align-items: center;
-	box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-	margin-bottom: 10px;
+  padding: 10px 35px;
+  width: 0;
+  outline: none;
+  border: none;
+  font-weight: 500;
+  transition: 0.8s;
+  background: #fff;
+  border-radius: 30px;
+  align-items: center;
+  box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 20%),
+    0 1px 5px 0 rgb(0 0 0 / 12%);
+  margin-bottom: 10px;
 }
-.wrapper .content .search-box button{
-	padding: 10px 10px;
-	position: absolute;
-	background: none;
-	border: none;
-	outline: none;
+.wrapper .content .search-box button {
+  padding: 10px 10px;
+  position: absolute;
+  background: none;
+  border: none;
+  outline: none;
 }
 .wrapper .content .search-box button .fas {
-	color: #A41034;
-	font-size: 18px;
+  color: var(--color-primary);
+  font-size: 18px;
 }
 
 /********** STUDENT MODULE BUTTONS **********/
 .wrapper .content .page label {
-	margin-top: 18px;
-	font-size: 14px;
+  margin-top: 18px;
+  font-size: 14px;
 }
 .wrapper .content .button-enroll {
-	margin-bottom: 10px;
-	float: right;
+  margin-bottom: 10px;
+  float: right;
 }
-.wrapper .content .button-enroll .btn a{
-	color: #FFF;
-	text-decoration: none;
+.wrapper .content .button-enroll .btn a {
+  color: #fff;
+  text-decoration: none;
 }
 .wrapper .content button {
-	font-size: 14px;
+  font-size: 14px;
 }
 .wrapper .content .table table {
-	font-size: 14px;
+  font-size: 14px;
 }
 .wrapper .content .table table tr td a {
-	text-decoration: none;
+  text-decoration: none;
 }
 .wrapper .content .table table tr td button {
-	border: none;
-	background: none;
+  border: none;
+  background: none;
 }
 .wrapper .content .table .modal .modal-dialog .modal-content {
-	background: #FFF;
-	border: none;
+  background: #fff;
+  border: none;
 }
 /********** STUDENT ENROLLMENT FORM **********/
-.wrapper .content .back-btn{
-	margin-bottom: 10px;
+.wrapper .content .back-btn {
+  margin-bottom: 10px;
 }
-.wrapper .content .registration{
-	padding: 10px;
-	height: 500px;
-	background: #FFF;
-	box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+.wrapper .content .registration {
+  padding: 10px;
+  height: 500px;
+  background: #fff;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
 }
 /********** PRIMARY DETAILS **********/
-.wrapper .content .registration .primary{
-	display: flex;
-	flex-direction: row;
+.wrapper .content .registration .primary {
+  display: flex;
+  flex-direction: row;
 }
-.wrapper .content .registration .primary input{
-	font-size: 14px;
-	border: 1px solid #DCDCDC;
-	border-radius: 2em;
-	height: 40px;
-	width: 330px;
-	padding: 10px;
+.wrapper .content .registration .primary input {
+  font-size: 14px;
+  border: 1px solid #dcdcdc;
+  border-radius: 2em;
+  height: 40px;
+  width: 330px;
+  padding: 10px;
 }
-.wrapper .content .registration .primary input:hover{
-	border: 1px solid #A41034;
+.wrapper .content .registration .primary input:hover {
+  border: 1px solid #a41034;
 }
-.wrapper .content .registration .primary select:hover{
-	border: 1px solid #A41034;
+.wrapper .content .registration .primary select:hover {
+  border: 1px solid #a41034;
 }
-.wrapper .content .registration .primary label{
-	font-size: 14px;
+.wrapper .content .registration .primary label {
+  font-size: 14px;
 }
-.wrapper .content .registration .primary select{
-	border: 1px solid #DCDCDC;
-	border-radius: 2em;
-	height: 40px;
-	width: 330px;
-	padding: 10px;
+.wrapper .content .registration .primary select {
+  border: 1px solid #dcdcdc;
+  border-radius: 2em;
+  height: 40px;
+  width: 330px;
+  padding: 10px;
 }
-.wrapper .content .registration .primary .p1{
-	width: 360px;
-	padding: 10px;
+.wrapper .content .registration .primary .p1 {
+  width: 360px;
+  padding: 10px;
 }
-.wrapper .content .registration .primary .p2{
-	width: 360px;
-	padding: 10px;
+.wrapper .content .registration .primary .p2 {
+  width: 360px;
+  padding: 10px;
 }
-.wrapper .content .registration .primary .p3{
-	width: 360px;
-	padding: 10px;
+.wrapper .content .registration .primary .p3 {
+  width: 360px;
+  padding: 10px;
 }
-.wrapper .content .registration .primary .p3 .files{
-	border: none;
+.wrapper .content .registration .primary .p3 .files {
+  border: none;
 }
 .wrapper .content .registration .primary .p3 .enroll-student {
-	text-align: right;
+  text-align: right;
 }
-.wrapper .content .registration .primary .p3 .enroll-student button{
-	width: 100px;
+.wrapper .content .registration .primary .p3 .enroll-student button {
+  width: 100px;
 }
 
 .wrapper .content .registration .primary .p3 .file-errors {
-	color: red;
+  color: red;
 }
 
 /********** VIEW STUDENT **********/
-.wrapper .content .registration .view-flex{
-	display: flex;
-	flex-direction: row;
+.wrapper .content .registration .view-flex {
+  display: flex;
+  flex-direction: row;
 }
 .wrapper .content .registration .student-requirements {
-	width: 250px;
-	font-size: 14px;
+  width: 250px;
+  font-size: 14px;
 }
 .wrapper .content .registration .student-info {
-	width: 360px;
-	font-size: 14px;
+  width: 360px;
+  font-size: 14px;
 }
 .wrapper .content .registration .student-info a {
-	text-decoration: none;
+  text-decoration: none;
 }
 .wrapper .content .registration .student-acad {
-	margin-left: 10px;
-	padding-left: 20px;
-	width: 450px;
+  margin-left: 10px;
+  padding-left: 20px;
+  width: 450px;
 }
-.wrapper .content .registration .student-acad label{
-	font-size: 14px;
+.wrapper .content .registration .student-acad label {
+  font-size: 14px;
 }
-.wrapper .content .registration .student-acad input{
-	border: 1px solid #DCDCDC;
-	border-radius: 2em;
-	height: 40px;
-	width: 330px;
-	padding: 10px;
-	font-size: 14px;
+.wrapper .content .registration .student-acad input {
+  border: 1px solid #dcdcdc;
+  border-radius: 2em;
+  height: 40px;
+  width: 330px;
+  padding: 10px;
+  font-size: 14px;
 }
 .wrapper .content .registration .student-requirements img {
-	margin-bottom: 30px;
-	box-shadow: 0 10px 10px rgba(0, 0, 0, 0.3);
-	height: 170px;
-	width: 170px;
+  margin-bottom: 30px;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.3);
+  height: 170px;
+  width: 170px;
 }
 
 /********** STUDENT RECORDS **********/
 .wrapper .content .registration .student-records {
-	display: flex;
-	flex-direction: row;
+  display: flex;
+  flex-direction: row;
 }
 .wrapper .content .registration .student-records .record-1 {
-	font-size: 14px;
-	border-right: 1px solid grey;
-	width: 250px;
+  font-size: 14px;
+  border-right: 1px solid grey;
+  width: 250px;
 }
 .wrapper .content .registration .student-records .record-1 input {
-	width: 220px;
-	height: 30px;
-	border: 1px solid #DFDFDF;
-	border-radius: 2em;
-	padding: 10px;
+  width: 220px;
+  height: 30px;
+  border: 1px solid #dfdfdf;
+  border-radius: 2em;
+  padding: 10px;
 }
 .wrapper .content .registration .student-records .record-1 select {
-	border: 1px solid #DFDFDF;
-	border-radius: 2em;
-	height: 30px;
-	width: 220px;
+  border: 1px solid #dfdfdf;
+  border-radius: 2em;
+  height: 30px;
+  width: 220px;
 }
 .wrapper .content .registration .student-records .record-1 button {
-	margin-left: 150px;
+  margin-left: 150px;
 }
 .wrapper .content .registration .student-records .record-2 {
-	width: 800px;
+  width: 800px;
 }
 /********** COURSES MODULE BUTTONS **********/
 .wrapper .content .course-pdf {
-	margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 /********** COURSES MODULE **********/
 .wrapper .content .courses {
-	background: #FFF;
-	box-shadow: 10px 10px 15px grey;
+  background: #fff;
+  box-shadow: 10px 10px 15px grey;
 }
 .wrapper .content .courses .add-courses {
-	display: flex;
-	flex-direction: row;
-	height: 500px;
+  display: flex;
+  flex-direction: row;
+  height: 500px;
 }
-.wrapper .content .courses .add-courses .courses-1{
-	border-right: 1px solid grey;
-	width: 320px;
-	padding: 20px;
+.wrapper .content .courses .add-courses .courses-1 {
+  border-right: 1px solid grey;
+  width: 320px;
+  padding: 20px;
 }
-.wrapper .content .courses .add-courses .courses-1 input{
-	border: 1px solid grey;
-	border-radius: 2em;
-	height: 35px;
-	width: 280px;
-	padding: 10px;
+.wrapper .content .courses .add-courses .courses-1 input {
+  border: 1px solid grey;
+  border-radius: 2em;
+  height: 35px;
+  width: 280px;
+  padding: 10px;
 }
 .wrapper .content .courses .courses-1 select {
-	border: 1px solid grey;
-	border-radius: 2em;
-	height: 35px;
-	width: 280px;
-	padding: 5px;
+  border: 1px solid grey;
+  border-radius: 2em;
+  height: 35px;
+  width: 280px;
+  padding: 5px;
 }
 .wrapper .content .courses .courses-1 button {
-	margin-top: 10px;
-	float: right;
+  margin-top: 10px;
+  float: right;
 }
-.wrapper .content .courses .add-courses .courses-2{
-	width: 100%;
-	padding: 20px;
+.wrapper .content .courses .add-courses .courses-2 {
+  width: 100%;
+  padding: 20px;
 }
-.wrapper .content .courses .add-courses .courses-2 .search{
-	position: relative;
-	margin-left: 100px;
-	float: right;
-	margin-bottom: 10px;
+.wrapper .content .courses .add-courses .courses-2 .search {
+  position: relative;
+  margin-left: 100px;
+  float: right;
+  margin-bottom: 10px;
 }
-.wrapper .content .courses .add-courses .courses-2 .search input{
-	border: 1px solid #DFDFDF;
-	border-radius: 2em;
-	height: 40px;
-	width: 280px;
-	padding-left: 40px;
-	
+.wrapper .content .courses .add-courses .courses-2 .search input {
+  border: 1px solid #dfdfdf;
+  border-radius: 2em;
+  height: 40px;
+  width: 280px;
+  padding-left: 40px;
 }
-.wrapper .content .courses .add-courses .courses-2 .search button{
-	position: absolute;
-	background: none;
-	border: none;
-	font-size: 20px;
-	padding: 5px;
-	margin-left: 5px;
-	color: #DFDFDF;
+.wrapper .content .courses .add-courses .courses-2 .search button {
+  position: absolute;
+  background: none;
+  border: none;
+  font-size: 20px;
+  padding: 5px;
+  margin-left: 5px;
+  color: #dfdfdf;
 }
-.wrapper .content .courses .add-courses .courses-2 .search button:hover{
-	color: #A41034;
-	font-size: 23px;
+.wrapper .content .courses .add-courses .courses-2 .search button:hover {
+  color: #a41034;
+  font-size: 23px;
 }
 .modal .modal-dialog .modal-content .modal-body label {
-	font-size: 14px;
+  font-size: 14px;
 }
 .modal .modal-dialog .modal-content .modal-body input {
-	font-size: 14px;
-	width: 300px;
-	height: 35px;
-	padding: 10px;
-	border: 1px solid #DFDFDF;
-	border-radius: 2em;
+  font-size: 14px;
+  width: 300px;
+  height: 35px;
+  padding: 10px;
+  border: 1px solid #dfdfdf;
+  border-radius: 2em;
 }
 .modal .modal-dialog .modal-content .modal-body select {
-	font-size: 14px;
-	width: 300px;
-	height: 35px;
-	border: 1px solid #DFDFDF;
-	border-radius: 2em;
+  font-size: 14px;
+  width: 300px;
+  height: 35px;
+  border: 1px solid #dfdfdf;
+  border-radius: 2em;
 }
 /********** VIEW CLASSES MODULE **********/
 .wrapper .content .courses .add-courses .courses-2 .pdescription {
-	font-size: 14px;
-	padding: 10px;
+  font-size: 14px;
+  padding: 10px;
 }
 .wrapper .content .courses .add-courses .courses-2 .table .table .th {
-	text-align: right;
+  text-align: right;
 }
 .wrapper .content .courses .add-courses .courses-2 .table .table th button {
-	border: none;
-	background: none;
+  border: none;
+  background: none;
 }
 .wrapper .content .courses .add-courses .courses-2 .table .table th .fas {
-	font-size: 25px;
-	color: green;
-	background: #FFF;
+  font-size: 25px;
+  color: green;
+  background: #fff;
 }
 .wrapper .content .courses .add-courses .courses-2 .table .table th .fas:hover {
-	cursor: pointer;
-	color: rgb(0, 172, 0);
+  cursor: pointer;
+  color: rgb(0, 172, 0);
 }
-
-
-
 
 /******* PASSWORD STRENGTH *******/
-.wrapper .reg-box .strength{
-    width: 25%;
-    display: inline-block;
-    position: relative;
-    height: 100%;
-    bottom: 5px;
+.wrapper .reg-box .strength {
+  width: 25%;
+  display: inline-block;
+  position: relative;
+  height: 100%;
+  bottom: 5px;
 }
-.wrapper .reg-box #strength-bar{
-    background-color: #dcdcdc;
-    height: 10px;
-    position: relative;
-	width: 315px;
+.wrapper .reg-box #strength-bar {
+  background-color: #dcdcdc;
+  height: 10px;
+  position: relative;
+  width: 315px;
 }
-.wrapper .reg-box .message{
-    width: 100%;
-    margin-top: 10px;
+.wrapper .reg-box .message {
+  width: 100%;
+  margin-top: 10px;
 }
 /************ DASHBOARD ****************/
 .row1 {
-	display: flex;
-	flex-direction: row;
+  display: flex;
+  flex-direction: row;
 }
 .row1 div {
-	padding: 80px;
-	text-align: center;
-	background: #EEEEEE;
-	margin: auto;
-	height: 230px;
-	width: 330px;
-	font-size: 20px;
+  padding: 80px;
+  text-align: center;
+  background: #eeeeee;
+  margin: auto;
+  height: 230px;
+  width: 330px;
+  font-size: 20px;
 }
 .row2 {
-	display: flex;
-	flex-direction: row;
+  display: flex;
+  flex-direction: row;
 }
 .row2 div {
-	padding: 80px;
-	text-align: center;
-	background: #EEEEEE;
-	margin: auto;
-	height: 230px;
-	width: 330px;
-	font-size: 20px;
+  padding: 80px;
+  text-align: center;
+  background: #eeeeee;
+  margin: auto;
+  height: 230px;
+  width: 330px;
+  font-size: 20px;
 }
 /********** ADD ADMIN *************/
 .wrapper .main-container .update-admin {
-	margin-left: 200px;
+  margin-left: 200px;
 }
 /********** VERIFY OTP *************/
 .wrapper .verify {
-	margin-top: 180px;
-	margin-left: 400spx;
-	height: 340px;
-	width: 800px;
-	background: #F3F3F3;
-	box-shadow: 10px 10px 5px grey;
-	padding: 20px;
+  margin-top: 180px;
+  margin-left: 400spx;
+  height: 340px;
+  width: 800px;
+  background: #f3f3f3;
+  box-shadow: 10px 10px 5px grey;
+  padding: 20px;
 }
-.wrapper .verify input{
-	font-size: 20px;
-	text-align: center;
+.wrapper .verify input {
+  font-size: 20px;
+  text-align: center;
 }
-.wrapper .verify form .btn{
-	margin:  10px 0 5px;
-	color: #FFF;
-    width: 170px;
-    padding: 10px;
-    background-color: #4493C2;
-    border: none;
-    text-transform: uppercase;
+.wrapper .verify form .btn {
+  margin: 10px 0 5px;
+  color: #fff;
+  width: 170px;
+  padding: 10px;
+  background-color: #4493c2;
+  border: none;
+  text-transform: uppercase;
 }
 .wrapper .verify form .btn:hover {
-    background-color: #37779E;
+  background-color: #37779e;
 }
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-
-
-
-
-
-

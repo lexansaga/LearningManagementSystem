@@ -1,5 +1,6 @@
 async function addPoints(actID,prevAnswers){
     var allInput = document.getElementsByClassName("points");
+    
     let allpoints = 0;
     for (let index = allInput.length-1; index >=0; index--) {
         const element = allInput[index];
